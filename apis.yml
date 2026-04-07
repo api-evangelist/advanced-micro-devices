@@ -1,7 +1,12 @@
 aid: advanced-micro-devices
-url: https://raw.githubusercontent.com/api-evangelist/advanced-micro-devices/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/advanced-micro-devices/refs/heads/main/apis.yml
 modified: '2026-03-21'
 apis: []
 common:
   - type: Website
     url: https://www.advanced-micro-devices.com
+description: >-
+  Advanced Micro Devices (AMD) is a global semiconductor company that develops high-performance
+  computing, graphics, and visualization technologies for data centers, gaming, and
+  embedded markets.
