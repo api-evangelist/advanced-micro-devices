@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ModelInput",
+  "description": "Request to deploy an AI model.",
+  "type": "object",
+  "required": [
+    "modelId",
+    "framework",
+    "gpuType"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "modelId": {
+      "type": "string",
+      "description": "Hugging Face model ID."
+    },
+    "framework": {
+      "type": "string",
+      "enum": [
+        "vLLM",
+        "TGI",
+        "TorchServe",
+        "Triton"
+      ]
+    },
+    "gpuType": {
+      "type": "string"
+    },
+    "gpuCount": {
+      "type": "integer"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Device",
+  "description": "An AMD GPU device.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "vbios": {
+      "type": "string"
+    },
+    "driverVersion": {
+      "type": "string"
+    },
+    "memoryTotal": {
+      "type": "integer",
+      "description": "Total GPU memory GB."
+    },
+    "pcieBusId": {
+      "type": "string"
+    },
+    "computeUnits": {
+      "type": "integer"
+    }
+  }
+}

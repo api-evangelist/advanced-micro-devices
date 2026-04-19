@@ -1,0 +1,10 @@
+{
+  "id": "gpu0",
+  "name": "AMD Instinct MI300X",
+  "model": "MI300X",
+  "vbios": "113-MSIV3C5.0N",
+  "driverVersion": "6.1.0",
+  "memoryTotal": 192,
+  "pcieBusId": "0000:03:00.0",
+  "computeUnits": 304
+}

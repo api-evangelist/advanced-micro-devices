@@ -1,0 +1,11 @@
+{
+  "devices": [
+    {
+      "id": "gpu0",
+      "name": "AMD Instinct MI300X",
+      "model": "MI300X",
+      "driverVersion": "6.1.0",
+      "memoryTotal": 192
+    }
+  ]
+}

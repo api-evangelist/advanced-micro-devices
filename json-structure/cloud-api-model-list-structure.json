@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "cloud-api-model-list-structure.json",
+  "title": "ModelList",
+  "description": "List of deployed AI models.",
+  "type": "object",
+  "properties": {
+    "models": {
+      "type": "array",
+      "description": "Array of models."
+    }
+  }
+}

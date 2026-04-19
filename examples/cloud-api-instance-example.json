@@ -1,0 +1,10 @@
+{
+  "id": "inst-001",
+  "name": "my-training-run",
+  "gpuType": "mi300x",
+  "gpuCount": 8,
+  "status": "running",
+  "region": "us-west-2",
+  "imageId": "rocm-6.1-pytorch",
+  "createdAt": "2026-04-01T10:00:00Z"
+}

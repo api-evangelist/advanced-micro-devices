@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InstanceList",
+  "description": "List of GPU compute instances.",
+  "type": "object",
+  "properties": {
+    "instances": {
+      "type": "array",
+      "description": "Array of instances.",
+      "items": {
+        "$ref": "#/$defs/Instance"
+      }
+    },
+    "total": {
+      "type": "integer",
+      "description": "Total count."
+    }
+  }
+}

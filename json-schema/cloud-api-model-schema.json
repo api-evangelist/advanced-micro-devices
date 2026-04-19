@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Model",
+  "description": "A deployed AI model for inference serving.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "framework": {
+      "type": "string",
+      "enum": [
+        "vLLM",
+        "TGI",
+        "TorchServe",
+        "Triton"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "deploying",
+        "serving",
+        "stopped",
+        "failed"
+      ]
+    },
+    "endpoint": {
+      "type": "string",
+      "description": "Inference endpoint URL."
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "deviceId": "gpu0",
+  "status": "healthy",
+  "temperature": 65,
+  "fanSpeed": 45,
+  "powerDraw": 420.0,
+  "eccErrors": 0
+}

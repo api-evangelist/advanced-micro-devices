@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "rocm-api-device-structure.json",
+  "title": "Device",
+  "description": "An AMD GPU device.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": ""
+    },
+    "name": {
+      "type": "string",
+      "description": ""
+    },
+    "model": {
+      "type": "string",
+      "description": ""
+    },
+    "vbios": {
+      "type": "string",
+      "description": ""
+    },
+    "driverVersion": {
+      "type": "string",
+      "description": ""
+    },
+    "memoryTotal": {
+      "type": "int32",
+      "description": "Total GPU memory GB."
+    },
+    "pcieBusId": {
+      "type": "string",
+      "description": ""
+    },
+    "computeUnits": {
+      "type": "int32",
+      "description": ""
+    }
+  }
+}

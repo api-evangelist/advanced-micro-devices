@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InstanceMetrics",
+  "description": "Real-time performance metrics for a GPU instance.",
+  "type": "object",
+  "properties": {
+    "instanceId": {
+      "type": "string"
+    },
+    "gpuUtilization": {
+      "type": "number",
+      "description": "GPU utilization %."
+    },
+    "memoryUsed": {
+      "type": "number",
+      "description": "Memory used GB."
+    },
+    "memoryTotal": {
+      "type": "number",
+      "description": "Total memory GB."
+    },
+    "temperature": {
+      "type": "integer",
+      "description": "Temperature Celsius."
+    },
+    "powerDraw": {
+      "type": "number",
+      "description": "Power draw watts."
+    }
+  }
+}

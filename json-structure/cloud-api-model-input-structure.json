@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "cloud-api-model-input-structure.json",
+  "title": "ModelInput",
+  "description": "Request to deploy an AI model.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": ""
+    },
+    "modelId": {
+      "type": "string",
+      "description": "Hugging Face model ID."
+    },
+    "framework": {
+      "type": "string",
+      "description": ""
+    },
+    "gpuType": {
+      "type": "string",
+      "description": ""
+    },
+    "gpuCount": {
+      "type": "int32",
+      "description": ""
+    }
+  }
+}

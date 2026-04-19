@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "cloud-api-instance-input-structure.json",
+  "title": "InstanceInput",
+  "description": "Request to create a GPU compute instance.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": ""
+    },
+    "gpuType": {
+      "type": "string",
+      "description": ""
+    },
+    "gpuCount": {
+      "type": "int32",
+      "description": ""
+    },
+    "imageId": {
+      "type": "string",
+      "description": ""
+    },
+    "region": {
+      "type": "string",
+      "description": ""
+    }
+  }
+}

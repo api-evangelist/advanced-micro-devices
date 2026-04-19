@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "rocm-api-device-list-structure.json",
+  "title": "DeviceList",
+  "description": "List of AMD GPU devices.",
+  "type": "object",
+  "properties": {
+    "devices": {
+      "type": "array",
+      "description": "Array of devices."
+    }
+  }
+}

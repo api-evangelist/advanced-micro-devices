@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DevicePerformance",
+  "description": "Performance counters for an AMD GPU device.",
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string"
+    },
+    "gpuUtilization": {
+      "type": "number"
+    },
+    "memoryUtilization": {
+      "type": "number"
+    },
+    "memoryBandwidth": {
+      "type": "number"
+    },
+    "computeThroughput": {
+      "type": "number"
+    }
+  }
+}

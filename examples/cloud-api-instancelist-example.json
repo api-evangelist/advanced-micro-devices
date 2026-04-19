@@ -1,0 +1,13 @@
+{
+  "instances": [
+    {
+      "id": "inst-001",
+      "name": "my-training-run",
+      "gpuType": "mi300x",
+      "gpuCount": 8,
+      "status": "running",
+      "region": "us-west-2"
+    }
+  ],
+  "total": 1
+}

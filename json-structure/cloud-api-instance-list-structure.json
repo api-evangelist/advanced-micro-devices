@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "cloud-api-instance-list-structure.json",
+  "title": "InstanceList",
+  "description": "List of GPU compute instances.",
+  "type": "object",
+  "properties": {
+    "instances": {
+      "type": "array",
+      "description": "Array of instances."
+    },
+    "total": {
+      "type": "int32",
+      "description": "Total count."
+    }
+  }
+}

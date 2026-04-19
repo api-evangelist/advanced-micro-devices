@@ -1,0 +1,155 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "AMD AI GPU Computing"
+  description: "Unified workflow capability for AI and HPC workloads on AMD Instinct GPUs — provision instances, deploy LLMs, monitor performance, and manage cloud credits. Designed for AI researchers, ML engineers, and HPC developers."
+  tags:
+    - AMD
+    - AI
+    - Cloud Computing
+    - GPU
+    - HPC
+    - Machine Learning
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      AMD_API_KEY: AMD_API_KEY
+
+capability:
+  consumes:
+    - import: amd-cloud
+      location: ./shared/developer-cloud-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: amd-gpu-api
+      description: "Unified REST API for AMD GPU compute management, AI model deployment, and monitoring."
+      resources:
+        - path: /v1/instances
+          name: instances
+          description: "GPU instance management."
+          operations:
+            - method: GET
+              name: list-instances
+              description: "List GPU instances."
+              call: "amd-cloud.list-instances"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-instance
+              description: "Create a GPU instance."
+              call: "amd-cloud.create-instance"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/models
+          name: models
+          description: "AI model deployment."
+          operations:
+            - method: GET
+              name: list-models
+              description: "List deployed AI models."
+              call: "amd-cloud.list-models"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: deploy-model
+              description: "Deploy an AI model."
+              call: "amd-cloud.deploy-model"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9091
+      namespace: amd-gpu-mcp
+      transport: http
+      description: "MCP server for AI-assisted AMD GPU computing — provision hardware, deploy models, and monitor performance."
+      tools:
+        - name: list-gpu-instances
+          description: "List all AMD Instinct GPU compute instances in the developer cloud."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "amd-cloud.list-instances"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-gpu-instance
+          description: "Launch an AMD Instinct GPU instance (MI300X, MI250, MI210) for AI training or HPC."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "amd-cloud.create-instance"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-gpu-instance-status
+          description: "Check the current status and configuration of an AMD GPU compute instance."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "amd-cloud.get-instance"
+          with:
+            instanceId: "tools.instanceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: monitor-gpu-performance
+          description: "Get real-time GPU utilization, memory usage, temperature, and power draw for an AMD instance."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "amd-cloud.get-instance-metrics"
+          with:
+            instanceId: "tools.instanceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: deploy-llm
+          description: "Deploy a large language model on AMD Instinct GPUs using vLLM for high-throughput inference."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "amd-cloud.deploy-model"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-deployed-models
+          description: "List AI models deployed and serving on AMD Instinct GPUs."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "amd-cloud.list-models"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: check-credit-balance
+          description: "Check available AMD Developer Cloud GPU credit balance and usage history."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "amd-cloud.get-credits"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: terminate-instance
+          description: "Terminate an AMD GPU compute instance to stop billing and release resources."
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "amd-cloud.terminate-instance"
+          with:
+            instanceId: "tools.instanceId"
+          outputParameters:
+            - type: object
+              mapping: "$."

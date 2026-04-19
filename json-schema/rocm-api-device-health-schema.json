@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeviceHealth",
+  "description": "Health status of an AMD GPU device.",
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "healthy",
+        "warning",
+        "critical",
+        "unknown"
+      ]
+    },
+    "temperature": {
+      "type": "integer"
+    },
+    "fanSpeed": {
+      "type": "integer"
+    },
+    "powerDraw": {
+      "type": "number"
+    },
+    "eccErrors": {
+      "type": "integer"
+    }
+  }
+}

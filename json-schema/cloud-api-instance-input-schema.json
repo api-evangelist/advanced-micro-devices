@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InstanceInput",
+  "description": "Request to create a GPU compute instance.",
+  "type": "object",
+  "required": [
+    "gpuType",
+    "gpuCount"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "gpuType": {
+      "type": "string",
+      "enum": [
+        "mi300x",
+        "mi250",
+        "mi210"
+      ]
+    },
+    "gpuCount": {
+      "type": "integer"
+    },
+    "imageId": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    }
+  }
+}

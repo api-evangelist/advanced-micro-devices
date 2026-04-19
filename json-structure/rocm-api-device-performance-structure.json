@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "rocm-api-device-performance-structure.json",
+  "title": "DevicePerformance",
+  "description": "Performance counters for an AMD GPU device.",
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string",
+      "description": ""
+    },
+    "gpuUtilization": {
+      "type": "float",
+      "description": ""
+    },
+    "memoryUtilization": {
+      "type": "float",
+      "description": ""
+    },
+    "memoryBandwidth": {
+      "type": "float",
+      "description": ""
+    },
+    "computeThroughput": {
+      "type": "float",
+      "description": ""
+    }
+  }
+}

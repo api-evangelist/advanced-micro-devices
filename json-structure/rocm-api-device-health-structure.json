@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "rocm-api-device-health-structure.json",
+  "title": "DeviceHealth",
+  "description": "Health status of an AMD GPU device.",
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string",
+      "description": ""
+    },
+    "status": {
+      "type": "string",
+      "description": ""
+    },
+    "temperature": {
+      "type": "int32",
+      "description": ""
+    },
+    "fanSpeed": {
+      "type": "int32",
+      "description": ""
+    },
+    "powerDraw": {
+      "type": "float",
+      "description": ""
+    },
+    "eccErrors": {
+      "type": "int32",
+      "description": ""
+    }
+  }
+}

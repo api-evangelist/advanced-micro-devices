@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Instance",
+  "description": "An AMD GPU compute instance.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Instance identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Instance display name."
+    },
+    "gpuType": {
+      "type": "string",
+      "description": "GPU hardware type.",
+      "enum": [
+        "mi300x",
+        "mi250",
+        "mi210",
+        "rx7900xtx"
+      ]
+    },
+    "gpuCount": {
+      "type": "integer",
+      "description": "Number of GPUs."
+    },
+    "status": {
+      "type": "string",
+      "description": "Instance status.",
+      "enum": [
+        "running",
+        "stopped",
+        "pending",
+        "terminated"
+      ]
+    },
+    "region": {
+      "type": "string",
+      "description": "Deployment region."
+    },
+    "imageId": {
+      "type": "string",
+      "description": "ROCm image."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation timestamp."
+    }
+  }
+}

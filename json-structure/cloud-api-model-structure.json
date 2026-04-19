@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "cloud-api-model-structure.json",
+  "title": "Model",
+  "description": "A deployed AI model for inference serving.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": ""
+    },
+    "name": {
+      "type": "string",
+      "description": ""
+    },
+    "framework": {
+      "type": "string",
+      "description": ""
+    },
+    "status": {
+      "type": "string",
+      "description": ""
+    },
+    "endpoint": {
+      "type": "string",
+      "description": "Inference endpoint URL."
+    }
+  }
+}

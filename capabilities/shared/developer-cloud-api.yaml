@@ -1,0 +1,212 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "AMD Developer Cloud API"
+  description: "REST API for managing AMD Instinct GPU compute instances, deploying AI models, monitoring utilization, and managing cloud credits."
+  tags:
+    - AMD
+    - AI
+    - Cloud Computing
+    - GPU
+    - Machine Learning
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      AMD_API_KEY: AMD_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: amd-cloud
+      baseUri: https://api.developer.amd.com/v1
+      description: "AMD Developer Cloud REST API."
+      authentication:
+        type: apiKey
+        header: X-API-Key
+        token: "{{AMD_API_KEY}}"
+      resources:
+        - name: instances
+          path: /instances
+          description: "GPU compute instance management."
+          operations:
+            - name: list-instances
+              method: GET
+              description: "List all GPU instances."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-instance
+              method: POST
+              description: "Launch a new GPU instance."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: instance
+          path: /instances/{instanceId}
+          description: "Individual GPU instance operations."
+          operations:
+            - name: get-instance
+              method: GET
+              description: "Get GPU instance details."
+              inputParameters:
+                - name: instanceId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Instance ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: terminate-instance
+              method: DELETE
+              description: "Terminate a GPU instance."
+              inputParameters:
+                - name: instanceId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Instance ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: instance-metrics
+          path: /instances/{instanceId}/metrics
+          description: "GPU instance performance metrics."
+          operations:
+            - name: get-instance-metrics
+              method: GET
+              description: "Get GPU utilization and performance metrics."
+              inputParameters:
+                - name: instanceId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Instance ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: models
+          path: /models
+          description: "AI model deployment and management."
+          operations:
+            - name: list-models
+              method: GET
+              description: "List deployed AI models."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: deploy-model
+              method: POST
+              description: "Deploy an AI model for inference."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: credits
+          path: /credits
+          description: "Cloud credit balance."
+          operations:
+            - name: get-credits
+              method: GET
+              description: "Get credit balance and usage."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: mcp
+      port: 9090
+      namespace: amd-cloud-mcp
+      transport: http
+      tools:
+        - name: list-gpu-instances
+          description: "List all AMD GPU compute instances in the developer cloud account."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "amd-cloud.list-instances"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-gpu-instance
+          description: "Launch a new AMD GPU compute instance with specified hardware and ROCm environment."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "amd-cloud.create-instance"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-instance-details
+          description: "Get configuration and status of a specific AMD GPU instance."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "amd-cloud.get-instance"
+          with:
+            instanceId: "tools.instanceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-gpu-metrics
+          description: "Retrieve real-time GPU utilization, memory, temperature, and power metrics for an instance."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "amd-cloud.get-instance-metrics"
+          with:
+            instanceId: "tools.instanceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-deployed-models
+          description: "List AI models currently deployed for inference on AMD Instinct GPUs."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "amd-cloud.list-models"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: deploy-ai-model
+          description: "Deploy an AI model for inference serving on AMD Instinct GPUs using vLLM or another framework."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "amd-cloud.deploy-model"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-credit-balance
+          description: "Check the GPU credit balance and usage for the AMD Developer Cloud account."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "amd-cloud.get-credits"
+          outputParameters:
+            - type: object
+              mapping: "$."

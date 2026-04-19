@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RocmVersion",
+  "description": "ROCm platform version information.",
+  "type": "object",
+  "properties": {
+    "rocmVersion": {
+      "type": "string"
+    },
+    "hipVersion": {
+      "type": "string"
+    },
+    "driverVersion": {
+      "type": "string"
+    },
+    "kernelVersion": {
+      "type": "string"
+    }
+  }
+}

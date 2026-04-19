@@ -1,0 +1,7 @@
+{
+  "name": "llama-3.1-70b",
+  "modelId": "meta-llama/Llama-3.1-70B-Instruct",
+  "framework": "vLLM",
+  "gpuType": "mi300x",
+  "gpuCount": 2
+}

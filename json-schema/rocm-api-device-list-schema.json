@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeviceList",
+  "description": "List of AMD GPU devices.",
+  "type": "object",
+  "properties": {
+    "devices": {
+      "type": "array",
+      "description": "Array of devices.",
+      "items": {
+        "$ref": "#/$defs/Device"
+      }
+    }
+  }
+}

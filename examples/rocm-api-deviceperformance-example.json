@@ -1,0 +1,7 @@
+{
+  "deviceId": "gpu0",
+  "gpuUtilization": 92.3,
+  "memoryUtilization": 78.5,
+  "memoryBandwidth": 4800.0,
+  "computeThroughput": 1.83
+}

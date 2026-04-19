@@ -1,0 +1,6 @@
+{
+  "rocmVersion": "6.1.0",
+  "hipVersion": "6.1.40091",
+  "driverVersion": "6.1.0.60100",
+  "kernelVersion": "5.15.0-105-generic"
+}

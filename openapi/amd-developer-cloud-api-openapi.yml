@@ -1,0 +1,645 @@
+openapi: 3.0.3
+info:
+  title: AMD Developer Cloud API
+  description: >-
+    The AMD Developer Cloud API provides access to AMD Instinct GPU instances for AI inference,
+    training, and HPC workloads. Supports managing compute instances, deploying AI models,
+    monitoring GPU utilization, and integrating with ROCm-compatible frameworks including
+    PyTorch, TensorFlow, and vLLM.
+  version: "1"
+  contact:
+    name: AMD Developer Support
+    url: https://developer.amd.com/support/
+  termsOfService: https://www.amd.com/en/legal/terms-and-conditions.html
+  license:
+    name: AMD Terms and Conditions
+    url: https://www.amd.com/en/legal/terms-and-conditions.html
+servers:
+  - url: https://api.developer.amd.com/v1
+    description: AMD Developer Cloud API Production
+tags:
+  - name: Instances
+    description: GPU compute instance management
+  - name: Models
+    description: AI model deployment and management
+  - name: Monitoring
+    description: GPU utilization and performance monitoring
+  - name: Credits
+    description: Cloud credit balance and usage
+security:
+  - apiKey: []
+paths:
+  /instances:
+    get:
+      operationId: listInstances
+      summary: AMD Developer Cloud List GPU Instances
+      description: "Retrieve all active GPU compute instances in the authenticated account."
+      tags:
+        - Instances
+      parameters:
+        - name: status
+          in: query
+          required: false
+          description: "Filter by instance status."
+          schema:
+            type: string
+            enum: [running, stopped, pending, terminated]
+        - name: gpuType
+          in: query
+          required: false
+          description: "Filter by GPU type (e.g., mi300x, mi250)."
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: "Maximum number of instances to return."
+          schema:
+            type: integer
+            default: 20
+        - name: offset
+          in: query
+          required: false
+          description: "Pagination offset."
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: "List of GPU instances."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceList'
+              examples:
+                listInstances200Example:
+                  summary: Default listInstances 200 response
+                  x-microcks-default: true
+                  value:
+                    instances:
+                      - id: "inst-001"
+                        name: "my-training-run"
+                        gpuType: "mi300x"
+                        gpuCount: 8
+                        status: "running"
+                        region: "us-west-2"
+                    total: 1
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                listInstances401Example:
+                  summary: Default listInstances 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Invalid API key"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createInstance
+      summary: AMD Developer Cloud Create GPU Instance
+      description: "Launch a new AMD GPU compute instance with specified hardware configuration and ROCm environment."
+      tags:
+        - Instances
+      requestBody:
+        required: true
+        description: "Instance creation parameters."
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstanceInput'
+            examples:
+              createInstanceRequestExample:
+                summary: Default createInstance request
+                x-microcks-default: true
+                value:
+                  name: "llm-training"
+                  gpuType: "mi300x"
+                  gpuCount: 8
+                  imageId: "rocm-6.1-pytorch"
+                  region: "us-west-2"
+      responses:
+        '201':
+          description: "Instance created."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Instance'
+              examples:
+                createInstance201Example:
+                  summary: Default createInstance 201 response
+                  x-microcks-default: true
+                  value:
+                    id: "inst-002"
+                    name: "llm-training"
+                    gpuType: "mi300x"
+                    gpuCount: 8
+                    status: "pending"
+                    region: "us-west-2"
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                createInstance401Example:
+                  summary: Default createInstance 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Invalid API key"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /instances/{instanceId}:
+    get:
+      operationId: getInstance
+      summary: AMD Developer Cloud Get GPU Instance
+      description: "Retrieve details of a specific GPU compute instance including status, configuration, and resource utilization."
+      tags:
+        - Instances
+      parameters:
+        - name: instanceId
+          in: path
+          required: true
+          description: "GPU instance identifier."
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Instance details."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Instance'
+              examples:
+                getInstance200Example:
+                  summary: Default getInstance 200 response
+                  x-microcks-default: true
+                  value:
+                    id: "inst-001"
+                    name: "my-training-run"
+                    gpuType: "mi300x"
+                    gpuCount: 8
+                    status: "running"
+                    region: "us-west-2"
+        '404':
+          description: "Instance not found."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getInstance404Example:
+                  summary: Default getInstance 404 response
+                  x-microcks-default: true
+                  value:
+                    code: "NOT_FOUND"
+                    message: "Instance not found"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: terminateInstance
+      summary: AMD Developer Cloud Terminate GPU Instance
+      description: "Terminate and remove an AMD GPU compute instance."
+      tags:
+        - Instances
+      parameters:
+        - name: instanceId
+          in: path
+          required: true
+          description: "GPU instance identifier."
+          schema:
+            type: string
+      responses:
+        '204':
+          description: "Instance terminated."
+        '404':
+          description: "Instance not found."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                terminateInstance404Example:
+                  summary: Default terminateInstance 404 response
+                  x-microcks-default: true
+                  value:
+                    code: "NOT_FOUND"
+                    message: "Instance not found"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /instances/{instanceId}/metrics:
+    get:
+      operationId: getInstanceMetrics
+      summary: AMD Developer Cloud Get GPU Instance Metrics
+      description: "Retrieve real-time GPU utilization, memory usage, temperature, and power consumption metrics for an instance."
+      tags:
+        - Monitoring
+      parameters:
+        - name: instanceId
+          in: path
+          required: true
+          description: "GPU instance identifier."
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Instance performance metrics."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceMetrics'
+              examples:
+                getInstanceMetrics200Example:
+                  summary: Default getInstanceMetrics 200 response
+                  x-microcks-default: true
+                  value:
+                    instanceId: "inst-001"
+                    gpuUtilization: 87.5
+                    memoryUsed: 180.2
+                    memoryTotal: 192.0
+                    temperature: 72
+                    powerDraw: 680.0
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getInstanceMetrics401Example:
+                  summary: Default getInstanceMetrics 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Invalid API key"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /models:
+    get:
+      operationId: listModels
+      summary: AMD Developer Cloud List Deployed Models
+      description: "List AI models deployed on the AMD Developer Cloud for inference serving."
+      tags:
+        - Models
+      responses:
+        '200':
+          description: "List of deployed models."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelList'
+              examples:
+                listModels200Example:
+                  summary: Default listModels 200 response
+                  x-microcks-default: true
+                  value:
+                    models:
+                      - id: "model-001"
+                        name: "llama-3.1-70b"
+                        framework: "vLLM"
+                        status: "serving"
+                        endpoint: "https://inf.developer.amd.com/model-001/v1"
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                listModels401Example:
+                  summary: Default listModels 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Invalid API key"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: deployModel
+      summary: AMD Developer Cloud Deploy AI Model
+      description: "Deploy an AI model for inference serving on AMD Instinct GPUs using vLLM or another serving framework."
+      tags:
+        - Models
+      requestBody:
+        required: true
+        description: "Model deployment configuration."
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelInput'
+            examples:
+              deployModelRequestExample:
+                summary: Default deployModel request
+                x-microcks-default: true
+                value:
+                  name: "llama-3.1-70b"
+                  modelId: "meta-llama/Llama-3.1-70B-Instruct"
+                  framework: "vLLM"
+                  gpuType: "mi300x"
+                  gpuCount: 2
+      responses:
+        '201':
+          description: "Model deployed."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+              examples:
+                deployModel201Example:
+                  summary: Default deployModel 201 response
+                  x-microcks-default: true
+                  value:
+                    id: "model-002"
+                    name: "llama-3.1-70b"
+                    framework: "vLLM"
+                    status: "deploying"
+                    endpoint: "https://inf.developer.amd.com/model-002/v1"
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                deployModel401Example:
+                  summary: Default deployModel 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Invalid API key"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /credits:
+    get:
+      operationId: getCredits
+      summary: AMD Developer Cloud Get Credit Balance
+      description: "Retrieve the current GPU credit balance and usage history for the authenticated account."
+      tags:
+        - Credits
+      responses:
+        '200':
+          description: "Credit balance and usage."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credits'
+              examples:
+                getCredits200Example:
+                  summary: Default getCredits 200 response
+                  x-microcks-default: true
+                  value:
+                    balance: 450.00
+                    used: 550.00
+                    total: 1000.00
+                    currency: "USD"
+                    expiresAt: "2026-12-31T23:59:59Z"
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getCredits401Example:
+                  summary: Default getCredits 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Invalid API key"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    Instance:
+      type: object
+      description: "An AMD GPU compute instance."
+      properties:
+        id:
+          type: string
+          description: "Instance identifier."
+          example: "inst-001"
+        name:
+          type: string
+          description: "Instance display name."
+          example: "my-training-run"
+        gpuType:
+          type: string
+          description: "GPU hardware type."
+          enum: [mi300x, mi250, mi210, rx7900xtx]
+          example: "mi300x"
+        gpuCount:
+          type: integer
+          description: "Number of GPUs in the instance."
+          example: 8
+        status:
+          type: string
+          description: "Current instance status."
+          enum: [running, stopped, pending, terminated]
+          example: "running"
+        region:
+          type: string
+          description: "Deployment region."
+          example: "us-west-2"
+        imageId:
+          type: string
+          description: "ROCm image used for the instance."
+          example: "rocm-6.1-pytorch"
+        createdAt:
+          type: string
+          format: date-time
+          description: "Instance creation timestamp."
+    InstanceInput:
+      type: object
+      description: "Request to create a GPU compute instance."
+      required:
+        - gpuType
+        - gpuCount
+      properties:
+        name:
+          type: string
+          description: "Display name for the instance."
+          example: "llm-training"
+        gpuType:
+          type: string
+          description: "GPU hardware type."
+          enum: [mi300x, mi250, mi210]
+          example: "mi300x"
+        gpuCount:
+          type: integer
+          description: "Number of GPUs to allocate."
+          example: 8
+        imageId:
+          type: string
+          description: "ROCm environment image."
+          example: "rocm-6.1-pytorch"
+        region:
+          type: string
+          description: "Deployment region."
+          example: "us-west-2"
+    InstanceList:
+      type: object
+      description: "List of GPU compute instances."
+      properties:
+        instances:
+          type: array
+          description: "Array of instances."
+          items:
+            $ref: '#/components/schemas/Instance'
+        total:
+          type: integer
+          description: "Total number of instances."
+          example: 3
+    InstanceMetrics:
+      type: object
+      description: "Real-time performance metrics for a GPU instance."
+      properties:
+        instanceId:
+          type: string
+          description: "Instance identifier."
+          example: "inst-001"
+        gpuUtilization:
+          type: number
+          format: float
+          description: "GPU utilization percentage."
+          example: 87.5
+        memoryUsed:
+          type: number
+          format: float
+          description: "GPU memory used in GB."
+          example: 180.2
+        memoryTotal:
+          type: number
+          format: float
+          description: "Total GPU memory in GB."
+          example: 192.0
+        temperature:
+          type: integer
+          description: "GPU temperature in Celsius."
+          example: 72
+        powerDraw:
+          type: number
+          format: float
+          description: "Current power draw in watts."
+          example: 680.0
+    Model:
+      type: object
+      description: "A deployed AI model for inference serving."
+      properties:
+        id:
+          type: string
+          description: "Model deployment identifier."
+          example: "model-001"
+        name:
+          type: string
+          description: "Model display name."
+          example: "llama-3.1-70b"
+        framework:
+          type: string
+          description: "Inference serving framework."
+          enum: [vLLM, TGI, TorchServe, Triton]
+          example: "vLLM"
+        status:
+          type: string
+          description: "Deployment status."
+          enum: [deploying, serving, stopped, failed]
+          example: "serving"
+        endpoint:
+          type: string
+          description: "Inference endpoint URL."
+          example: "https://inf.developer.amd.com/model-001/v1"
+    ModelInput:
+      type: object
+      description: "Request to deploy an AI model."
+      required:
+        - modelId
+        - framework
+        - gpuType
+      properties:
+        name:
+          type: string
+          description: "Display name for the deployment."
+          example: "llama-3.1-70b"
+        modelId:
+          type: string
+          description: "Hugging Face model ID or path."
+          example: "meta-llama/Llama-3.1-70B-Instruct"
+        framework:
+          type: string
+          description: "Inference framework to use."
+          enum: [vLLM, TGI, TorchServe, Triton]
+          example: "vLLM"
+        gpuType:
+          type: string
+          description: "GPU hardware type."
+          example: "mi300x"
+        gpuCount:
+          type: integer
+          description: "Number of GPUs to allocate."
+          example: 2
+    ModelList:
+      type: object
+      description: "List of deployed AI models."
+      properties:
+        models:
+          type: array
+          description: "Array of model deployments."
+          items:
+            $ref: '#/components/schemas/Model'
+    Credits:
+      type: object
+      description: "GPU credit balance and usage for the account."
+      properties:
+        balance:
+          type: number
+          format: float
+          description: "Remaining credit balance."
+          example: 450.00
+        used:
+          type: number
+          format: float
+          description: "Credits consumed."
+          example: 550.00
+        total:
+          type: number
+          format: float
+          description: "Total credits allocated."
+          example: 1000.00
+        currency:
+          type: string
+          description: "Currency of credit values."
+          example: "USD"
+        expiresAt:
+          type: string
+          format: date-time
+          description: "Credit expiration date."
+    ErrorResponse:
+      type: object
+      description: "API error response."
+      properties:
+        code:
+          type: string
+          description: "Error code."
+          example: "NOT_FOUND"
+        message:
+          type: string
+          description: "Error message."
+          example: "The requested resource was not found."

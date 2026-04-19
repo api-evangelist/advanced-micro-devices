@@ -1,0 +1,8 @@
+{
+  "instanceId": "inst-001",
+  "gpuUtilization": 87.5,
+  "memoryUsed": 180.2,
+  "memoryTotal": 192.0,
+  "temperature": 72,
+  "powerDraw": 680.0
+}

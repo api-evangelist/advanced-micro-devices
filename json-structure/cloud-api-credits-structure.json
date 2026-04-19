@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "cloud-api-credits-structure.json",
+  "title": "Credits",
+  "description": "GPU credit balance and usage.",
+  "type": "object",
+  "properties": {
+    "balance": {
+      "type": "float",
+      "description": ""
+    },
+    "used": {
+      "type": "float",
+      "description": ""
+    },
+    "total": {
+      "type": "float",
+      "description": ""
+    },
+    "currency": {
+      "type": "string",
+      "description": ""
+    },
+    "expiresAt": {
+      "type": "string",
+      "description": ""
+    }
+  }
+}

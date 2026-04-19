@@ -1,0 +1,49 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amd": "https://developer.amd.com/vocab#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Instance": "amd:ComputeInstance",
+    "id": "@id",
+    "name": "schema:name",
+    "gpuType": "amd:gpuType",
+    "gpuCount": "amd:gpuCount",
+    "status": "schema:status",
+    "region": "amd:region",
+    "imageId": "amd:imageId",
+    "createdAt": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "InstanceInput": "amd:InstanceInput",
+    "InstanceList": "amd:InstanceList",
+    "instances": "amd:instances",
+    "total": "amd:total",
+    "InstanceMetrics": "amd:InstanceMetrics",
+    "instanceId": "amd:instanceId",
+    "gpuUtilization": "amd:gpuUtilization",
+    "memoryUsed": "amd:memoryUsed",
+    "memoryTotal": "amd:memoryTotal",
+    "temperature": "amd:temperature",
+    "powerDraw": "amd:powerDraw",
+    "Model": "amd:AIModel",
+    "framework": "amd:framework",
+    "endpoint": "schema:url",
+    "ModelInput": "amd:ModelInput",
+    "modelId": "amd:modelId",
+    "ModelList": "amd:ModelList",
+    "models": "amd:models",
+    "Credits": "amd:Credits",
+    "balance": "amd:creditBalance",
+    "used": "amd:creditUsed",
+    "currency": "schema:currency",
+    "expiresAt": {
+      "@id": "amd:expiresAt",
+      "@type": "xsd:dateTime"
+    },
+    "ErrorResponse": "amd:ErrorResponse",
+    "code": "amd:errorCode",
+    "message": "schema:description"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "rocm-api-rocm-version-structure.json",
+  "title": "RocmVersion",
+  "description": "ROCm platform version information.",
+  "type": "object",
+  "properties": {
+    "rocmVersion": {
+      "type": "string",
+      "description": ""
+    },
+    "hipVersion": {
+      "type": "string",
+      "description": ""
+    },
+    "driverVersion": {
+      "type": "string",
+      "description": ""
+    },
+    "kernelVersion": {
+      "type": "string",
+      "description": ""
+    }
+  }
+}

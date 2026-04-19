@@ -1,0 +1,11 @@
+{
+  "models": [
+    {
+      "id": "model-001",
+      "name": "llama-3.1-70b",
+      "framework": "vLLM",
+      "status": "serving",
+      "endpoint": "https://inf.developer.amd.com/model-001/v1"
+    }
+  ]
+}

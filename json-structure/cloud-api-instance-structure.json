@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "cloud-api-instance-structure.json",
+  "title": "Instance",
+  "description": "An AMD GPU compute instance.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Instance identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Instance display name."
+    },
+    "gpuType": {
+      "type": "string",
+      "description": "GPU hardware type."
+    },
+    "gpuCount": {
+      "type": "int32",
+      "description": "Number of GPUs."
+    },
+    "status": {
+      "type": "string",
+      "description": "Instance status."
+    },
+    "region": {
+      "type": "string",
+      "description": "Deployment region."
+    },
+    "imageId": {
+      "type": "string",
+      "description": "ROCm image."
+    },
+    "createdAt": {
+      "type": "string",
+      "description": "Creation timestamp."
+    }
+  }
+}

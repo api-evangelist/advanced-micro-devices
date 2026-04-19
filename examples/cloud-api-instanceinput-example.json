@@ -1,0 +1,7 @@
+{
+  "name": "llm-training",
+  "gpuType": "mi300x",
+  "gpuCount": 8,
+  "imageId": "rocm-6.1-pytorch",
+  "region": "us-west-2"
+}

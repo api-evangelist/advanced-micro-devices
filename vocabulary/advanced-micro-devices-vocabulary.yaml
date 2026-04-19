@@ -1,0 +1,225 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Advanced Micro Devices"
+  description: "Vocabulary for AMD APIs covering GPU compute instances, AI model deployment, ROCm device management, performance monitoring, and cloud credits."
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - name: "AMD Developer Cloud API"
+      namespace: amd-cloud
+      version: "1"
+      baseUrl: https://api.developer.amd.com/v1
+      status: active
+    - name: "AMD ROCm Management API"
+      namespace: amd-rocm
+      version: "1"
+      baseUrl: https://rocm-mgmt.amd.com/v1
+      status: active
+
+  resources:
+    - name: instances
+      api: amd-cloud
+      actions: [list, create, get, terminate]
+    - name: instance-metrics
+      api: amd-cloud
+      actions: [get]
+    - name: models
+      api: amd-cloud
+      actions: [list, deploy]
+    - name: credits
+      api: amd-cloud
+      actions: [get]
+    - name: devices
+      api: amd-rocm
+      actions: [list, get]
+    - name: device-health
+      api: amd-rocm
+      actions: [get]
+    - name: device-performance
+      api: amd-rocm
+      actions: [get]
+    - name: rocm-version
+      api: amd-rocm
+      actions: [get]
+
+  actions:
+    - name: list
+      method: GET
+      pattern: read
+    - name: get
+      method: GET
+      pattern: read
+    - name: create
+      method: POST
+      pattern: write
+    - name: deploy
+      method: POST
+      pattern: write
+    - name: terminate
+      method: DELETE
+      pattern: destructive
+
+  schemas:
+    compute:
+      - Instance
+      - InstanceInput
+      - InstanceList
+      - InstanceMetrics
+    ai-inference:
+      - Model
+      - ModelInput
+      - ModelList
+    billing:
+      - Credits
+    hardware:
+      - Device
+      - DeviceList
+      - DeviceHealth
+      - DevicePerformance
+      - RocmVersion
+
+  parameters:
+    identifiers:
+      - instanceId
+      - deviceId
+      - modelId
+    filters:
+      - status
+      - gpuType
+    pagination:
+      - limit
+      - offset
+
+  enums:
+    gpuTypes:
+      - mi300x
+      - mi250
+      - mi210
+      - rx7900xtx
+    instanceStatus:
+      - running
+      - stopped
+      - pending
+      - terminated
+    modelFrameworks:
+      - vLLM
+      - TGI
+      - TorchServe
+      - Triton
+    modelStatus:
+      - deploying
+      - serving
+      - stopped
+      - failed
+    deviceHealthStatus:
+      - healthy
+      - warning
+      - critical
+      - unknown
+
+  authentication:
+    schemes:
+      - name: apiKey
+        type: apiKey
+        header: X-API-Key
+        apis: [amd-cloud]
+      - name: bearerAuth
+        type: bearer
+        format: JWT
+        apis: [amd-rocm]
+
+capability:
+  workflows:
+    - name: ai-gpu-computing
+      file: capabilities/ai-gpu-computing.yaml
+      description: Unified workflow for AI and HPC workloads on AMD Instinct GPUs
+      apis: [amd-cloud]
+      toolCount: 8
+      personas: [ai-researcher, ml-engineer, hpc-developer]
+      domains: [AI, Cloud Computing, GPU, HPC]
+
+  personas:
+    - id: ai-researcher
+      name: AI Researcher
+      description: Researcher training and evaluating large language models on AMD GPU clusters
+      workflows: [ai-gpu-computing]
+    - id: ml-engineer
+      name: ML Engineer
+      description: Engineer deploying and optimizing ML inference workloads on AMD hardware
+      workflows: [ai-gpu-computing]
+    - id: hpc-developer
+      name: HPC Developer
+      description: Developer running scientific simulations and HPC workloads with ROCm
+      workflows: [ai-gpu-computing]
+
+  domains:
+    - name: AI
+      resources: [models, model-metrics]
+    - name: Cloud Computing
+      resources: [instances, instance-metrics, credits]
+    - name: Hardware
+      resources: [devices, device-health, device-performance]
+    - name: HPC
+      resources: [instances, devices]
+
+  namespaces:
+    consumed:
+      - name: amd-cloud
+        type: http
+        baseUri: https://api.developer.amd.com/v1
+      - name: amd-rocm
+        type: http
+        baseUri: https://rocm-mgmt.amd.com/v1
+    rest:
+      - namespace: amd-gpu-api
+        port: 8080
+    mcp:
+      - namespace: amd-cloud-mcp
+        port: 9090
+      - namespace: amd-gpu-mcp
+        port: 9091
+
+  binds:
+    - name: AMD_API_KEY
+      description: API key for AMD Developer Cloud API
+
+crossReference:
+  - resource: instances
+    operations:
+      - operationId: listInstances
+        method: GET
+        path: /instances
+      - operationId: createInstance
+        method: POST
+        path: /instances
+      - operationId: getInstance
+        method: GET
+        path: /instances/{instanceId}
+      - operationId: terminateInstance
+        method: DELETE
+        path: /instances/{instanceId}
+    workflows: [ai-gpu-computing]
+    personas: [ai-researcher, ml-engineer, hpc-developer]
+  - resource: models
+    operations:
+      - operationId: listModels
+        method: GET
+        path: /models
+      - operationId: deployModel
+        method: POST
+        path: /models
+    workflows: [ai-gpu-computing]
+    personas: [ai-researcher, ml-engineer]
+  - resource: devices
+    operations:
+      - operationId: listDevices
+        method: GET
+        path: /devices
+      - operationId: getDevice
+        method: GET
+        path: /devices/{deviceId}
+    workflows: []
+    personas: [hpc-developer, ml-engineer]

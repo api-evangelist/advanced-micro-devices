@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "cloud-api-instance-metrics-structure.json",
+  "title": "InstanceMetrics",
+  "description": "Real-time performance metrics for a GPU instance.",
+  "type": "object",
+  "properties": {
+    "instanceId": {
+      "type": "string",
+      "description": ""
+    },
+    "gpuUtilization": {
+      "type": "float",
+      "description": "GPU utilization %."
+    },
+    "memoryUsed": {
+      "type": "float",
+      "description": "Memory used GB."
+    },
+    "memoryTotal": {
+      "type": "float",
+      "description": "Total memory GB."
+    },
+    "temperature": {
+      "type": "int32",
+      "description": "Temperature Celsius."
+    },
+    "powerDraw": {
+      "type": "float",
+      "description": "Power draw watts."
+    }
+  }
+}
