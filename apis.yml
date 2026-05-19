@@ -57,6 +57,8 @@ apis:
   - type: Vocabulary
     url: vocabulary/advanced-micro-devices-vocabulary.yaml
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/amd
 - type: Website
   url: https://www.amd.com
 - type: Portal

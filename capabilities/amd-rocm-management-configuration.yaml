@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AMD ROCm Management API — Configuration
+  description: 'AMD ROCm Management API — Configuration. 1 operations. Lead operation: AMD ROCm Get ROCm Software Version.
+    Self-contained Naftiko capability covering one Advanced Micro Devices business surface.'
+  tags:
+  - Advanced Micro Devices
+  - Configuration
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADVANCED_MICRO_DEVICES_API_KEY: ADVANCED_MICRO_DEVICES_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amd-rocm-management-configuration
+    baseUri: https://rocm-mgmt.amd.com/v1
+    description: AMD ROCm Management API — Configuration business capability. Self-contained, no shared references.
+    resources:
+    - name: system-rocm-version
+      path: /system/rocm-version
+      operations:
+      - name: getrocmversion
+        method: GET
+        description: AMD ROCm Get ROCm Software Version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ADVANCED_MICRO_DEVICES_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: amd-rocm-management-configuration-rest
+    port: 8080
+    description: REST adapter for AMD ROCm Management API — Configuration. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/system/rocm-version
+      name: system-rocm-version
+      description: REST surface for system-rocm-version.
+      operations:
+      - method: GET
+        name: getrocmversion
+        description: AMD ROCm Get ROCm Software Version
+        call: amd-rocm-management-configuration.getrocmversion
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amd-rocm-management-configuration-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AMD ROCm Management API — Configuration. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: amd-rocm-get-rocm-software
+      description: AMD ROCm Get ROCm Software Version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amd-rocm-management-configuration.getrocmversion
+      outputParameters:
+      - type: object
+        mapping: $.

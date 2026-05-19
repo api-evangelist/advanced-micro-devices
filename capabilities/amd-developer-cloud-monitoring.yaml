@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AMD Developer Cloud API — Monitoring
+  description: 'AMD Developer Cloud API — Monitoring. 1 operations. Lead operation: AMD Developer Cloud Get GPU Instance Metrics.
+    Self-contained Naftiko capability covering one Advanced Micro Devices business surface.'
+  tags:
+  - Advanced Micro Devices
+  - Monitoring
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADVANCED_MICRO_DEVICES_API_KEY: ADVANCED_MICRO_DEVICES_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amd-developer-cloud-monitoring
+    baseUri: https://api.developer.amd.com/v1
+    description: AMD Developer Cloud API — Monitoring business capability. Self-contained, no shared references.
+    resources:
+    - name: instances-instanceId-metrics
+      path: /instances/{instanceId}/metrics
+      operations:
+      - name: getinstancemetrics
+        method: GET
+        description: AMD Developer Cloud Get GPU Instance Metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: instanceId
+          in: path
+          type: string
+          description: GPU instance identifier.
+          required: true
+    authentication:
+      type: apikey
+      key: X-API-Key
+      value: '{{env.ADVANCED_MICRO_DEVICES_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amd-developer-cloud-monitoring-rest
+    port: 8080
+    description: REST adapter for AMD Developer Cloud API — Monitoring. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/instances/{instanceid}/metrics
+      name: instances-instanceid-metrics
+      description: REST surface for instances-instanceId-metrics.
+      operations:
+      - method: GET
+        name: getinstancemetrics
+        description: AMD Developer Cloud Get GPU Instance Metrics
+        call: amd-developer-cloud-monitoring.getinstancemetrics
+        with:
+          instanceId: rest.instanceId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amd-developer-cloud-monitoring-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AMD Developer Cloud API — Monitoring. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: amd-developer-cloud-get-gpu
+      description: AMD Developer Cloud Get GPU Instance Metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amd-developer-cloud-monitoring.getinstancemetrics
+      with:
+        instanceId: tools.instanceId
+      outputParameters:
+      - type: object
+        mapping: $.
