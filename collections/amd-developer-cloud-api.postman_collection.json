@@ -1,0 +1,1247 @@
+{
+  "item": [
+    {
+      "id": "ec734527-d79b-4b0d-a253-03a0783acc5d",
+      "name": "Instances",
+      "description": {
+        "content": "GPU compute instance management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "09ae84c8-ed5e-4e05-9453-e84c52f8f943",
+          "name": "AMD Developer Cloud List GPU Instances",
+          "request": {
+            "name": "AMD Developer Cloud List GPU Instances",
+            "description": {
+              "content": "Retrieve all active GPU compute instances in the authenticated account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "instances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by instance status."
+                },
+                {
+                  "disabled": false,
+                  "key": "gpuType",
+                  "value": "<string>",
+                  "description": "Filter by GPU type (e.g., mi300x, mi250)."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of instances to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bc78f63e-0f9e-44b2-bd82-478f6c08d571",
+              "name": "List of GPU instances.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gpuType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instances\": [\n    {\n      \"id\": \"inst-001\",\n      \"name\": \"my-training-run\",\n      \"gpuType\": \"mi300x\",\n      \"gpuCount\": 8,\n      \"status\": \"running\",\n      \"region\": \"us-west-2\"\n    }\n  ],\n  \"total\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4f6c3a0-fe6a-4ba7-a7dd-1006fc04bb05",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gpuType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid API key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ffba0b6-e23c-4e68-9ffe-ccfb38d3d9ee",
+          "name": "AMD Developer Cloud Create GPU Instance",
+          "request": {
+            "name": "AMD Developer Cloud Create GPU Instance",
+            "description": {
+              "content": "Launch a new AMD GPU compute instance with specified hardware configuration and ROCm environment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "instances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"gpuType\": \"<string>\",\n  \"gpuCount\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"imageId\": \"<string>\",\n  \"region\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fe10e37d-f509-4576-9ad3-b970eb6e7ae2",
+              "name": "Instance created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"llm-training\",\n  \"gpuType\": \"mi300x\",\n  \"gpuCount\": 8,\n  \"imageId\": \"rocm-6.1-pytorch\",\n  \"region\": \"us-west-2\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"inst-002\",\n  \"name\": \"llm-training\",\n  \"gpuType\": \"mi300x\",\n  \"gpuCount\": 8,\n  \"status\": \"pending\",\n  \"region\": \"us-west-2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6ea9b18-9932-40b5-83a3-f3331fe563cd",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"llm-training\",\n  \"gpuType\": \"mi300x\",\n  \"gpuCount\": 8,\n  \"imageId\": \"rocm-6.1-pytorch\",\n  \"region\": \"us-west-2\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid API key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80110151-2613-4799-a3fc-dcee485c1758",
+          "name": "AMD Developer Cloud Get GPU Instance",
+          "request": {
+            "name": "AMD Developer Cloud Get GPU Instance",
+            "description": {
+              "content": "Retrieve details of a specific GPU compute instance including status, configuration, and resource utilization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "instances",
+                ":instanceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "instanceId",
+                  "description": "(Required) GPU instance identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f5da8f78-7b1b-44fb-9bdd-85660a1c6374",
+              "name": "Instance details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instances",
+                    ":instanceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "instanceId",
+                      "description": "(Required) GPU instance identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"inst-001\",\n  \"name\": \"my-training-run\",\n  \"gpuType\": \"mi300x\",\n  \"gpuCount\": 8,\n  \"status\": \"running\",\n  \"region\": \"us-west-2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ef85744-e5d7-432d-84eb-9d637fc6b0b2",
+              "name": "Instance not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instances",
+                    ":instanceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "instanceId",
+                      "description": "(Required) GPU instance identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"NOT_FOUND\",\n  \"message\": \"Instance not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2923dd4b-e3a2-45e6-9ab1-a7c956282ce2",
+          "name": "AMD Developer Cloud Terminate GPU Instance",
+          "request": {
+            "name": "AMD Developer Cloud Terminate GPU Instance",
+            "description": {
+              "content": "Terminate and remove an AMD GPU compute instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "instances",
+                ":instanceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "instanceId",
+                  "description": "(Required) GPU instance identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ea7607f-c81b-4398-8075-9d8838ec9e5e",
+              "name": "Instance terminated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instances",
+                    ":instanceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "instanceId",
+                      "description": "(Required) GPU instance identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e80ee5a5-96ef-4cd9-8081-44069616208f",
+              "name": "Instance not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instances",
+                    ":instanceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "instanceId",
+                      "description": "(Required) GPU instance identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"NOT_FOUND\",\n  \"message\": \"Instance not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c0898bf8-4379-4fab-9e94-e23bd3e267de",
+      "name": "Models",
+      "description": {
+        "content": "AI model deployment and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6359dabe-b11b-456c-a5d7-c930557915a0",
+          "name": "AMD Developer Cloud List Deployed Models",
+          "request": {
+            "name": "AMD Developer Cloud List Deployed Models",
+            "description": {
+              "content": "List AI models deployed on the AMD Developer Cloud for inference serving.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de697306-0055-4ba1-8206-aedee34f5820",
+              "name": "List of deployed models.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"models\": [\n    {\n      \"id\": \"model-001\",\n      \"name\": \"llama-3.1-70b\",\n      \"framework\": \"vLLM\",\n      \"status\": \"serving\",\n      \"endpoint\": \"https://inf.developer.amd.com/model-001/v1\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0444eff0-4448-4b6a-bf13-b93d2890520f",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid API key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97de2b1a-210c-4c82-bcf7-6327e5ed64e5",
+          "name": "AMD Developer Cloud Deploy AI Model",
+          "request": {
+            "name": "AMD Developer Cloud Deploy AI Model",
+            "description": {
+              "content": "Deploy an AI model for inference serving on AMD Instinct GPUs using vLLM or another serving framework.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"modelId\": \"<string>\",\n  \"framework\": \"<string>\",\n  \"gpuType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"gpuCount\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f9193dfe-2f82-49b8-bcf6-6850d9f1b394",
+              "name": "Model deployed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"llama-3.1-70b\",\n  \"modelId\": \"meta-llama/Llama-3.1-70B-Instruct\",\n  \"framework\": \"vLLM\",\n  \"gpuType\": \"mi300x\",\n  \"gpuCount\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"model-002\",\n  \"name\": \"llama-3.1-70b\",\n  \"framework\": \"vLLM\",\n  \"status\": \"deploying\",\n  \"endpoint\": \"https://inf.developer.amd.com/model-002/v1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d5bb94b-143f-4597-b1c5-e6be8ee3f6c3",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"llama-3.1-70b\",\n  \"modelId\": \"meta-llama/Llama-3.1-70B-Instruct\",\n  \"framework\": \"vLLM\",\n  \"gpuType\": \"mi300x\",\n  \"gpuCount\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid API key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d88ecde2-d71f-4a73-b40a-ba872ab7651b",
+      "name": "Monitoring",
+      "description": {
+        "content": "GPU utilization and performance monitoring",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0e5ae746-f385-4b3c-b7b5-be2f7e0025f2",
+          "name": "AMD Developer Cloud Get GPU Instance Metrics",
+          "request": {
+            "name": "AMD Developer Cloud Get GPU Instance Metrics",
+            "description": {
+              "content": "Retrieve real-time GPU utilization, memory usage, temperature, and power consumption metrics for an instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "instances",
+                ":instanceId",
+                "metrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "instanceId",
+                  "description": "(Required) GPU instance identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ff96a9f7-3f2c-449c-aac8-090c4481d73e",
+              "name": "Instance performance metrics.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instances",
+                    ":instanceId",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "instanceId",
+                      "description": "(Required) GPU instance identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instanceId\": \"inst-001\",\n  \"gpuUtilization\": 87.5,\n  \"memoryUsed\": 180.2,\n  \"memoryTotal\": 192,\n  \"temperature\": 72,\n  \"powerDraw\": 680\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "293ef24f-4ad5-483e-b418-cb1de40a55cb",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "instances",
+                    ":instanceId",
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "instanceId",
+                      "description": "(Required) GPU instance identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid API key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "bedb87af-4447-4640-8fe2-e76a7e326181",
+      "name": "Credits",
+      "description": {
+        "content": "Cloud credit balance and usage",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8ba69c8a-845e-474d-bb3e-bb71eedea157",
+          "name": "AMD Developer Cloud Get Credit Balance",
+          "request": {
+            "name": "AMD Developer Cloud Get Credit Balance",
+            "description": {
+              "content": "Retrieve the current GPU credit balance and usage history for the authenticated account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "credits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a85bb4f7-7f7f-4d30-a381-4caba8f18399",
+              "name": "Credit balance and usage.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"balance\": 450,\n  \"used\": 550,\n  \"total\": 1000,\n  \"currency\": \"USD\",\n  \"expiresAt\": \"2026-12-31T23:59:59Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efd7ec97-8035-42ec-9891-865891eaaa87",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Invalid API key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.developer.amd.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "385bd766-d1b2-4836-b51b-9ce9f7f997c0",
+    "name": "AMD Developer Cloud API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The AMD Developer Cloud API provides access to AMD Instinct GPU instances for AI inference, training, and HPC workloads. Supports managing compute instances, deploying AI models, monitoring GPU utilization, and integrating with ROCm-compatible frameworks including PyTorch, TensorFlow, and vLLM.\n\nContact Support:\n Name: AMD Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AMD Developer Cloud API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Instances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AMD Developer Cloud List GPU Instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.developer.amd.com/v1/instances",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by instance status."
+              },
+              {
+                "name": "gpuType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by GPU type (e.g., mi300x, mi250)."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of instances to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset."
+              }
+            ]
+          },
+          "docs": "Retrieve all active GPU compute instances in the authenticated account."
+        },
+        {
+          "info": {
+            "name": "AMD Developer Cloud Create GPU Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.developer.amd.com/v1/instances",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Launch a new AMD GPU compute instance with specified hardware configuration and ROCm environment."
+        },
+        {
+          "info": {
+            "name": "AMD Developer Cloud Get GPU Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.developer.amd.com/v1/instances/:instanceId",
+            "params": [
+              {
+                "name": "instanceId",
+                "value": "",
+                "type": "path",
+                "description": "GPU instance identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific GPU compute instance including status, configuration, and resource utilization."
+        },
+        {
+          "info": {
+            "name": "AMD Developer Cloud Terminate GPU Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.developer.amd.com/v1/instances/:instanceId",
+            "params": [
+              {
+                "name": "instanceId",
+                "value": "",
+                "type": "path",
+                "description": "GPU instance identifier."
+              }
+            ]
+          },
+          "docs": "Terminate and remove an AMD GPU compute instance."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AMD Developer Cloud Get GPU Instance Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.developer.amd.com/v1/instances/:instanceId/metrics",
+            "params": [
+              {
+                "name": "instanceId",
+                "value": "",
+                "type": "path",
+                "description": "GPU instance identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve real-time GPU utilization, memory usage, temperature, and power consumption metrics for an instance."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AMD Developer Cloud List Deployed Models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.developer.amd.com/v1/models"
+          },
+          "docs": "List AI models deployed on the AMD Developer Cloud for inference serving."
+        },
+        {
+          "info": {
+            "name": "AMD Developer Cloud Deploy AI Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.developer.amd.com/v1/models",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deploy an AI model for inference serving on AMD Instinct GPUs using vLLM or another serving framework."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Credits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AMD Developer Cloud Get Credit Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.developer.amd.com/v1/credits"
+          },
+          "docs": "Retrieve the current GPU credit balance and usage history for the authenticated account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AMD ROCm Management API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Devices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AMD ROCm List GPU Devices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rocm-mgmt.amd.com/v1/devices"
+          },
+          "docs": "Enumerate all AMD GPU devices visible to the ROCm runtime on the system."
+        },
+        {
+          "info": {
+            "name": "AMD ROCm Get GPU Device Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rocm-mgmt.amd.com/v1/devices/:deviceId",
+            "params": [
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "GPU device identifier (e.g., gpu0, gpu1)."
+              }
+            ]
+          },
+          "docs": "Retrieve detailed hardware information for a specific AMD GPU device including model, firmware, memory, and topology."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AMD ROCm Get GPU Device Health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rocm-mgmt.amd.com/v1/devices/:deviceId/health",
+            "params": [
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "GPU device identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve current health status, temperature, fan speed, and error counts for an AMD GPU device."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Performance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AMD ROCm Get GPU Device Performance Counters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rocm-mgmt.amd.com/v1/devices/:deviceId/performance",
+            "params": [
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "GPU device identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve GPU utilization, memory bandwidth, compute throughput, and other performance counters for an AMD GPU."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AMD ROCm Get ROCm Software Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rocm-mgmt.amd.com/v1/system/rocm-version"
+          },
+          "docs": "Retrieve the installed ROCm platform version, HIP runtime version, and driver information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

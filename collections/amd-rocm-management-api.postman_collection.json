@@ -1,0 +1,769 @@
+{
+  "item": [
+    {
+      "id": "168dfa86-e745-47b0-b75b-645b9c24af8b",
+      "name": "Devices",
+      "description": {
+        "content": "GPU device enumeration and information",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b0613d80-a401-49ae-b7ab-3b04a3cdd4f5",
+          "name": "AMD ROCm List GPU Devices",
+          "request": {
+            "name": "AMD ROCm List GPU Devices",
+            "description": {
+              "content": "Enumerate all AMD GPU devices visible to the ROCm runtime on the system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "devices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "840b9415-8871-4cf2-b50a-9f6c5a417e0f",
+              "name": "List of GPU devices.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"devices\": [\n    {\n      \"id\": \"gpu0\",\n      \"name\": \"AMD Instinct MI300X\",\n      \"model\": \"MI300X\",\n      \"vbios\": \"113-MSIV3C5.0N\",\n      \"driverVersion\": \"6.1.0\",\n      \"memoryTotal\": 192\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e7b78f6-3d8c-4917-99da-e4cb5d22d345",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Authentication required\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5bec5529-fd12-4511-8391-6eface4edb85",
+          "name": "AMD ROCm Get GPU Device Details",
+          "request": {
+            "name": "AMD ROCm Get GPU Device Details",
+            "description": {
+              "content": "Retrieve detailed hardware information for a specific AMD GPU device including model, firmware, memory, and topology.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "devices",
+                ":deviceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "deviceId",
+                  "description": "(Required) GPU device identifier (e.g., gpu0, gpu1)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0589f23c-ad65-4335-b84a-774be0517a07",
+              "name": "GPU device details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices",
+                    ":deviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceId",
+                      "description": "(Required) GPU device identifier (e.g., gpu0, gpu1)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"gpu0\",\n  \"name\": \"AMD Instinct MI300X\",\n  \"model\": \"MI300X\",\n  \"vbios\": \"113-MSIV3C5.0N\",\n  \"driverVersion\": \"6.1.0\",\n  \"memoryTotal\": 192,\n  \"pcieBusId\": \"0000:03:00.0\",\n  \"computeUnits\": 304\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16df16ca-612b-4a9d-bc65-9936e0935f7e",
+              "name": "Device not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices",
+                    ":deviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceId",
+                      "description": "(Required) GPU device identifier (e.g., gpu0, gpu1)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"NOT_FOUND\",\n  \"message\": \"Device not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "ac4fcc86-a286-4ec9-b835-66e3052346e0",
+      "name": "Health",
+      "description": {
+        "content": "GPU health and diagnostic status",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2bbec3d0-98bc-42f6-ba7c-f0de1b98c8d2",
+          "name": "AMD ROCm Get GPU Device Health",
+          "request": {
+            "name": "AMD ROCm Get GPU Device Health",
+            "description": {
+              "content": "Retrieve current health status, temperature, fan speed, and error counts for an AMD GPU device.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "devices",
+                ":deviceId",
+                "health"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "deviceId",
+                  "description": "(Required) GPU device identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0b273d97-8056-4c96-b66c-21d6b953b5e0",
+              "name": "GPU health status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices",
+                    ":deviceId",
+                    "health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceId",
+                      "description": "(Required) GPU device identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deviceId\": \"gpu0\",\n  \"status\": \"healthy\",\n  \"temperature\": 65,\n  \"fanSpeed\": 45,\n  \"powerDraw\": 420,\n  \"eccErrors\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abbd27fe-3d40-465a-adeb-523cfe54ad34",
+              "name": "Device not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices",
+                    ":deviceId",
+                    "health"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceId",
+                      "description": "(Required) GPU device identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"NOT_FOUND\",\n  \"message\": \"Device not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "9166877d-f83b-440f-9dc6-5adbfaafc9e6",
+      "name": "Performance",
+      "description": {
+        "content": "Performance counters and profiling data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "162c162e-c540-4bf0-81f7-f8939dd5e5d7",
+          "name": "AMD ROCm Get GPU Device Performance Counters",
+          "request": {
+            "name": "AMD ROCm Get GPU Device Performance Counters",
+            "description": {
+              "content": "Retrieve GPU utilization, memory bandwidth, compute throughput, and other performance counters for an AMD GPU.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "devices",
+                ":deviceId",
+                "performance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "deviceId",
+                  "description": "(Required) GPU device identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "843c1641-8248-46d2-80a6-ef21f50b416d",
+              "name": "GPU performance counters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices",
+                    ":deviceId",
+                    "performance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceId",
+                      "description": "(Required) GPU device identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deviceId\": \"gpu0\",\n  \"gpuUtilization\": 92.3,\n  \"memoryUtilization\": 78.5,\n  \"memoryBandwidth\": 4800,\n  \"computeThroughput\": 1.83\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6bde80d5-08d0-4f44-a2a5-09d55f48b85d",
+              "name": "Device not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices",
+                    ":deviceId",
+                    "performance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceId",
+                      "description": "(Required) GPU device identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"NOT_FOUND\",\n  \"message\": \"Device not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "12996ae2-69e5-41ea-b45c-1f1d2b421e56",
+      "name": "Configuration",
+      "description": {
+        "content": "ROCm system configuration",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a5985ed7-9d63-4957-9bc7-dee3cb193d57",
+          "name": "AMD ROCm Get ROCm Software Version",
+          "request": {
+            "name": "AMD ROCm Get ROCm Software Version",
+            "description": {
+              "content": "Retrieve the installed ROCm platform version, HIP runtime version, and driver information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "system",
+                "rocm-version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5eff5056-a280-4997-81ed-2dce2f7a4a3f",
+              "name": "ROCm version information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "system",
+                    "rocm-version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rocmVersion\": \"6.1.0\",\n  \"hipVersion\": \"6.1.40091\",\n  \"driverVersion\": \"6.1.0.60100\",\n  \"kernelVersion\": \"5.15.0-105-generic\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4a585ac-d6f8-4b56-81c0-9cb95d11ebd2",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "system",
+                    "rocm-version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Authentication required\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://rocm-mgmt.amd.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "05971b2c-32e0-4ae0-bf65-80f6b240650e",
+    "name": "AMD ROCm Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The AMD ROCm Management API provides runtime monitoring and configuration for AMD GPU hardware running the ROCm software stack. Supports querying GPU device information, monitoring utilization and health, managing ROCm system configuration, and retrieving performance counters for AMD Instinct and Radeon GPUs.\n\nContact Support:\n Name: AMD ROCm Support",
+      "type": "text/plain"
+    }
+  }
+}
