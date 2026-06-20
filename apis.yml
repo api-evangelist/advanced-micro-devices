@@ -145,7 +145,7 @@ description: >-
   platform for GPU computing, HIP programming interface, and the AMD Developer Cloud for AI workloads using AMD Instinct
   GPUs.
 name: Advanced Micro Devices
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 type: Index
 created: '2024-01-01'
 specificationVersion: '0.19'
