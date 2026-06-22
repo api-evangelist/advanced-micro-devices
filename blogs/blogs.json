@@ -3,13 +3,12 @@
   "feeds": [
     {
       "source": "https://www.amd.com/en/corporate/blog.html",
-      "error": "HTTPError"
-    },
-    {
-      "source": "https://developer.amd.com/support/",
-      "error": "HTTPError"
+      "feed_url": null,
+      "title": "AMD Corporate Blog",
+      "saved": 0,
+      "note": "All feed-path and HTML fetches timed out (no reachable RSS/Atom feed); same failure as prior run."
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-21T17:00:00Z",
+  "post_count": 0
 }
