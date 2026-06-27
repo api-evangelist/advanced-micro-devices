@@ -81,7 +81,7 @@ common:
     url: https://github.com/ROCm
   - type: Academy
     url: https://academy.amd.com
-  - type: SignUp
+  - type: Signup
     url: https://developer.amd.com/amd-developer-cloud/
   - type: Features
     data:

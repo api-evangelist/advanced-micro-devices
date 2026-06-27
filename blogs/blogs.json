@@ -3,12 +3,11 @@
   "feeds": [
     {
       "source": "https://www.amd.com/en/corporate/blog.html",
-      "feed_url": null,
-      "title": "AMD Corporate Blog",
+      "feed_url": "",
       "saved": 0,
-      "note": "All feed-path and HTML fetches timed out (no reachable RSS/Atom feed); same failure as prior run."
+      "error": "timeout/socket hang up on all fetch attempts"
     }
   ],
-  "fetched": "2026-06-21T17:00:00Z",
+  "fetched": "2026-06-27T12:20:57Z",
   "post_count": 0
 }
