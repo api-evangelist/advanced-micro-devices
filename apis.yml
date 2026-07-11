@@ -59,6 +59,10 @@ apis:
       - type: Vocabulary
         url: vocabulary/advanced-micro-devices-vocabulary.yaml
 common:
+  - type: DomainSecurity
+    url: security/advanced-micro-devices-domain-security.yml
+  - type: Authentication
+    url: authentication/advanced-micro-devices-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/amd
   - type: Website

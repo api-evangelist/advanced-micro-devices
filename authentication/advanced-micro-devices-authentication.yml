@@ -1,0 +1,22 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/amd-developer-cloud-api-openapi.yml, openapi/amd-rocm-management-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: X-API-Key
+  sources:
+  - openapi/amd-developer-cloud-api-openapi.yml
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/amd-rocm-management-api-openapi.yml
