@@ -2,12 +2,10 @@
   "repo": "advanced-micro-devices",
   "feeds": [
     {
-      "source": "https://www.amd.com/en/corporate/blog.html",
-      "feed_url": "",
-      "saved": 0,
-      "error": "timeout/socket hang up on all fetch attempts"
+      "source": "https://developer.amd.com/support/",
+      "error": "HTTPError"
     }
   ],
-  "fetched": "2026-06-27T12:20:57Z",
+  "fetched": "2026-07-11T11:50:51Z",
   "post_count": 0
 }
