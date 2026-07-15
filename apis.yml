@@ -59,6 +59,8 @@ apis:
       - type: Vocabulary
         url: vocabulary/advanced-micro-devices-vocabulary.yaml
 common:
+  - type: AgenticAccess
+    url: agentic-access/advanced-micro-devices-agentic-access.yml
   - type: DomainSecurity
     url: security/advanced-micro-devices-domain-security.yml
   - type: Authentication
