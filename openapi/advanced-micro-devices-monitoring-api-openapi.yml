@@ -1,0 +1,120 @@
+openapi: 3.0.3
+info:
+  title: AMD Developer Cloud Configuration Monitoring API
+  description: The AMD Developer Cloud API provides access to AMD Instinct GPU instances for AI inference, training, and HPC workloads. Supports managing compute instances, deploying AI models, monitoring GPU utilization, and integrating with ROCm-compatible frameworks including PyTorch, TensorFlow, and vLLM.
+  version: '1'
+  contact:
+    name: AMD Developer Support
+    url: https://developer.amd.com/support/
+  termsOfService: https://www.amd.com/en/legal/terms-and-conditions.html
+  license:
+    name: AMD Terms and Conditions
+    url: https://www.amd.com/en/legal/terms-and-conditions.html
+servers:
+- url: https://api.developer.amd.com/v1
+  description: AMD Developer Cloud API Production
+security:
+- apiKey: []
+tags:
+- name: Monitoring
+  description: GPU utilization and performance monitoring
+paths:
+  /instances/{instanceId}/metrics:
+    get:
+      operationId: getInstanceMetrics
+      summary: AMD Developer Cloud Get GPU Instance Metrics
+      description: Retrieve real-time GPU utilization, memory usage, temperature, and power consumption metrics for an instance.
+      tags:
+      - Monitoring
+      parameters:
+      - name: instanceId
+        in: path
+        required: true
+        description: GPU instance identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Instance performance metrics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceMetrics'
+              examples:
+                getInstanceMetrics200Example:
+                  summary: Default getInstanceMetrics 200 response
+                  x-microcks-default: true
+                  value:
+                    instanceId: inst-001
+                    gpuUtilization: 87.5
+                    memoryUsed: 180.2
+                    memoryTotal: 192.0
+                    temperature: 72
+                    powerDraw: 680.0
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getInstanceMetrics401Example:
+                  summary: Default getInstanceMetrics 401 response
+                  x-microcks-default: true
+                  value:
+                    code: UNAUTHORIZED
+                    message: Invalid API key
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    InstanceMetrics:
+      type: object
+      description: Real-time performance metrics for a GPU instance.
+      properties:
+        instanceId:
+          type: string
+          description: Instance identifier.
+          example: inst-001
+        gpuUtilization:
+          type: number
+          format: float
+          description: GPU utilization percentage.
+          example: 87.5
+        memoryUsed:
+          type: number
+          format: float
+          description: GPU memory used in GB.
+          example: 180.2
+        memoryTotal:
+          type: number
+          format: float
+          description: Total GPU memory in GB.
+          example: 192.0
+        temperature:
+          type: integer
+          description: GPU temperature in Celsius.
+          example: 72
+        powerDraw:
+          type: number
+          format: float
+          description: Current power draw in watts.
+          example: 680.0
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key

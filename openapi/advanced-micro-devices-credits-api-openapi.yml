@@ -1,0 +1,107 @@
+openapi: 3.0.3
+info:
+  title: AMD Developer Cloud Configuration Credits API
+  description: The AMD Developer Cloud API provides access to AMD Instinct GPU instances for AI inference, training, and HPC workloads. Supports managing compute instances, deploying AI models, monitoring GPU utilization, and integrating with ROCm-compatible frameworks including PyTorch, TensorFlow, and vLLM.
+  version: '1'
+  contact:
+    name: AMD Developer Support
+    url: https://developer.amd.com/support/
+  termsOfService: https://www.amd.com/en/legal/terms-and-conditions.html
+  license:
+    name: AMD Terms and Conditions
+    url: https://www.amd.com/en/legal/terms-and-conditions.html
+servers:
+- url: https://api.developer.amd.com/v1
+  description: AMD Developer Cloud API Production
+security:
+- apiKey: []
+tags:
+- name: Credits
+  description: Cloud credit balance and usage
+paths:
+  /credits:
+    get:
+      operationId: getCredits
+      summary: AMD Developer Cloud Get Credit Balance
+      description: Retrieve the current GPU credit balance and usage history for the authenticated account.
+      tags:
+      - Credits
+      responses:
+        '200':
+          description: Credit balance and usage.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Credits'
+              examples:
+                getCredits200Example:
+                  summary: Default getCredits 200 response
+                  x-microcks-default: true
+                  value:
+                    balance: 450.0
+                    used: 550.0
+                    total: 1000.0
+                    currency: USD
+                    expiresAt: '2026-12-31T23:59:59Z'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getCredits401Example:
+                  summary: Default getCredits 401 response
+                  x-microcks-default: true
+                  value:
+                    code: UNAUTHORIZED
+                    message: Invalid API key
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Credits:
+      type: object
+      description: GPU credit balance and usage for the account.
+      properties:
+        balance:
+          type: number
+          format: float
+          description: Remaining credit balance.
+          example: 450.0
+        used:
+          type: number
+          format: float
+          description: Credits consumed.
+          example: 550.0
+        total:
+          type: number
+          format: float
+          description: Total credits allocated.
+          example: 1000.0
+        currency:
+          type: string
+          description: Currency of credit values.
+          example: USD
+        expiresAt:
+          type: string
+          format: date-time
+          description: Credit expiration date.
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key

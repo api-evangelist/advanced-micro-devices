@@ -1,0 +1,213 @@
+openapi: 3.0.3
+info:
+  title: AMD Developer Cloud Configuration Models API
+  description: The AMD Developer Cloud API provides access to AMD Instinct GPU instances for AI inference, training, and HPC workloads. Supports managing compute instances, deploying AI models, monitoring GPU utilization, and integrating with ROCm-compatible frameworks including PyTorch, TensorFlow, and vLLM.
+  version: '1'
+  contact:
+    name: AMD Developer Support
+    url: https://developer.amd.com/support/
+  termsOfService: https://www.amd.com/en/legal/terms-and-conditions.html
+  license:
+    name: AMD Terms and Conditions
+    url: https://www.amd.com/en/legal/terms-and-conditions.html
+servers:
+- url: https://api.developer.amd.com/v1
+  description: AMD Developer Cloud API Production
+security:
+- apiKey: []
+tags:
+- name: Models
+  description: AI model deployment and management
+paths:
+  /models:
+    get:
+      operationId: listModels
+      summary: AMD Developer Cloud List Deployed Models
+      description: List AI models deployed on the AMD Developer Cloud for inference serving.
+      tags:
+      - Models
+      responses:
+        '200':
+          description: List of deployed models.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelList'
+              examples:
+                listModels200Example:
+                  summary: Default listModels 200 response
+                  x-microcks-default: true
+                  value:
+                    models:
+                    - id: model-001
+                      name: llama-3.1-70b
+                      framework: vLLM
+                      status: serving
+                      endpoint: https://inf.developer.amd.com/model-001/v1
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                listModels401Example:
+                  summary: Default listModels 401 response
+                  x-microcks-default: true
+                  value:
+                    code: UNAUTHORIZED
+                    message: Invalid API key
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: deployModel
+      summary: AMD Developer Cloud Deploy AI Model
+      description: Deploy an AI model for inference serving on AMD Instinct GPUs using vLLM or another serving framework.
+      tags:
+      - Models
+      requestBody:
+        required: true
+        description: Model deployment configuration.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelInput'
+            examples:
+              deployModelRequestExample:
+                summary: Default deployModel request
+                x-microcks-default: true
+                value:
+                  name: llama-3.1-70b
+                  modelId: meta-llama/Llama-3.1-70B-Instruct
+                  framework: vLLM
+                  gpuType: mi300x
+                  gpuCount: 2
+      responses:
+        '201':
+          description: Model deployed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+              examples:
+                deployModel201Example:
+                  summary: Default deployModel 201 response
+                  x-microcks-default: true
+                  value:
+                    id: model-002
+                    name: llama-3.1-70b
+                    framework: vLLM
+                    status: deploying
+                    endpoint: https://inf.developer.amd.com/model-002/v1
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                deployModel401Example:
+                  summary: Default deployModel 401 response
+                  x-microcks-default: true
+                  value:
+                    code: UNAUTHORIZED
+                    message: Invalid API key
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Model:
+      type: object
+      description: A deployed AI model for inference serving.
+      properties:
+        id:
+          type: string
+          description: Model deployment identifier.
+          example: model-001
+        name:
+          type: string
+          description: Model display name.
+          example: llama-3.1-70b
+        framework:
+          type: string
+          description: Inference serving framework.
+          enum:
+          - vLLM
+          - TGI
+          - TorchServe
+          - Triton
+          example: vLLM
+        status:
+          type: string
+          description: Deployment status.
+          enum:
+          - deploying
+          - serving
+          - stopped
+          - failed
+          example: serving
+        endpoint:
+          type: string
+          description: Inference endpoint URL.
+          example: https://inf.developer.amd.com/model-001/v1
+    ModelList:
+      type: object
+      description: List of deployed AI models.
+      properties:
+        models:
+          type: array
+          description: Array of model deployments.
+          items:
+            $ref: '#/components/schemas/Model'
+    ModelInput:
+      type: object
+      description: Request to deploy an AI model.
+      required:
+      - modelId
+      - framework
+      - gpuType
+      properties:
+        name:
+          type: string
+          description: Display name for the deployment.
+          example: llama-3.1-70b
+        modelId:
+          type: string
+          description: Hugging Face model ID or path.
+          example: meta-llama/Llama-3.1-70B-Instruct
+        framework:
+          type: string
+          description: Inference framework to use.
+          enum:
+          - vLLM
+          - TGI
+          - TorchServe
+          - Triton
+          example: vLLM
+        gpuType:
+          type: string
+          description: GPU hardware type.
+          example: mi300x
+        gpuCount:
+          type: integer
+          description: Number of GPUs to allocate.
+          example: 2
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
