@@ -1,64 +1,231 @@
 aid: advanced-micro-devices
 url: https://raw.githubusercontent.com/api-evangelist/advanced-micro-devices/refs/heads/main/apis.yml
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 modified: '2026-04-19'
 apis:
-  - name: AMD Developer Cloud API
-    description: >-
-      The AMD Developer Cloud API provides access to AMD Instinct GPU instances for AI inference, training, and HPC
-      workloads. Supports managing compute instances, deploying AI models, monitoring GPU utilization, and integrating
-      with ROCm-compatible frameworks including PyTorch, TensorFlow, and vLLM.
-    humanURL: https://developer.amd.com
-    baseURL: https://api.developer.amd.com/v1
-    tags:
-      - AI
-      - Cloud Computing
-      - GPU
-      - HPC
-      - Instinct
-    properties:
-      - type: Documentation
-        url: https://developer.amd.com
-      - type: OpenAPI
-        url: openapi/amd-developer-cloud-api-openapi.yml
-      - type: JSONSchema
-        url: json-schema/
-      - type: JSONStructure
-        url: json-structure/
-      - type: JSONLD
-        url: json-ld/amd-developer-cloud-api-context.jsonld
-      - type: SpectralRules
-        url: rules/amd-spectral-rules.yml
-      - type: Vocabulary
-        url: vocabulary/advanced-micro-devices-vocabulary.yaml
-  - name: AMD ROCm API
-    description: >-
-      The AMD ROCm (Radeon Open Compute) platform provides the runtime and library APIs for GPU-accelerated computing on
-      AMD hardware. Includes HIP (Heterogeneous-compute Interface for Portability), math libraries (rocBLAS, rocFFT,
-      rocRAND), and communication libraries (RCCL) for high-performance computing and AI workloads.
-    humanURL: https://rocm.docs.amd.com
-    baseURL: https://rocm.docs.amd.com/en/latest
-    tags:
-      - GPU
-      - HPC
-      - Machine Learning
-      - ROCm
-      - SDK
-    properties:
-      - type: Documentation
-        url: https://rocm.docs.amd.com
-      - type: OpenAPI
-        url: openapi/amd-rocm-management-api-openapi.yml
-      - type: JSONSchema
-        url: json-schema/
-      - type: JSONStructure
-        url: json-structure/
-      - type: JSONLD
-        url: json-ld/amd-rocm-management-api-context.jsonld
-      - type: SpectralRules
-        url: rules/amd-spectral-rules.yml
-      - type: Vocabulary
-        url: vocabulary/advanced-micro-devices-vocabulary.yaml
+- aid: advanced-micro-devices:advanced-micro-devices-configuration-api
+  name: Advanced Micro Devices Configuration API
+  description: ROCm system configuration
+  humanURL: https://developer.amd.com
+  baseURL: https://api.developer.amd.com/v1
+  tags:
+  - Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/advanced-micro-devices-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://developer.amd.com
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: JSONLD
+    url: json-ld/amd-developer-cloud-api-context.jsonld
+  - type: SpectralRules
+    url: rules/amd-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/advanced-micro-devices-vocabulary.yaml
+  - type: Documentation
+    url: https://rocm.docs.amd.com
+  - type: JSONLD
+    url: json-ld/amd-rocm-management-api-context.jsonld
+- aid: advanced-micro-devices:advanced-micro-devices-credits-api
+  name: Advanced Micro Devices Credits API
+  description: Cloud credit balance and usage
+  humanURL: https://developer.amd.com
+  baseURL: https://api.developer.amd.com/v1
+  tags:
+  - Credits
+  properties:
+  - type: OpenAPI
+    url: openapi/advanced-micro-devices-credits-api-openapi.yml
+  - type: Documentation
+    url: https://developer.amd.com
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: JSONLD
+    url: json-ld/amd-developer-cloud-api-context.jsonld
+  - type: SpectralRules
+    url: rules/amd-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/advanced-micro-devices-vocabulary.yaml
+  - type: Documentation
+    url: https://rocm.docs.amd.com
+  - type: JSONLD
+    url: json-ld/amd-rocm-management-api-context.jsonld
+- aid: advanced-micro-devices:advanced-micro-devices-devices-api
+  name: Advanced Micro Devices Devices API
+  description: GPU device enumeration and information
+  humanURL: https://developer.amd.com
+  baseURL: https://api.developer.amd.com/v1
+  tags:
+  - Devices
+  properties:
+  - type: OpenAPI
+    url: openapi/advanced-micro-devices-devices-api-openapi.yml
+  - type: Documentation
+    url: https://developer.amd.com
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: JSONLD
+    url: json-ld/amd-developer-cloud-api-context.jsonld
+  - type: SpectralRules
+    url: rules/amd-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/advanced-micro-devices-vocabulary.yaml
+  - type: Documentation
+    url: https://rocm.docs.amd.com
+  - type: JSONLD
+    url: json-ld/amd-rocm-management-api-context.jsonld
+- aid: advanced-micro-devices:advanced-micro-devices-health-api
+  name: Advanced Micro Devices Health API
+  description: GPU health and diagnostic status
+  humanURL: https://developer.amd.com
+  baseURL: https://api.developer.amd.com/v1
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/advanced-micro-devices-health-api-openapi.yml
+  - type: Documentation
+    url: https://developer.amd.com
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: JSONLD
+    url: json-ld/amd-developer-cloud-api-context.jsonld
+  - type: SpectralRules
+    url: rules/amd-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/advanced-micro-devices-vocabulary.yaml
+  - type: Documentation
+    url: https://rocm.docs.amd.com
+  - type: JSONLD
+    url: json-ld/amd-rocm-management-api-context.jsonld
+- aid: advanced-micro-devices:advanced-micro-devices-instances-api
+  name: Advanced Micro Devices Instances API
+  description: GPU compute instance management
+  humanURL: https://developer.amd.com
+  baseURL: https://api.developer.amd.com/v1
+  tags:
+  - Instances
+  properties:
+  - type: OpenAPI
+    url: openapi/advanced-micro-devices-instances-api-openapi.yml
+  - type: Documentation
+    url: https://developer.amd.com
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: JSONLD
+    url: json-ld/amd-developer-cloud-api-context.jsonld
+  - type: SpectralRules
+    url: rules/amd-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/advanced-micro-devices-vocabulary.yaml
+  - type: Documentation
+    url: https://rocm.docs.amd.com
+  - type: JSONLD
+    url: json-ld/amd-rocm-management-api-context.jsonld
+- aid: advanced-micro-devices:advanced-micro-devices-models-api
+  name: Advanced Micro Devices Models API
+  description: AI model deployment and management
+  humanURL: https://developer.amd.com
+  baseURL: https://api.developer.amd.com/v1
+  tags:
+  - Models
+  properties:
+  - type: OpenAPI
+    url: openapi/advanced-micro-devices-models-api-openapi.yml
+  - type: Documentation
+    url: https://developer.amd.com
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: JSONLD
+    url: json-ld/amd-developer-cloud-api-context.jsonld
+  - type: SpectralRules
+    url: rules/amd-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/advanced-micro-devices-vocabulary.yaml
+  - type: Documentation
+    url: https://rocm.docs.amd.com
+  - type: JSONLD
+    url: json-ld/amd-rocm-management-api-context.jsonld
+- aid: advanced-micro-devices:advanced-micro-devices-monitoring-api
+  name: Advanced Micro Devices Monitoring API
+  description: GPU utilization and performance monitoring
+  humanURL: https://developer.amd.com
+  baseURL: https://api.developer.amd.com/v1
+  tags:
+  - Monitoring
+  properties:
+  - type: OpenAPI
+    url: openapi/advanced-micro-devices-monitoring-api-openapi.yml
+  - type: Documentation
+    url: https://developer.amd.com
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: JSONLD
+    url: json-ld/amd-developer-cloud-api-context.jsonld
+  - type: SpectralRules
+    url: rules/amd-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/advanced-micro-devices-vocabulary.yaml
+  - type: Documentation
+    url: https://rocm.docs.amd.com
+  - type: JSONLD
+    url: json-ld/amd-rocm-management-api-context.jsonld
+- aid: advanced-micro-devices:advanced-micro-devices-performance-api
+  name: Advanced Micro Devices Performance API
+  description: Performance counters and profiling data
+  humanURL: https://developer.amd.com
+  baseURL: https://api.developer.amd.com/v1
+  tags:
+  - Performance
+  properties:
+  - type: OpenAPI
+    url: openapi/advanced-micro-devices-performance-api-openapi.yml
+  - type: Documentation
+    url: https://developer.amd.com
+  - type: JSONSchema
+    url: json-schema/
+  - type: JSONStructure
+    url: json-structure/
+  - type: JSONLD
+    url: json-ld/amd-developer-cloud-api-context.jsonld
+  - type: SpectralRules
+    url: rules/amd-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/advanced-micro-devices-vocabulary.yaml
+  - type: Documentation
+    url: https://rocm.docs.amd.com
+  - type: JSONLD
+    url: json-ld/amd-rocm-management-api-context.jsonld
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/advanced-micro-devices/overview
   - type: AgenticAccess
     url: agentic-access/advanced-micro-devices-agentic-access.yml
   - type: DomainSecurity
@@ -151,7 +318,7 @@ description: >-
   platform for GPU computing, HIP programming interface, and the AMD Developer Cloud for AI workloads using AMD Instinct
   GPUs.
 name: Advanced Micro Devices
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/advanced-micro-devices.png
 type: Index
 created: '2024-01-01'
 specificationVersion: '0.19'
