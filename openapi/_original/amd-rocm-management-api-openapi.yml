@@ -1,0 +1,399 @@
+openapi: 3.0.3
+info:
+  title: AMD ROCm Management API
+  description: >-
+    The AMD ROCm Management API provides runtime monitoring and configuration for AMD GPU
+    hardware running the ROCm software stack. Supports querying GPU device information,
+    monitoring utilization and health, managing ROCm system configuration, and retrieving
+    performance counters for AMD Instinct and Radeon GPUs.
+  version: "1"
+  contact:
+    name: AMD ROCm Support
+    url: https://rocm.docs.amd.com
+  termsOfService: https://www.amd.com/en/legal/terms-and-conditions.html
+  license:
+    name: AMD Terms and Conditions
+    url: https://www.amd.com/en/legal/terms-and-conditions.html
+servers:
+  - url: https://rocm-mgmt.amd.com/v1
+    description: AMD ROCm Management API Production
+tags:
+  - name: Devices
+    description: GPU device enumeration and information
+  - name: Health
+    description: GPU health and diagnostic status
+  - name: Performance
+    description: Performance counters and profiling data
+  - name: Configuration
+    description: ROCm system configuration
+security:
+  - bearerAuth: []
+paths:
+  /devices:
+    get:
+      operationId: listDevices
+      summary: AMD ROCm List GPU Devices
+      description: "Enumerate all AMD GPU devices visible to the ROCm runtime on the system."
+      tags:
+        - Devices
+      responses:
+        '200':
+          description: "List of GPU devices."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceList'
+              examples:
+                listDevices200Example:
+                  summary: Default listDevices 200 response
+                  x-microcks-default: true
+                  value:
+                    devices:
+                      - id: "gpu0"
+                        name: "AMD Instinct MI300X"
+                        model: "MI300X"
+                        vbios: "113-MSIV3C5.0N"
+                        driverVersion: "6.1.0"
+                        memoryTotal: 192
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                listDevices401Example:
+                  summary: Default listDevices 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Authentication required"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /devices/{deviceId}:
+    get:
+      operationId: getDevice
+      summary: AMD ROCm Get GPU Device Details
+      description: "Retrieve detailed hardware information for a specific AMD GPU device including model, firmware, memory, and topology."
+      tags:
+        - Devices
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          description: "GPU device identifier (e.g., gpu0, gpu1)."
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "GPU device details."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+              examples:
+                getDevice200Example:
+                  summary: Default getDevice 200 response
+                  x-microcks-default: true
+                  value:
+                    id: "gpu0"
+                    name: "AMD Instinct MI300X"
+                    model: "MI300X"
+                    vbios: "113-MSIV3C5.0N"
+                    driverVersion: "6.1.0"
+                    memoryTotal: 192
+                    pcieBusId: "0000:03:00.0"
+                    computeUnits: 304
+        '404':
+          description: "Device not found."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getDevice404Example:
+                  summary: Default getDevice 404 response
+                  x-microcks-default: true
+                  value:
+                    code: "NOT_FOUND"
+                    message: "Device not found"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /devices/{deviceId}/health:
+    get:
+      operationId: getDeviceHealth
+      summary: AMD ROCm Get GPU Device Health
+      description: "Retrieve current health status, temperature, fan speed, and error counts for an AMD GPU device."
+      tags:
+        - Health
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          description: "GPU device identifier."
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "GPU health status."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceHealth'
+              examples:
+                getDeviceHealth200Example:
+                  summary: Default getDeviceHealth 200 response
+                  x-microcks-default: true
+                  value:
+                    deviceId: "gpu0"
+                    status: "healthy"
+                    temperature: 65
+                    fanSpeed: 45
+                    powerDraw: 420
+                    eccErrors: 0
+        '404':
+          description: "Device not found."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getDeviceHealth404Example:
+                  summary: Default getDeviceHealth 404 response
+                  x-microcks-default: true
+                  value:
+                    code: "NOT_FOUND"
+                    message: "Device not found"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /devices/{deviceId}/performance:
+    get:
+      operationId: getDevicePerformance
+      summary: AMD ROCm Get GPU Device Performance Counters
+      description: "Retrieve GPU utilization, memory bandwidth, compute throughput, and other performance counters for an AMD GPU."
+      tags:
+        - Performance
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          description: "GPU device identifier."
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "GPU performance counters."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DevicePerformance'
+              examples:
+                getDevicePerformance200Example:
+                  summary: Default getDevicePerformance 200 response
+                  x-microcks-default: true
+                  value:
+                    deviceId: "gpu0"
+                    gpuUtilization: 92.3
+                    memoryUtilization: 78.5
+                    memoryBandwidth: 4800.0
+                    computeThroughput: 1.83
+        '404':
+          description: "Device not found."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getDevicePerformance404Example:
+                  summary: Default getDevicePerformance 404 response
+                  x-microcks-default: true
+                  value:
+                    code: "NOT_FOUND"
+                    message: "Device not found"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /system/rocm-version:
+    get:
+      operationId: getRocmVersion
+      summary: AMD ROCm Get ROCm Software Version
+      description: "Retrieve the installed ROCm platform version, HIP runtime version, and driver information."
+      tags:
+        - Configuration
+      responses:
+        '200':
+          description: "ROCm version information."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RocmVersion'
+              examples:
+                getRocmVersion200Example:
+                  summary: Default getRocmVersion 200 response
+                  x-microcks-default: true
+                  value:
+                    rocmVersion: "6.1.0"
+                    hipVersion: "6.1.40091"
+                    driverVersion: "6.1.0.60100"
+                    kernelVersion: "5.15.0-105-generic"
+        '401':
+          description: "Unauthorized."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                getRocmVersion401Example:
+                  summary: Default getRocmVersion 401 response
+                  x-microcks-default: true
+                  value:
+                    code: "UNAUTHORIZED"
+                    message: "Authentication required"
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Device:
+      type: object
+      description: "An AMD GPU device."
+      properties:
+        id:
+          type: string
+          description: "Device identifier."
+          example: "gpu0"
+        name:
+          type: string
+          description: "Device display name."
+          example: "AMD Instinct MI300X"
+        model:
+          type: string
+          description: "GPU model name."
+          example: "MI300X"
+        vbios:
+          type: string
+          description: "VBIOS version string."
+          example: "113-MSIV3C5.0N"
+        driverVersion:
+          type: string
+          description: "ROCm driver version."
+          example: "6.1.0"
+        memoryTotal:
+          type: integer
+          description: "Total GPU memory in GB."
+          example: 192
+        pcieBusId:
+          type: string
+          description: "PCIe bus ID."
+          example: "0000:03:00.0"
+        computeUnits:
+          type: integer
+          description: "Number of compute units."
+          example: 304
+    DeviceList:
+      type: object
+      description: "List of AMD GPU devices."
+      properties:
+        devices:
+          type: array
+          description: "Array of GPU devices."
+          items:
+            $ref: '#/components/schemas/Device'
+    DeviceHealth:
+      type: object
+      description: "Health status of an AMD GPU device."
+      properties:
+        deviceId:
+          type: string
+          description: "Device identifier."
+          example: "gpu0"
+        status:
+          type: string
+          description: "Overall health status."
+          enum: [healthy, warning, critical, unknown]
+          example: "healthy"
+        temperature:
+          type: integer
+          description: "GPU junction temperature in Celsius."
+          example: 65
+        fanSpeed:
+          type: integer
+          description: "Fan speed percentage."
+          example: 45
+        powerDraw:
+          type: number
+          format: float
+          description: "Current power consumption in watts."
+          example: 420.0
+        eccErrors:
+          type: integer
+          description: "ECC memory error count."
+          example: 0
+    DevicePerformance:
+      type: object
+      description: "Performance counters for an AMD GPU device."
+      properties:
+        deviceId:
+          type: string
+          description: "Device identifier."
+          example: "gpu0"
+        gpuUtilization:
+          type: number
+          format: float
+          description: "GPU compute utilization percentage."
+          example: 92.3
+        memoryUtilization:
+          type: number
+          format: float
+          description: "GPU memory utilization percentage."
+          example: 78.5
+        memoryBandwidth:
+          type: number
+          format: float
+          description: "Memory bandwidth utilization in GB/s."
+          example: 4800.0
+        computeThroughput:
+          type: number
+          format: float
+          description: "Compute throughput in PFLOPS."
+          example: 1.83
+    RocmVersion:
+      type: object
+      description: "ROCm platform version information."
+      properties:
+        rocmVersion:
+          type: string
+          description: "ROCm platform version."
+          example: "6.1.0"
+        hipVersion:
+          type: string
+          description: "HIP runtime version."
+          example: "6.1.40091"
+        driverVersion:
+          type: string
+          description: "AMD GPU driver version."
+          example: "6.1.0.60100"
+        kernelVersion:
+          type: string
+          description: "Linux kernel version."
+          example: "5.15.0-105-generic"
+    ErrorResponse:
+      type: object
+      description: "API error response."
+      properties:
+        code:
+          type: string
+          description: "Error code."
+          example: "NOT_FOUND"
+        message:
+          type: string
+          description: "Error message."
+          example: "The requested resource was not found."

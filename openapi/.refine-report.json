@@ -1,0 +1,28 @@
+{
+  "provider": "advanced-micro-devices",
+  "sources": [
+    "advanced-micro-devices-configuration-api-openapi.yml",
+    "advanced-micro-devices-credits-api-openapi.yml",
+    "advanced-micro-devices-devices-api-openapi.yml",
+    "advanced-micro-devices-health-api-openapi.yml",
+    "advanced-micro-devices-instances-api-openapi.yml",
+    "advanced-micro-devices-models-api-openapi.yml",
+    "advanced-micro-devices-monitoring-api-openapi.yml",
+    "advanced-micro-devices-performance-api-openapi.yml"
+  ],
+  "outputs": [
+    "advanced-micro-devices-configuration-api-openapi.yml",
+    "advanced-micro-devices-credits-api-openapi.yml",
+    "advanced-micro-devices-devices-api-openapi.yml",
+    "advanced-micro-devices-health-api-openapi.yml",
+    "advanced-micro-devices-instances-api-openapi.yml",
+    "advanced-micro-devices-models-api-openapi.yml",
+    "advanced-micro-devices-monitoring-api-openapi.yml",
+    "advanced-micro-devices-performance-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

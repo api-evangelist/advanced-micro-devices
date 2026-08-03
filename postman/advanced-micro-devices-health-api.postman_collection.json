@@ -1,0 +1,206 @@
+{
+  "info": {
+    "_postman_id": "74abd615-1e65-4c23-a8ad-a493210a2fb8",
+    "name": "AMD Developer Cloud Configuration Health API",
+    "description": "The AMD Developer Cloud API provides access to AMD Instinct GPU instances for AI inference, training, and HPC workloads. Supports managing compute instances, deploying AI models, monitoring GPU utilization, and integrating with ROCm-compatible frameworks including PyTorch, TensorFlow, and vLLM.\n\nContact Support:\n Name: AMD Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:28:40.000Z",
+    "updatedAt": "2026-07-28T00:28:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-74abd615-1e65-4c23-a8ad-a493210a2fb8"
+  },
+  "item": [
+    {
+      "name": "devices",
+      "item": [
+        {
+          "name": "{deviceId}",
+          "item": [
+            {
+              "name": "health",
+              "item": [
+                {
+                  "name": "AMD ROCm Get GPU Device Health",
+                  "id": "739a326b-afd4-42f7-aade-c64b30a28f47",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/devices/:deviceId/health",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "devices",
+                        ":deviceId",
+                        "health"
+                      ],
+                      "variable": [
+                        {
+                          "id": "58234646-5bbd-4431-890f-2fc6b655722b",
+                          "key": "deviceId",
+                          "value": "<string>",
+                          "description": "(Required) GPU device identifier."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve current health status, temperature, fan speed, and error counts for an AMD GPU device."
+                  },
+                  "response": [
+                    {
+                      "id": "35b9065a-5ec7-4a29-a0e9-362f81aac81f",
+                      "name": "GPU health status.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-API-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/devices/:deviceId/health",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "devices",
+                            ":deviceId",
+                            "health"
+                          ],
+                          "variable": [
+                            {
+                              "key": "deviceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"deviceId\": \"<string>\",\n  \"status\": \"critical\",\n  \"temperature\": \"<integer>\",\n  \"fanSpeed\": \"<integer>\",\n  \"powerDraw\": \"<float>\",\n  \"eccErrors\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T00:28:41.000Z",
+                      "updatedAt": "2026-07-28T00:28:41.000Z",
+                      "uid": "35240-35b9065a-5ec7-4a29-a0e9-362f81aac81f"
+                    },
+                    {
+                      "id": "ca615fe3-55f0-4db2-9a6f-7c23815ee739",
+                      "name": "Device not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "X-API-Key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/devices/:deviceId/health",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "devices",
+                            ":deviceId",
+                            "health"
+                          ],
+                          "variable": [
+                            {
+                              "key": "deviceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T00:28:41.000Z",
+                      "updatedAt": "2026-07-28T00:28:41.000Z",
+                      "uid": "35240-ca615fe3-55f0-4db2-9a6f-7c23815ee739"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:28:41.000Z",
+                  "updatedAt": "2026-07-28T00:28:41.000Z",
+                  "uid": "35240-739a326b-afd4-42f7-aade-c64b30a28f47"
+                }
+              ],
+              "id": "1949b394-57a9-421f-ba65-faaf0c2af807",
+              "createdAt": "2026-07-28T00:28:41.000Z",
+              "updatedAt": "2026-07-28T00:28:41.000Z",
+              "uid": "35240-1949b394-57a9-421f-ba65-faaf0c2af807"
+            }
+          ],
+          "id": "c48b13db-5971-41de-9023-455faf2f67fb",
+          "createdAt": "2026-07-28T00:28:41.000Z",
+          "updatedAt": "2026-07-28T00:28:41.000Z",
+          "uid": "35240-c48b13db-5971-41de-9023-455faf2f67fb"
+        }
+      ],
+      "id": "ea95f1bd-0fb4-448d-8444-368634aeaff5",
+      "createdAt": "2026-07-28T00:28:41.000Z",
+      "updatedAt": "2026-07-28T00:28:41.000Z",
+      "uid": "35240-ea95f1bd-0fb4-448d-8444-368634aeaff5"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.developer.amd.com/v1"
+    }
+  ]
+}
