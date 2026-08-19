@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AMD Developer Cloud Configuration Models API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AMD Developer Cloud List Deployed Models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.developer.amd.com/v1/models"
+          },
+          "docs": "List AI models deployed on the AMD Developer Cloud for inference serving."
+        },
+        {
+          "info": {
+            "name": "AMD Developer Cloud Deploy AI Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.developer.amd.com/v1/models",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deploy an AI model for inference serving on AMD Instinct GPUs using vLLM or another serving framework."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

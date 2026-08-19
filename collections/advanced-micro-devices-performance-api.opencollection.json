@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AMD Developer Cloud Configuration Performance API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Performance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AMD ROCm Get GPU Device Performance Counters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.developer.amd.com/v1/devices/:deviceId/performance",
+            "params": [
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "GPU device identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve GPU utilization, memory bandwidth, compute throughput, and other performance counters for an AMD GPU."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

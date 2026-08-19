@@ -1,0 +1,173 @@
+{
+  "item": [
+    {
+      "id": "b43fdca3-b977-4a46-8d93-403164c4570c",
+      "name": "Configuration",
+      "description": {
+        "content": "ROCm system configuration",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1a6a04b5-9cbb-454e-bf68-fb20a5d33ac7",
+          "name": "AMD ROCm Get ROCm Software Version",
+          "request": {
+            "name": "AMD ROCm Get ROCm Software Version",
+            "description": {
+              "content": "Retrieve the installed ROCm platform version, HIP runtime version, and driver information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "system",
+                "rocm-version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e61ac000-6cfb-496a-b8c3-594635b8be89",
+              "name": "ROCm version information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "system",
+                    "rocm-version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rocmVersion\": \"6.1.0\",\n  \"hipVersion\": \"6.1.40091\",\n  \"driverVersion\": \"6.1.0.60100\",\n  \"kernelVersion\": \"5.15.0-105-generic\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a84764b-5d91-47de-95fd-2a5dd73c8725",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "system",
+                    "rocm-version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"UNAUTHORIZED\",\n  \"message\": \"Authentication required\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.developer.amd.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dca1679d-9bce-4460-823c-6e06c8c62712",
+    "name": "AMD Developer Cloud Configuration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The AMD Developer Cloud API provides access to AMD Instinct GPU instances for AI inference, training, and HPC workloads. Supports managing compute instances, deploying AI models, monitoring GPU utilization, and integrating with ROCm-compatible frameworks including PyTorch, TensorFlow, and vLLM.\n\nContact Support:\n Name: AMD Developer Support",
+      "type": "text/plain"
+    }
+  }
+}
