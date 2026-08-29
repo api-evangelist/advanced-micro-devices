@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: AMD Developer Cloud Configuration Instances API
+  title: AMD Developer Cloud Instances API
   description: The AMD Developer Cloud API provides access to AMD Instinct GPU instances for AI inference, training, and HPC workloads. Supports managing compute instances, deploying AI models, monitoring GPU utilization, and integrating with ROCm-compatible frameworks including PyTorch, TensorFlow, and vLLM.
   version: '1'
   contact:
@@ -233,6 +233,37 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    InstanceInput:
+      type: object
+      description: Request to create a GPU compute instance.
+      required:
+      - gpuType
+      - gpuCount
+      properties:
+        name:
+          type: string
+          description: Display name for the instance.
+          example: llm-training
+        gpuType:
+          type: string
+          description: GPU hardware type.
+          enum:
+          - mi300x
+          - mi250
+          - mi210
+          example: mi300x
+        gpuCount:
+          type: integer
+          description: Number of GPUs to allocate.
+          example: 8
+        imageId:
+          type: string
+          description: ROCm environment image.
+          example: rocm-6.1-pytorch
+        region:
+          type: string
+          description: Deployment region.
+          example: us-west-2
     Instance:
       type: object
       description: An AMD GPU compute instance.
@@ -279,37 +310,6 @@ components:
           type: string
           format: date-time
           description: Instance creation timestamp.
-    InstanceInput:
-      type: object
-      description: Request to create a GPU compute instance.
-      required:
-      - gpuType
-      - gpuCount
-      properties:
-        name:
-          type: string
-          description: Display name for the instance.
-          example: llm-training
-        gpuType:
-          type: string
-          description: GPU hardware type.
-          enum:
-          - mi300x
-          - mi250
-          - mi210
-          example: mi300x
-        gpuCount:
-          type: integer
-          description: Number of GPUs to allocate.
-          example: 8
-        imageId:
-          type: string
-          description: ROCm environment image.
-          example: rocm-6.1-pytorch
-        region:
-          type: string
-          description: Deployment region.
-          example: us-west-2
     ErrorResponse:
       type: object
       description: API error response.

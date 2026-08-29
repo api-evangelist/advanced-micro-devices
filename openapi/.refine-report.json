@@ -1,28 +1,35 @@
 {
   "provider": "advanced-micro-devices",
   "sources": [
-    "advanced-micro-devices-configuration-api-openapi.yml",
-    "advanced-micro-devices-credits-api-openapi.yml",
-    "advanced-micro-devices-devices-api-openapi.yml",
-    "advanced-micro-devices-health-api-openapi.yml",
-    "advanced-micro-devices-instances-api-openapi.yml",
-    "advanced-micro-devices-models-api-openapi.yml",
-    "advanced-micro-devices-monitoring-api-openapi.yml",
-    "advanced-micro-devices-performance-api-openapi.yml"
+    "_original/amd-developer-cloud-api-openapi.yml",
+    "_original/amd-rocm-management-api-openapi.yml"
   ],
   "outputs": [
-    "advanced-micro-devices-configuration-api-openapi.yml",
     "advanced-micro-devices-credits-api-openapi.yml",
-    "advanced-micro-devices-devices-api-openapi.yml",
-    "advanced-micro-devices-health-api-openapi.yml",
     "advanced-micro-devices-instances-api-openapi.yml",
     "advanced-micro-devices-models-api-openapi.yml",
     "advanced-micro-devices-monitoring-api-openapi.yml",
+    "advanced-micro-devices-configuration-api-openapi.yml",
+    "advanced-micro-devices-devices-api-openapi.yml",
+    "advanced-micro-devices-health-api-openapi.yml",
     "advanced-micro-devices-performance-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "amd-developer-cloud-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "amd-rocm-management-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "advanced-micro-devices-configuration-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "advanced-micro-devices-credits-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "advanced-micro-devices-devices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "advanced-micro-devices-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "advanced-micro-devices-instances-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "advanced-micro-devices-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "advanced-micro-devices-monitoring-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "advanced-micro-devices-performance-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,20 +1,20 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: AMD Developer Cloud Configuration API
-  description: The AMD Developer Cloud API provides access to AMD Instinct GPU instances for AI inference, training, and HPC workloads. Supports managing compute instances, deploying AI models, monitoring GPU utilization, and integrating with ROCm-compatible frameworks including PyTorch, TensorFlow, and vLLM.
+  title: AMD ROCm Management Configuration API
+  description: The AMD ROCm Management API provides runtime monitoring and configuration for AMD GPU hardware running the ROCm software stack. Supports querying GPU device information, monitoring utilization and health, managing ROCm system configuration, and retrieving performance counters for AMD Instinct and Radeon GPUs.
   version: '1'
   contact:
-    name: AMD Developer Support
-    url: https://developer.amd.com/support/
+    name: AMD ROCm Support
+    url: https://rocm.docs.amd.com
   termsOfService: https://www.amd.com/en/legal/terms-and-conditions.html
   license:
     name: AMD Terms and Conditions
     url: https://www.amd.com/en/legal/terms-and-conditions.html
 servers:
-- url: https://api.developer.amd.com/v1
-  description: AMD Developer Cloud API Production
+- url: https://rocm-mgmt.amd.com/v1
+  description: AMD ROCm Management API Production
 security:
-- apiKey: []
+- bearerAuth: []
 tags:
 - name: Configuration
   description: ROCm system configuration
@@ -60,6 +60,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
     RocmVersion:
       type: object
       description: ROCm platform version information.
@@ -80,20 +92,8 @@ components:
           type: string
           description: Linux kernel version.
           example: 5.15.0-105-generic
-    ErrorResponse:
-      type: object
-      description: API error response.
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        message:
-          type: string
-          description: Error message.
-          example: The requested resource was not found.
   securitySchemes:
-    apiKey:
-      type: apiKey
-      in: header
-      name: X-API-Key
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

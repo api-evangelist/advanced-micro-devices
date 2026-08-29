@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: AMD Developer Cloud Configuration Models API
+  title: AMD Developer Cloud Models API
   description: The AMD Developer Cloud API provides access to AMD Instinct GPU instances for AI inference, training, and HPC workloads. Supports managing compute instances, deploying AI models, monitoring GPU utilization, and integrating with ROCm-compatible frameworks including PyTorch, TensorFlow, and vLLM.
   version: '1'
   contact:
@@ -118,6 +118,39 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ModelInput:
+      type: object
+      description: Request to deploy an AI model.
+      required:
+      - modelId
+      - framework
+      - gpuType
+      properties:
+        name:
+          type: string
+          description: Display name for the deployment.
+          example: llama-3.1-70b
+        modelId:
+          type: string
+          description: Hugging Face model ID or path.
+          example: meta-llama/Llama-3.1-70B-Instruct
+        framework:
+          type: string
+          description: Inference framework to use.
+          enum:
+          - vLLM
+          - TGI
+          - TorchServe
+          - Triton
+          example: vLLM
+        gpuType:
+          type: string
+          description: GPU hardware type.
+          example: mi300x
+        gpuCount:
+          type: integer
+          description: Number of GPUs to allocate.
+          example: 2
     Model:
       type: object
       description: A deployed AI model for inference serving.
@@ -152,48 +185,6 @@ components:
           type: string
           description: Inference endpoint URL.
           example: https://inf.developer.amd.com/model-001/v1
-    ModelList:
-      type: object
-      description: List of deployed AI models.
-      properties:
-        models:
-          type: array
-          description: Array of model deployments.
-          items:
-            $ref: '#/components/schemas/Model'
-    ModelInput:
-      type: object
-      description: Request to deploy an AI model.
-      required:
-      - modelId
-      - framework
-      - gpuType
-      properties:
-        name:
-          type: string
-          description: Display name for the deployment.
-          example: llama-3.1-70b
-        modelId:
-          type: string
-          description: Hugging Face model ID or path.
-          example: meta-llama/Llama-3.1-70B-Instruct
-        framework:
-          type: string
-          description: Inference framework to use.
-          enum:
-          - vLLM
-          - TGI
-          - TorchServe
-          - Triton
-          example: vLLM
-        gpuType:
-          type: string
-          description: GPU hardware type.
-          example: mi300x
-        gpuCount:
-          type: integer
-          description: Number of GPUs to allocate.
-          example: 2
     ErrorResponse:
       type: object
       description: API error response.
@@ -206,6 +197,15 @@ components:
           type: string
           description: Error message.
           example: The requested resource was not found.
+    ModelList:
+      type: object
+      description: List of deployed AI models.
+      properties:
+        models:
+          type: array
+          description: Array of model deployments.
+          items:
+            $ref: '#/components/schemas/Model'
   securitySchemes:
     apiKey:
       type: apiKey
