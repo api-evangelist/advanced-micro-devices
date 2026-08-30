@@ -1,0 +1,116 @@
+# ROCm documentation
+
+> Note: ROCm documentation is split across multiple projects. In addition to this file, each project publishes its own `llms.txt` and `llms-full.txt` under `https://<base_url>/projects/<project_name>/en/latest/`.
+
+## Docs
+
+- [Release notes](https://rocm.docs.amd.com/en/latest/about/release-notes.html)
+- [Transition guide](https://rocm.docs.amd.com/en/latest/about/transition-guide-TheRock.html)
+- [What is ROCm?](https://rocm.docs.amd.com/en/latest/about/what-is-rocm.html): Learn what ROCm is – AMD open software stack for GPU programming, including runtimes, compilers, libraries, and tools for Linux and Windows.
+- [Compatibility matrix](https://rocm.docs.amd.com/en/latest/compatibility/compatibility-matrix.html)
+- [Install ROCm](https://rocm.docs.amd.com/en/latest/install/rocm.html): How to install AMD ROCm for Instinct GPUs, Radeon GPUs, and Ryzen AI APUs
+  - [Prerequisites](https://rocm.docs.amd.com/en/latest/install/redirect/_prerequisites.html)
+  - [Installation](https://rocm.docs.amd.com/en/latest/install/redirect/_install.html)
+  - [Post-installation](https://rocm.docs.amd.com/en/latest/install/redirect/_post-install.html)
+  - [Uninstalling](https://rocm.docs.amd.com/en/latest/install/redirect/_uninstall.html)
+- [ROCm Runfile Installer](https://rocm.docs.amd.com/en/latest/install/rocm-runfile-installer.html): How to use the ROCm Runfile Installer
+- [Build ROCm from source](https://rocm.docs.amd.com/en/latest/install/build-from-source.html): Learn how to build the ROCm Core SDK from source using TheRock. Includes references to environment setup guides for Ubuntu 24.04 and Windows 11, plus links to official instructions and compatibility guidance.
+- [Install AI frameworks](https://rocm.docs.amd.com/en/latest/ai-ecosystem.html)
+  - [PyTorch](https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/frameworks/pytorch/install.html)
+  - [JAX](https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/frameworks/jax/install.html)
+  - [vLLM](https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/inference/vllm.html)
+  - [SGLang](https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/inference/sglang.html)
+- [ROCm Core SDK](https://rocm.docs.amd.com/en/latest/components/core.html): AMD ROCm Core SDK - list of libraries and tools
+  - [Math and compute libraries](https://rocm.docs.amd.com/en/latest/components/math-and-compute-libs.html): AMD ROCm math and compute libraries for GPU-accelerated linear algebra, FFTs, random number generation, and deep learning.
+    - [Composable Kernel](https://rocm.docs.amd.com/projects/composable_kernel/en/latest)
+    - [hipBLAS](https://rocm.docs.amd.com/projects/hipBLAS/en/latest)
+    - [hipBLASLt](https://rocm.docs.amd.com/projects/hipBLASLt/en/latest)
+    - [hipCUB](https://rocm.docs.amd.com/projects/hipCUB/en/latest)
+    - [hipFFT](https://rocm.docs.amd.com/projects/hipFFT/en/latest)
+    - [hipRAND](https://rocm.docs.amd.com/projects/hipRAND/en/latest)
+    - [hipSOLVER](https://rocm.docs.amd.com/projects/hipSOLVER/en/latest)
+    - [hipSPARSE](https://rocm.docs.amd.com/projects/hipSPARSE/en/latest)
+    - [hipSPARSELt](https://rocm.docs.amd.com/projects/hipSPARSELt/en/latest)
+    - [MIOpen](https://rocm.docs.amd.com/projects/MIOpen/en/latest)
+    - [rocBLAS](https://rocm.docs.amd.com/projects/rocBLAS/en/latest)
+    - [rocFFT](https://rocm.docs.amd.com/projects/rocFFT/en/latest)
+    - [rocPRIM](https://rocm.docs.amd.com/projects/rocPRIM/en/latest)
+    - [rocRAND](https://rocm.docs.amd.com/projects/rocRAND/en/latest)
+    - [rocSOLVER](https://rocm.docs.amd.com/projects/rocSOLVER/en/latest)
+    - [rocSPARSE](https://rocm.docs.amd.com/projects/rocSPARSE/en/latest)
+    - [rocThrust](https://rocm.docs.amd.com/projects/rocThrust/en/latest)
+    - [rocWMMA](https://rocm.docs.amd.com/projects/rocWMMA/en/latest)
+  - [Communication libraries](https://rocm.docs.amd.com/en/latest/components/communication-libs.html): AMD ROCm communication libraries for multi-GPU and multi-node collective and peer-to-peer communication.
+    - [RCCL](https://rocm.docs.amd.com/projects/rccl/en/latest)
+    - [rocSHMEM](https://rocm.docs.amd.com/projects/rocSHMEM/en/latest)
+  - [Media libraries](https://rocm.docs.amd.com/en/latest/components/media-libs.html): AMD ROCm media libraries for GPU-accelerated video decoding and image processing.
+    - [rocDecode](https://rocm.docs.amd.com/projects/rocDecode/en/latest)
+    - [rocJPEG](https://rocm.docs.amd.com/projects/rocJPEG/en/latest)
+  - [Storage libraries](https://rocm.docs.amd.com/en/latest/components/storage-libs.html): AMD ROCm storage libraries
+    - [hipFile](https://rocm.docs.amd.com/projects/hipFile/en/latest)
+  - [Runtime and compilers](https://rocm.docs.amd.com/en/latest/components/runtimes-and-compilers.html): AMD ROCm runtimes and compilers for GPU application development, including HIP, HIPIFY, and LLVM.
+    - [HIP](https://rocm.docs.amd.com/projects/HIP/en/latest)
+    - [HIPIFY](https://rocm.docs.amd.com/projects/HIPIFY/en/latest)
+    - [LLVM](https://rocm.docs.amd.com/projects/llvm-project/en/latest)
+  - [Profiling and debugging tools](https://rocm.docs.amd.com/en/latest/components/profilers-and-debuggers.html): AMD ROCm profiling and debugging tools for GPU application performance analysis and fault diagnosis.
+    - [ROCm Compute Profiler (rocprofiler-compute)](https://rocm.docs.amd.com/projects/rocprofiler-compute/en/latest)
+    - [ROCm Systems Profiler (rocprofiler-systems)](https://rocm.docs.amd.com/projects/rocprofiler-systems/en/latest)
+    - [ROCprofiler-SDK](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/latest)
+    - [ROCdbgapi](https://rocm.docs.amd.com/projects/ROCdbgapi/en/latest)
+    - [ROCm Debugger (ROCgdb)](https://rocm.docs.amd.com/projects/ROCgdb/en/latest)
+    - [ROCR Debug Agent](https://rocm.docs.amd.com/projects/rocr_debug_agent/en/latest)
+  - [Control and monitoring tools](https://rocm.docs.amd.com/en/latest/components/control-and-monitoring-tools.html): AMD ROCm control and monitoring tools for inspecting and managing AMD GPU hardware state.
+    - [AMD SMI](https://rocm.docs.amd.com/projects/amdsmi/en/latest)
+    - [ROCm Data Center Tool (RDC)](https://rocm.docs.amd.com/projects/rdc/en/latest)
+    - [rocminfo](https://rocm.docs.amd.com/projects/rocminfo/en/latest)
+- [ROCm HPC SDK](https://rocm.docs.amd.com/en/latest/components/hpc-sdk/index.html): Learn how to use AMD ROCm for high-performance computing (HPC).
+  - [Install HPC SDK](https://rocm.docs.amd.com/en/latest/components/hpc-sdk/install.html): Install ROCm to run high-performance computing (HPC) workloads.
+- [ROCm Extras](https://rocm.docs.amd.com/en/latest/components/extras.html): AMD ROCm Extras - list of tools and test suites
+  - [ROCm Validation Suite (RVS)](https://rocm.docs.amd.com/projects/ROCmValidationSuite/en/latest/index.html)
+  - [TransferBench](https://rocm.docs.amd.com/projects/TransferBench/en/latest/index.html)
+  - [ROCm Optiq](https://rocm.docs.amd.com/projects/roc-optiq/en/latest/index.html)
+- [AI Developer Hub](https://rocm.docs.amd.com/projects/ai-developer-hub/en/latest/)
+- [ROCm examples](https://github.com/ROCm/rocm-examples/tree/release/therock-10.0)
+- [AMD GPU specifications](https://rocm.docs.amd.com/en/latest/reference/gpu-specs.html): AMD Instinct™ GPU, AMD Radeon PRO™, and AMD Radeon™ GPU architecture information
+- [AMD GPU architectures](https://rocm.docs.amd.com/en/latest/reference/gpu-arch/index.html)
+  - [MI350 microarchitecture](https://rocm.docs.amd.com/en/latest/reference/gpu-arch/mi350.html): AMD Instinct MI350 Series microarchitecture reference.
+    - [CDNA4 ISA reference](https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/instruction-set-architectures/amd-instinct-cdna4-instruction-set-architecture.pdf)
+    - [CDNA4 white paper](https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-4-architecture-whitepaper.pdf)
+    - [Instinct MI350 Series performance counters](https://rocm.docs.amd.com/en/latest/reference/gpu-arch/mi350-performance-counters.html): MI355 Series performance counters and metrics
+  - [MI300 microarchitecture](https://rocm.docs.amd.com/en/latest/reference/gpu-arch/mi300.html): Learn about the AMD Instinct MI300 Series architecture.
+    - [CDNA3 ISA reference](https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/instruction-set-architectures/amd-instinct-mi300-cdna3-instruction-set-architecture.pdf)
+    - [CDNA3 white paper](https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/white-papers/amd-cdna-3-white-paper.pdf)
+    - [Instinct MI300 and MI200 Series performance counters](https://rocm.docs.amd.com/en/latest/reference/gpu-arch/mi300-mi200-performance-counters.html): MI300 and MI200 Series performance counters and metrics
+  - [MI250 microarchitecture](https://rocm.docs.amd.com/en/latest/reference/gpu-arch/mi250.html): Learn about the AMD Instinct MI250 Series architecture.
+    - [CDNA2 ISA reference](https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/instruction-set-architectures/instinct-mi200-cdna2-instruction-set-architecture.pdf)
+    - [CDNA2 white paper](https://www.amd.com/content/dam/amd/en/documents/instinct-business-docs/white-papers/amd-cdna2-white-paper.pdf)
+  - [MI100 microarchitecture](https://rocm.docs.amd.com/en/latest/reference/gpu-arch/mi100.html): Learn about the AMD Instinct MI100 Series architecture.
+    - [CDNA1 ISA reference](https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/instruction-set-architectures/instinct-mi100-cdna1-shader-instruction-set-architecture.pdf)
+    - [CDNA1 white paper](https://www.amd.com/content/dam/amd/en/documents/instinct-business-docs/white-papers/amd-cdna-white-paper.pdf)
+- [AMD GPU system optimization](https://rocm.docs.amd.com/en/latest/reference/system-optimization/index.html): Learn about AMD hardware optimization for HPC-specific and workstation workloads.
+  - [AMD Instinct GPUs](https://rocm.docs.amd.com/en/latest/reference/system-optimization/cdna.html): System optimization guides for AMD Instinct CDNA GPUs.
+    - [AMD MI355X](https://instinct.docs.amd.com/projects/system-acceptance/en/latest/gpus/mi355x.html)
+    - [AMD MI350X](https://instinct.docs.amd.com/projects/system-acceptance/en/latest/gpus/mi350x.html)
+    - [AMD MI325X](https://instinct.docs.amd.com/projects/system-acceptance/en/latest/gpus/mi325x.html)
+    - [AMD MI300X](https://instinct.docs.amd.com/projects/system-acceptance/en/latest/gpus/mi300x.html)
+    - [AMD MI300A](https://instinct.docs.amd.com/projects/system-acceptance/en/latest/gpus/mi300a.html)
+    - [AMD MI250 / MI250X](https://instinct.docs.amd.com/projects/system-acceptance/en/latest/gpus/mi250.html)
+    - [AMD MI210](https://instinct.docs.amd.com/projects/system-acceptance/en/latest/gpus/mi210.html)
+    - [AMD MI100](https://instinct.docs.amd.com/projects/system-acceptance/en/latest/gpus/mi100.html)
+  - [AMD Radeon and Ryzen GPUs](https://rocm.docs.amd.com/en/latest/reference/system-optimization/rdna.html): System optimization guides for AMD Radeon and Ryzen RDNA GPUs.
+    - [RDNA3.5](https://rocm.docs.amd.com/en/latest/reference/system-optimization/rdna3-5.html): System optimization of AMD RDNA3.5 Ryzen APUs (gfx1150/gfx1151/gfx1152) systems. Learn about VRAM, GTT, TTM tuning, shared memory configuration, and required Linux kernel support.
+    - [RDNA2](https://rocm.docs.amd.com/en/latest/reference/system-optimization/rdna2.html): Learn about system settings and performance tuning for RDNA2-based GPUs.
+  - [Common system settings](https://rocm.docs.amd.com/en/latest/reference/system-optimization/common.html): Common system settings for AMD GPUs including GPU isolation and BAR access configuration.
+    - [GPU isolation techniques](https://rocm.docs.amd.com/en/latest/reference/system-optimization/gpu-isolation.html)
+    - [BAR access limits](https://rocm.docs.amd.com/en/latest/reference/system-optimization/bar-access-limits.html): Learn about BAR configuration in AMD GPUs and ways to troubleshoot physical addressing limit
+- [AMD GPU and ROCm components data types and precision support](https://rocm.docs.amd.com/en/latest/reference/precision-support.html): Supported data types of AMD GPUs and libraries in ROCm.
+- [ROCm libraries graph-safe support](https://rocm.docs.amd.com/en/latest/reference/graph-safe-support.html): This page lists supported graph safe ROCm libraries.
+- [AMD GPU atomics operation support](https://rocm.docs.amd.com/en/latest/reference/gpu-atomics-operation.html): AMD Instinct GPU, AMD Radeon PRO, and AMD Radeon GPU atomics operations information
+- [ROCm environment variables](https://rocm.docs.amd.com/en/latest/reference/environment-variables/index.html): Environment variables reference
+  - [Set the number of CUs](https://rocm.docs.amd.com/en/latest/reference/environment-variables/setting-cus.html): Setting the number of CUs
+- [AMD GPU programming on ROCm](https://rocm.docs.amd.com/en/latest/reference/hip-programming.html): HIP programming
+- [Contributing to the ROCm documentation](https://rocm.docs.amd.com/en/latest/contribute/contributing.html)
+  - [ROCm documentation toolchain](https://rocm.docs.amd.com/en/latest/contribute/toolchain.html)
+  - [Building documentation](https://rocm.docs.amd.com/en/latest/contribute/building.html)
+- [Providing feedback about the ROCm documentation](https://rocm.docs.amd.com/en/latest/contribute/feedback.html)
+- [ROCm licenses](https://rocm.docs.amd.com/en/latest/about/license.html)

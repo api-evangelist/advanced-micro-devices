@@ -1,0 +1,66 @@
+generated: '2026-08-30'
+method: probed
+source: live unauthenticated HTTPS probes of every apis.yml host and every documentation host
+note: >-
+  AMD serves no /.well-known/ documents on any host we could reach. www.amd.com answers every
+  /.well-known/ path with a 302 to a branded 404 page (/en/site-notifications/404.html), which is a
+  soft-404 and NOT a document. developer.amd.com and rocm.docs.amd.com return hard 404s. No
+  WellKnown or SecurityTxt pointer is emitted for this provider because nothing was served — the
+  recorded absence is the finding. AMD's vulnerability-disclosure contact is published as a web page
+  and a mailto (psirt@amd.com), not as /.well-known/security.txt; see
+  security/advanced-micro-devices-vulnerability-disclosure.yml.
+hosts:
+  - host: www.amd.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+        note: 302 to https://www.amd.com/en/site-notifications/404.html (soft-404 HTML shell)
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+      - path: /security.txt
+        status: 404
+        file: null
+  - host: developer.amd.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: rocm.docs.amd.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+  - host: api.developer.amd.com
+    documents:
+      - path: /.well-known/security.txt
+        status: null
+        file: null
+        note: >-
+          Host does not resolve. `dig api.developer.amd.com` returns no A/CNAME record, so no probe
+          was possible. This is the servers[] host named by the OpenAPI documents already in
+          openapi/ — see the contract-provenance note in
+          conformance/advanced-micro-devices-conformance.yml.
+  - host: rocm-mgmt.amd.com
+    documents:
+      - path: /.well-known/security.txt
+        status: null
+        file: null
+        note: >-
+          Host does not resolve. `dig rocm-mgmt.amd.com` returns no A/CNAME record.

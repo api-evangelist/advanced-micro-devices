@@ -1,0 +1,82 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  https://rocm.docs.amd.com/llms.txt (AMD's own machine-readable documentation index) and the
+  per-project documentation sites it links.
+description: >-
+  AMD ships an unusually large first-party command-line surface. These are the control, monitoring,
+  validation and profiling tools in the ROCm Core SDK — they are the practical operator interface to
+  AMD GPUs, and several of them are the human front end for the same gRPC contracts captured in
+  grpc/. Distribution is via the ROCm distro repositories (repo.radeon.com) and OCI containers, not
+  a language package registry; see packages/advanced-micro-devices-packages.yml.
+install:
+  - method: distribution package
+    url: https://rocm.docs.amd.com/en/latest/install/rocm.html
+    note: apt/dnf/zypper install of the ROCm Core SDK brings the control and monitoring tools.
+  - method: runfile installer
+    url: https://rocm.docs.amd.com/en/latest/install/rocm-runfile-installer.html
+  - method: build from source
+    url: https://rocm.docs.amd.com/en/latest/install/build-from-source.html
+  - method: container
+    url: https://www.amd.com/en/developer/resources/infinity-hub.html
+    note: AMD Infinity Hub publishes pre-built ROCm and framework containers.
+tools:
+  - name: AMD SMI
+    group: control and monitoring
+    docs: https://rocm.docs.amd.com/projects/amdsmi/en/latest
+    repository: https://github.com/ROCm/amdsmi
+    python_binding: amdsmi
+    description: >-
+      AMD System Management Interface — query and manage AMD GPUs: device enumeration, telemetry,
+      clocks, power, memory and compute partitioning, RAS/bad-page state, resets. The supported
+      successor to rocm-smi.
+  - name: ROCm Data Center Tool (RDC)
+    group: control and monitoring
+    docs: https://rocm.docs.amd.com/projects/rdc/en/latest/
+    repository: https://github.com/ROCm/rocm-systems
+    version: 1.3.1
+    description: >-
+      Cluster and data-center administration for AMD GPUs — GPU telemetry, per-job GPU statistics,
+      diagnostics, health, policy and topology. Runs as a daemon exposing the RdcAPI gRPC service;
+      the CLI is the client for that same contract.
+    contract: grpc/advanced-micro-devices-rdc.proto
+  - name: rocminfo
+    group: control and monitoring
+    docs: https://rocm.docs.amd.com/projects/rocminfo/en/latest
+    description: Reports the HSA agents (CPU and GPU) visible to the ROCm runtime.
+  - name: ROCm Compute Profiler (rocprofiler-compute)
+    group: profiling and debugging
+    docs: https://rocm.docs.amd.com/projects/rocprofiler-compute/en/latest
+    description: Kernel-level performance analysis and roofline profiling for GPU compute workloads.
+  - name: ROCm Systems Profiler (rocprofiler-systems)
+    group: profiling and debugging
+    docs: https://rocm.docs.amd.com/projects/rocprofiler-systems/en/latest
+    description: Whole-application, multi-node system tracing and profiling.
+  - name: ROCm Debugger (ROCgdb)
+    group: profiling and debugging
+    docs: https://rocm.docs.amd.com/projects/ROCgdb/en/latest
+    description: GDB-based source-level debugger for GPU kernels.
+  - name: HIPIFY
+    group: porting
+    docs: https://rocm.docs.amd.com/projects/HIPIFY/en/latest
+    description: Translates CUDA source to portable HIP source.
+  - name: ROCm Validation Suite (RVS)
+    group: validation
+    docs: https://rocm.docs.amd.com/projects/ROCmValidationSuite/en/latest/index.html
+    description: Hardware and stack validation tests for deployed AMD GPU systems.
+  - name: TransferBench
+    group: validation
+    docs: https://rocm.docs.amd.com/projects/TransferBench/en/latest/index.html
+    description: Measures host-to-device, device-to-device and multi-GPU transfer bandwidth.
+tool_count: 9
+note: >-
+  Tool names and documentation URLs are transcribed verbatim from AMD's published llms.txt. Exact
+  binary names, subcommand trees and flags were NOT transcribed — reading them reliably requires the
+  per-tool reference pages, and guessing an invocation is worse than recording the gap.
+evidence:
+  - url: https://rocm.docs.amd.com/llms.txt
+    status: 200
+  - url: https://rocm.docs.amd.com/projects/amdsmi/en/latest/
+    status: 200
+  - url: https://rocm.docs.amd.com/projects/rdc/en/latest/
+    status: 200

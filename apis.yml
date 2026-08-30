@@ -25,7 +25,7 @@ accessModel:
   - authentication
   generated: '2026-07-22'
   method: derived
-modified: '2026-04-19'
+modified: '2026-08-30'
 apis:
 - aid: advanced-micro-devices:advanced-micro-devices-configuration-api
   name: Advanced Micro Devices Configuration API
@@ -253,11 +253,11 @@ common:
   - type: Documentation
     url: https://rocm.docs.amd.com
   - type: GettingStarted
-    url: https://developer.amd.com/resources/rocm-resources/
+    url: https://rocm.docs.amd.com/en/latest/install/rocm.html
   - type: Support
-    url: https://developer.amd.com/support/
+    url: https://www.amd.com/en/support.html
   - type: Blog
-    url: https://www.amd.com/en/corporate/blog.html
+    url: https://www.amd.com/en/blogs.html
   - type: TermsOfService
     url: https://www.amd.com/en/legal/terms-and-conditions.html
   - type: PrivacyPolicy
@@ -267,7 +267,45 @@ common:
   - type: Academy
     url: https://academy.amd.com
   - type: Signup
-    url: https://developer.amd.com/amd-developer-cloud/
+    url: https://www.amd.com/en/developer/resources/cloud-access/amd-developer-cloud.html
+  - type: APIReference
+    url: https://rocm.docs.amd.com/en/latest/components/core.html
+  - type: Protobuf
+    url: grpc/advanced-micro-devices-rdc.proto
+  - type: Protobuf
+    url: grpc/advanced-micro-devices-device-metrics-gpu.proto
+  - type: Protobuf
+    url: grpc/advanced-micro-devices-device-metrics-nic.proto
+  - type: Protobuf
+    url: grpc/advanced-micro-devices-device-metrics-exporterconfig.proto
+  - type: MCPServer
+    url: mcp/advanced-micro-devices-mcp.yml
+  - type: LLMsTxt
+    url: llms/advanced-micro-devices-llms.txt
+  - type: Packages
+    url: packages/advanced-micro-devices-packages.yml
+  - type: SDKs
+    url: packages/advanced-micro-devices-packages.yml
+  - type: CLI
+    url: cli/advanced-micro-devices-cli.yml
+  - type: Security
+    url: security/advanced-micro-devices-vulnerability-disclosure.yml
+  - type: VulnerabilityDisclosure
+    url: security/advanced-micro-devices-vulnerability-disclosure.yml
+  - type: ChangeLog
+    url: changelog/advanced-micro-devices-changelog.yml
+  - type: Lifecycle
+    url: lifecycle/advanced-micro-devices-lifecycle.yml
+  - type: Conventions
+    url: conventions/advanced-micro-devices-conventions.yml
+  - type: ErrorCatalog
+    url: errors/advanced-micro-devices-problem-types.yml
+  - type: Conformance
+    url: conformance/advanced-micro-devices-conformance.yml
+  - type: Plans
+    url: plans/advanced-micro-devices-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/advanced-micro-devices-rate-limits.yml
   - type: Features
     data:
       - name: AMD Instinct GPU Instances
@@ -354,3 +392,9 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
     url: https://apievangelist.com
+
+x-enrichment:
+  date: '2026-08-30'
+  status: enriched
+  artifacts_added: 15
+  pass: local-v1

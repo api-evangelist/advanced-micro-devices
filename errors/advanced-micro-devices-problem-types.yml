@@ -1,0 +1,70 @@
+generated: '2026-08-30'
+method: derived
+source: >-
+  grpc/advanced-micro-devices-rdc.proto and grpc/advanced-micro-devices-device-metrics-gpu.proto,
+  harvested verbatim from AMD's ROCm GitHub organization.
+format: in-band protobuf status field
+rfc9457: false
+scope_note: >-
+  Derived ONLY from AMD's published gRPC contracts. Nothing here is derived from the OpenAPI
+  documents in openapi/, whose servers[] hosts do not resolve — see conformance/.
+envelopes:
+  - contract: grpc/advanced-micro-devices-rdc.proto
+    service:
+      - RdcAPI
+      - RdcAdmin
+    field: status
+    type: uint32
+    position: field 1 of the response message
+    occurrences: 47
+    semantics: >-
+      Wire form of the C API's rdc_status_t enum. Success and failure are both returned in-band on a
+      successful gRPC call; a caller must read `status` on every response rather than relying on the
+      gRPC status code alone. The enum's symbolic names and values are defined in the RDC C headers
+      (rdc/rdc.h in ROCm/rocm-systems), NOT in the proto, so they are not transcribed here.
+    enum_captured: false
+  - contract: grpc/advanced-micro-devices-device-metrics-gpu.proto
+    service:
+      - GPUSvc
+      - DebugGPUSvc
+    fields:
+      - name: ApiStatus
+        type: types.ApiStatus
+        position: field 1
+      - name: ErrorCode
+        type: types.ErrorCode
+        position: field 2
+    semantics: >-
+      Two-part result: a coarse API status plus a specific error code. Both types are defined in
+      types.proto, which gpu.proto imports (`import "types.proto";`) and which is not vendored into
+      this repository, so the enum members are not transcribed.
+    enum_captured: false
+domain_enums_in_contract:
+  note: >-
+    gpu.proto does define several device-state enumerations in-line. These are not error catalogues
+    but they are what an agent must interpret to know whether a GPU is healthy.
+  enums:
+    - name: GPUOperStatus
+      contract: grpc/advanced-micro-devices-device-metrics-gpu.proto
+      purpose: Operational state of the device.
+    - name: GPUXGMIErrorStatus
+      contract: grpc/advanced-micro-devices-device-metrics-gpu.proto
+      purpose: XGMI interconnect error state.
+    - name: GPUThrottlingStatus
+      contract: grpc/advanced-micro-devices-device-metrics-gpu.proto
+      purpose: Why the device is throttling.
+    - name: GPUPageStatus
+      contract: grpc/advanced-micro-devices-device-metrics-gpu.proto
+      purpose: Memory page / bad-page retirement state.
+problem_types: []
+problem_types_note: >-
+  Empty by construction, not by omission. AMD publishes no HTTP problem-type catalogue because it
+  publishes no hosted HTTP API. The error contract is the protobuf status field documented above.
+  Enumerating rdc_status_t or types.ErrorCode members would require parsing C headers and a proto
+  this repository does not hold; guessing them would be fabrication.
+remediation_docs: https://rocm.docs.amd.com/projects/rdc/en/latest/
+evidence:
+  - url: https://raw.githubusercontent.com/ROCm/rocm-systems/develop/projects/rdc/protos/rdc.proto
+    status: 200
+  - url: https://raw.githubusercontent.com/ROCm/device-metrics-exporter/main/pkg/amdgpu/proto/gpu.proto
+    status: 200

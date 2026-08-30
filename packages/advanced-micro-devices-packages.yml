@@ -1,0 +1,99 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  PyPI JSON metadata API (pypi.org/pypi/<pkg>/json), npm registry, Maven Central, NuGet and
+  crates.io, cross-checked against the AMD and ROCm GitHub organizations and rocm.docs.amd.com.
+note: >-
+  AMD's developer distribution is a native software stack, not a web-API SDK estate. The first-party
+  packages below are GPU management, quantization and documentation-tooling libraries — they wrap
+  local hardware and the ROCm runtime, not a hosted AMD endpoint. Registries checked and found to
+  carry NO first-party AMD packages: npm (no @amd scope; `amd-smi`, `rocm` are 404), Maven Central
+  (g:com.amd returns 0 artifacts), NuGet (amd.smi absent), crates.io (every `rocm` hit is
+  third-party — RustNSparks/rocm-rs, hanzoai, MIT-RLX, none AMD-owned). The bulk of ROCm ships as
+  distro packages (apt/dnf/zypper repos at repo.radeon.com) and OCI containers, which have no
+  package-registry metadata endpoint to query.
+registries_checked:
+  - registry: pypi
+    result: 4 first-party packages
+  - registry: npm
+    result: none
+  - registry: maven-central
+    result: none
+  - registry: nuget
+    result: none
+  - registry: crates.io
+    result: none
+  - registry: rubygems
+    result: not applicable
+  - registry: packagist
+    result: not applicable
+packages:
+  - name: amdsmi
+    registry: pypi
+    url: https://pypi.org/project/amdsmi/
+    version: 7.0.2
+    published: '2025-10-11'
+    official: true
+    language: python
+    license: MIT (Copyright Advanced Micro Devices, Inc.)
+    repository: https://github.com/ROCm/amdsmi
+    docs: https://rocm.docs.amd.com/projects/amdsmi/en/latest/
+    description: >-
+      AMD SMI Python library — the supported Python binding over the AMD System Management Interface
+      library for querying and managing AMD GPUs. Successor to rocm-smi.
+  - name: rocm-docs-core
+    registry: pypi
+    url: https://pypi.org/project/rocm-docs-core/
+    version: 1.40.2
+    published: '2026-08-27'
+    official: true
+    language: python
+    repository: https://github.com/ROCm/rocm-docs-core
+    docs: https://rocm.docs.amd.com
+    description: >-
+      Core Sphinx tooling AMD uses to build every ROCm documentation site on Read the Docs. The most
+      actively released of AMD's public Python packages.
+  - name: pyrsmi
+    registry: pypi
+    url: https://pypi.org/project/pyrsmi/
+    version: 1.1.0
+    published: '2025-12-03'
+    official: true
+    language: python
+    license: MIT
+    repository: https://github.com/ROCm/pyrsmi
+    description: >-
+      Python System Management Library for AMD GPUs — a lightweight ctypes wrapper over the ROCm SMI
+      shared library for GPU telemetry.
+  - name: amd-quark
+    registry: pypi
+    url: https://pypi.org/project/amd-quark/
+    version: 0.12.post1
+    published: '2026-07-04'
+    official: true
+    language: python
+    license: MIT
+    author: AMD
+    repository: https://github.com/amd/quark
+    docs: https://quark.docs.amd.com
+    description: >-
+      AMD Quark — cross-platform model quantization toolkit for compressing models targeting AMD
+      hardware. Published under the AMD GitHub organization with `author: AMD` in its own metadata.
+non_registry_distribution:
+  - name: ROCm Core SDK
+    channel: distribution packages
+    url: https://rocm.docs.amd.com/en/latest/install/rocm.html
+    version: 10.0.0
+    published: null
+    note: >-
+      Distributed as apt/dnf/zypper repositories at repo.radeon.com and as OCI container images, not
+      through any language package registry. `published:` is null because no registry metadata
+      endpoint exists to date it; the ROCm Core SDK 10.0.0 release notes are the dated record.
+  - name: ROCm Data Center Tool (RDC)
+    channel: source + distribution packages
+    url: https://rocm.docs.amd.com/projects/rdc/en/latest/
+    version: 1.3.1
+    published: null
+    note: >-
+      Version read from the RDC documentation title ("RDC 1.3.1 documentation"). Source lives in
+      ROCm/rocm-systems (projects/rdc); no package-registry entry exists.

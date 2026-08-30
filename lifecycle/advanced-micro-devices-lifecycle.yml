@@ -1,0 +1,65 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  https://rocm.docs.amd.com/en/latest/about/release-notes.html,
+  https://rocm.docs.amd.com/en/latest/compatibility/compatibility-matrix.html,
+  https://www.amd.com/en/resources/product-security/support-policy.html
+versioning:
+  scheme: semver
+  current: 10.0.0
+  surface: >-
+    ROCm stack version. AMD's machine-readable contracts (RDC gRPC, Device Metrics Exporter gRPC)
+    ship inside ROCm and inherit its version rather than carrying their own API version.
+  documented: true
+  url: https://rocm.docs.amd.com/en/latest/about/release-notes.html
+  component_versions:
+    - component: ROCm Core SDK
+      version: 10.0.0
+    - component: ROCm Data Center Tool (RDC)
+      version: 1.3.1
+      url: https://rocm.docs.amd.com/projects/rdc/en/latest/
+deprecation:
+  policy_published: true
+  policy_url: https://www.amd.com/en/resources/product-security/support-policy.html
+  policy_note: >-
+    AMD's published support policy governs product-security servicing windows for AMD products. It
+    is a product-lifecycle policy, not an HTTP API deprecation policy.
+  compatibility_matrix: https://rocm.docs.amd.com/en/latest/compatibility/compatibility-matrix.html
+  compatibility_note: >-
+    The ROCm compatibility matrix is the practical deprecation surface for developers: it states
+    which GPU architectures, operating systems and framework versions each ROCm release supports,
+    and dropping a row from it is how AMD retires support in practice.
+  rfc8594_headers: false
+  rfc8594_note: >-
+    No Sunset or Deprecation response headers. Not applicable in the usual sense — AMD's contracts
+    are gRPC services running on the customer's own machine, not a hosted HTTP endpoint AMD can send
+    headers from.
+  deprecated_operations: []
+  deprecated_operations_note: >-
+    No RPC in grpc/advanced-micro-devices-rdc.proto or the Device Metrics Exporter protos carries a
+    `deprecated = true` option. Checked; none found.
+status_page:
+  published: false
+  probed:
+    - url: https://status.amd.com
+      status: 0
+      note: DNS/connection failure — the host does not answer.
+  note: >-
+    AMD publishes no status page. This is defensible for a stack that runs on the customer's own
+    hardware, but the AMD Developer Cloud is a hosted service and has no status surface we could
+    find.
+sla:
+  published: false
+  note: No public SLA. AMD Developer Cloud access is granted through the AI Developer Program, not sold with a published availability commitment.
+support:
+  url: https://www.amd.com/en/support.html
+  psirt: https://www.amd.com/en/resources/product-security.html
+evidence:
+  - url: https://rocm.docs.amd.com/en/latest/about/release-notes.html
+    status: 200
+  - url: https://rocm.docs.amd.com/projects/rdc/en/latest/
+    status: 200
+  - url: https://www.amd.com/en/resources/product-security/support-policy.html
+    status: 200
+  - url: https://status.amd.com
+    status: 0

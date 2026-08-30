@@ -1,0 +1,163 @@
+generated: '2026-08-30'
+method: derived
+source: >-
+  grpc/advanced-micro-devices-rdc.proto and grpc/advanced-micro-devices-device-metrics-gpu.proto
+  (both harvested verbatim from AMD's own ROCm GitHub organization), plus
+  https://rocm.docs.amd.com/projects/rdc/en/latest/
+scope: >-
+  These conventions describe AMD's PUBLISHED machine-readable contracts — the RDC gRPC services and
+  the Device Metrics Exporter gRPC services. They deliberately do NOT describe the OpenAPI documents
+  in openapi/, whose servers[] hosts (api.developer.amd.com, rocm-mgmt.amd.com) do not resolve in
+  DNS; see the contract_provenance block in conformance/advanced-micro-devices-conformance.yml.
+protocol: gRPC over HTTP/2, protobuf3
+transport_note: >-
+  These are self-hosted services. RDC runs as the rdcd daemon on the customer's own node or cluster;
+  the Device Metrics Exporter runs alongside it. AMD operates no endpoint for either — there is no
+  vendor base URL to call.
+authentication:
+  style: transport-level
+  scheme: gRPC channel credentials (TLS) as configured by the operator
+  documented_in_contract: false
+  note: >-
+    Neither proto declares an auth mechanism; gRPC carries credentials at the channel, not in the
+    IDL. RdcAdmin.VerifyConnection(magic_num) is a liveness/handshake echo, not authentication.
+    Deployment-time TLS configuration is the operator's, not AMD's, so no key format or token shape
+    is asserted here.
+idempotency:
+  supported: false
+  header: null
+  na: false
+  note: >-
+    No idempotency key, request-id or dedup field appears in any request message across the four
+    protos. Several write RPCs (CreateGpuGroup, CreateFieldGroup, StartJobStats, SetPolicy,
+    SetConfig, GPUReset) are not safe to retry blindly. Recorded as absent, not as not-applicable,
+    because a real write surface exists.
+pagination:
+  style: none
+  note: >-
+    Collection RPCs return whole fixed-size sets bounded by hardware — GetAllDevices,
+    GetGroupAllIds, GetFieldGroupAllIds carry a count plus a fixed-capacity list. No cursor, offset
+    or page-size parameter exists. Two RPCs use server streaming instead: DiagnosticRun and
+    DiagnosticTestCaseRun (`returns (stream ...)`), and RegisterPolicy streams policy callbacks.
+field_selection:
+  style: field groups
+  note: >-
+    RDC's equivalent of sparse fieldsets is explicit and first-class: a caller composes a field
+    group (CreateFieldGroup / AddFieldToFieldGroup) of the telemetry fields it wants, binds it to a
+    GPU group, and then watches it (WatchFields) or reads it (GetLatestFieldValue / GetFieldSince).
+    This is a subscription model, not a query-parameter model.
+metadata:
+  supported: false
+tracing:
+  request_id: false
+  note: No correlation-id or trace field in any request or response message.
+versioning:
+  in_contract: false
+  scheme: ROCm stack semver; the protos carry no package version suffix (package rdc, amdgpu, nicmetrics, exportermetrics)
+  discovery: GetComponentVersion and GetMixedComponentVersion RPCs return component versions at runtime
+  see: lifecycle/advanced-micro-devices-lifecycle.yml
+errors:
+  envelope: in-band status field on the response message
+  rdc: >-
+    47 of the RdcAPI response messages carry `uint32 status = 1`, the wire form of the C API's
+    rdc_status_t. Errors are returned in the response body, not only as gRPC status codes.
+  device_metrics: >-
+    GPUSvc and DebugGPUSvc responses carry `types.ApiStatus ApiStatus` plus `types.ErrorCode
+    ErrorCode`.
+  rfc9457: false
+  see: errors/advanced-micro-devices-problem-types.yml
+rate_limiting:
+  signaled: false
+  note: >-
+    No rate-limit field, header convention or exhaustion status is defined. Expected for a
+    self-hosted daemon on the operator's own hardware — the constraint is GPU capacity, not request
+    quota. See rate-limits/advanced-micro-devices-rate-limits.yml.
+dry_run_mode:
+  supported: false
+  note: >-
+    No RPC accepts a dry-run, validate-only or preview flag. DiagnosticRun and
+    DiagnosticTestCaseRun are read-only diagnostics rather than rehearsals of a write.
+reversibility:
+  grade: documented
+  grade_basis: >-
+    Reversal operations exist and are named in the contract, but AMD publishes NO time window,
+    retention period or precondition for any of them. Per the pipeline grading rule that is
+    `documented` (0.4), not `verified` (1.0). No window is asserted here because AMD states none.
+  write_surface: true
+  operations:
+    - action: CreateGpuGroup
+      reversal: DestroyGpuGroup
+      window: null
+      window_documented: false
+      contract: grpc/advanced-micro-devices-rdc.proto
+    - action: CreateFieldGroup
+      reversal: DestroyFieldGroup
+      window: null
+      window_documented: false
+      contract: grpc/advanced-micro-devices-rdc.proto
+    - action: AddToGpuGroup
+      reversal: null
+      window: null
+      window_documented: false
+      note: No remove-member RPC. A GPU group member can only be undone by destroying the whole group.
+      contract: grpc/advanced-micro-devices-rdc.proto
+    - action: AddFieldToFieldGroup
+      reversal: null
+      window: null
+      window_documented: false
+      note: No remove-field RPC; only DestroyFieldGroup.
+      contract: grpc/advanced-micro-devices-rdc.proto
+    - action: WatchFields
+      reversal: UnWatchFields
+      window: null
+      window_documented: false
+      contract: grpc/advanced-micro-devices-rdc.proto
+    - action: StartJobStats
+      reversal: StopJobStats
+      window: null
+      window_documented: false
+      note: RemoveJob and RemoveAllJob additionally discard recorded job statistics.
+      contract: grpc/advanced-micro-devices-rdc.proto
+    - action: SetPolicy
+      reversal: DeletePolicy
+      window: null
+      window_documented: false
+      contract: grpc/advanced-micro-devices-rdc.proto
+    - action: RegisterPolicy
+      reversal: UnRegisterPolicy
+      window: null
+      window_documented: false
+      contract: grpc/advanced-micro-devices-rdc.proto
+    - action: SetHealth
+      reversal: ClearHealth
+      window: null
+      window_documented: false
+      contract: grpc/advanced-micro-devices-rdc.proto
+    - action: SetConfig
+      reversal: ClearConfig
+      window: null
+      window_documented: false
+      note: >-
+        ClearConfig restores default configuration rather than the caller's previous value; it is a
+        reset, not an undo.
+      contract: grpc/advanced-micro-devices-rdc.proto
+  irreversible:
+    - operation: GPUReset
+      contract: grpc/advanced-micro-devices-device-metrics-gpu.proto
+      note: >-
+        Resets the physical device. There is no inverse operation and no documented safe window —
+        the highest-consequence call in AMD's published contract surface, and an agent should treat
+        it as requiring human confirmation.
+    - operation: GPUComputePartitionSet
+      contract: grpc/advanced-micro-devices-device-metrics-gpu.proto
+      note: >-
+        Repartitioning a physical GPU. GPUComputePartitionGet reads the current value, so a caller
+        CAN capture the prior state and set it back, but AMD documents no rollback path or window.
+    - operation: GPUMemoryPartitionSet
+      contract: grpc/advanced-micro-devices-device-metrics-gpu.proto
+      note: Same shape as GPUComputePartitionSet — read-before-write is the only recovery.
+cross_links:
+  errors: errors/advanced-micro-devices-problem-types.yml
+  lifecycle: lifecycle/advanced-micro-devices-lifecycle.yml
+  authentication: authentication/advanced-micro-devices-authentication.yml
+  rate_limits: rate-limits/advanced-micro-devices-rate-limits.yml

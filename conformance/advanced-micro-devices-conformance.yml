@@ -1,0 +1,147 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  AMD's published contracts in grpc/, https://rocm.docs.amd.com/llms.txt,
+  https://www.amd.com/en/resources/product-security.html and the ROCm/device-metrics-exporter
+  repository.
+contract_provenance:
+  finding: contract-host-does-not-resolve
+  severity: high
+  detail: >-
+    The eight OpenAPI documents in openapi/ (and the two archived sources in openapi/_original/)
+    describe an "AMD Developer Cloud API" at https://api.developer.amd.com/v1 and an "AMD ROCm
+    Management API" at https://rocm-mgmt.amd.com/v1. NEITHER HOST EXISTS: `dig api.developer.amd.com`
+    and `dig rocm-mgmt.amd.com` both return no A or CNAME record. They therefore cannot be verified
+    as AMD-published contracts, and nothing in this enrichment round was derived from them. The
+    artifacts written this round (conventions/, errors/, cli/, mcp/, packages/, grpc/, changelog/,
+    lifecycle/) are grounded exclusively in AMD's real gRPC protos, real MCP server, real PyPI
+    packages and real published documentation.
+    Recorded as a finding for human review rather than acted on: the house remediation for a
+    suspected scaffold is quarantine to openapi/_scaffold/ with a provenance stamp, which moves the
+    Kin Score and is a deliberate decision, not a side effect of an enrichment pass.
+  evidence:
+    - probe: dig api.developer.amd.com
+      result: no record
+    - probe: dig rocm-mgmt.amd.com
+      result: no record
+    - url: https://developer.amd.com/amd-developer-cloud/
+      status: 404
+standards:
+  - id: grpc
+    name: gRPC
+    conforms: true
+    evidence: >-
+      RdcAdmin and RdcAPI in grpc/advanced-micro-devices-rdc.proto (2 services, 43 RPCs) and GPUSvc
+      and DebugGPUSvc in grpc/advanced-micro-devices-device-metrics-gpu.proto (2 services, 9 RPCs),
+      published in AMD's own ROCm GitHub organization.
+  - id: protobuf3
+    name: Protocol Buffers 3
+    conforms: true
+    evidence: >-
+      All four protos declare `syntax = "proto3"` with distinct packages (rdc, amdgpu, nicmetrics,
+      exportermetrics).
+  - id: grpc-server-streaming
+    name: gRPC server streaming
+    conforms: true
+    evidence: >-
+      DiagnosticRun, DiagnosticTestCaseRun, RegisterPolicy and GPUBadPageGet all declare
+      `returns (stream ...)`.
+  - id: mcp
+    name: Model Context Protocol
+    conforms: true
+    evidence: >-
+      amd/ryzenai-mcp-server declares `mcp>=1.14.0` and ships a server.json with
+      `"transport": ["stdio"]`. Stdio transport only; no remote endpoint. See
+      mcp/advanced-micro-devices-mcp.yml.
+  - id: llmstxt
+    name: llms.txt
+    conforms: true
+    evidence: >-
+      https://rocm.docs.amd.com/llms.txt returns 200 text/plain (13,524 bytes), and AMD also serves
+      llms-full.txt and per-project llms.txt files under /projects/<project>/en/latest/.
+      https://ryzenai.docs.amd.com/llms.txt returns 200 as well.
+  - id: cve
+    name: CVE / MITRE identifier scheme
+    conforms: true
+    evidence: >-
+      Every AMD security bulletin at https://www.amd.com/en/resources/product-security.html is keyed
+      to CVE identifiers and links https://www.cve.org/. AMD-SB-#### is the vendor advisory ID.
+  - id: rfc9116
+    name: security.txt
+    conforms: false
+    evidence: >-
+      404 on www.amd.com, developer.amd.com and rocm.docs.amd.com. AMD runs a real PSIRT
+      (psirt@amd.com, published PGP key) but exposes no machine-discoverable pointer to it.
+  - id: rfc9457
+    name: Problem Details for HTTP APIs
+    conforms: false
+    evidence: Not applicable to AMD's contracts, which are gRPC and carry an in-band protobuf status field.
+  - id: oauth2
+    name: OAuth 2.0
+    conforms: false
+    evidence: >-
+      No OAuth surface. /.well-known/oauth-authorization-server and
+      /.well-known/oauth-protected-resource were not served on any probed host.
+  - id: a2a
+    name: A2A Agent Card
+    conforms: false
+    evidence: >-
+      /.well-known/agent-card.json and the legacy /.well-known/agent.json 404 on www.amd.com,
+      developer.amd.com and rocm.docs.amd.com. No card is authored on AMD's behalf.
+  - id: asyncapi
+    name: AsyncAPI
+    conforms: false
+    evidence: >-
+      No event or webhook surface found. The nearest thing is gRPC server streaming inside the RDC
+      contract, which AsyncAPI does not describe.
+  - id: openapi
+    name: OpenAPI
+    conforms: unverified
+    evidence: >-
+      See contract_provenance above. AMD publishes no OpenAPI document we could locate on a
+      resolving AMD host; /openapi.json, /swagger.json and /api-docs were not reachable because the
+      hosts named by the existing specs do not resolve.
+domain_standards:
+  - id: prometheus-openmetrics
+    name: Prometheus / OpenMetrics exposition
+    market: data-center GPU telemetry
+    conforms: true
+    evidence: >-
+      ROCm/device-metrics-exporter is AMD's Prometheus exporter for AMD GPU and NIC metrics; its
+      exportermetrics and nicmetrics protobuf packages define the metric field catalogue it exposes.
+      An operator already running Prometheus scrapes AMD GPUs with no bespoke connector — which is
+      exactly the integration cost a domain standard removes.
+    contract: grpc/advanced-micro-devices-device-metrics-exporterconfig.proto
+    note: >-
+      Recorded as the domain-standard signature for this market. It is read from AMD's own published
+      contract and repository, not from a marketing claim.
+  - id: oci
+    name: OCI container images
+    market: HPC / AI software distribution
+    conforms: true
+    evidence: >-
+      AMD Infinity Hub (https://www.amd.com/en/developer/resources/infinity-hub.html) publishes
+      pre-built ROCm and framework container images.
+  - id: hsa
+    name: Heterogeneous System Architecture (HSA)
+    market: GPU compute runtime
+    conforms: true
+    evidence: >-
+      ROCr is AMD's HSA runtime; rocminfo enumerates HSA agents. Documented across
+      rocm.docs.amd.com/en/latest/components/.
+compliance_certifications: []
+compliance_note: >-
+  No trust center and no named certification (SOC 2 / ISO 27001 / PCI / HIPAA / FedRAMP) was found
+  for AMD's developer surface. https://www.amd.com/en/corporate/trust-center.html returns 404. No
+  Compliance pointer is emitted.
+evidence:
+  - url: https://rocm.docs.amd.com/llms.txt
+    status: 200
+  - url: https://github.com/ROCm/device-metrics-exporter
+    status: 200
+  - url: https://github.com/amd/ryzenai-mcp-server
+    status: 200
+  - url: https://www.amd.com/en/resources/product-security.html
+    status: 200
+  - url: https://www.amd.com/en/corporate/trust-center.html
+    status: 404

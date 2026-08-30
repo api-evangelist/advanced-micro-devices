@@ -1,0 +1,81 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  https://rocm.docs.amd.com/en/latest/about/release-notes.html and the dated GitHub releases at
+  https://github.com/ROCm/ROCm/releases and https://github.com/ROCm/rocm-systems/releases
+name: ROCm release notes
+description: >-
+  AMD's dated change record for its developer surface is the ROCm release notes plus the tagged
+  GitHub releases on the ROCm organization. There is no separate API changelog, because the
+  callable contracts AMD publishes (the RDC gRPC service, the Device Metrics Exporter gRPC
+  services) version with the ROCm stack rather than independently.
+url: https://rocm.docs.amd.com/en/latest/about/release-notes.html
+alternate_urls:
+  - https://github.com/ROCm/ROCm/releases
+  - https://github.com/ROCm/rocm-systems/releases
+scheme: semver
+current_version: 10.0.0
+current_version_note: >-
+  "ROCm Core SDK 10.0.0 release notes" is the title rendered at rocm.docs.amd.com/en/latest as of
+  2026-08-30. The rocm-systems repository carries a matching `therock-10.0` tag dated 2026-08-26.
+  The last tag in the classic rocm-N.N.N series on ROCm/ROCm is rocm-7.14.0 (2026-07-16).
+feed: null
+feed_note: No RSS/Atom feed for the release notes was found; GitHub's releases.atom is the only machine-readable option.
+entries:
+  - version: therock-10.0
+    date: '2026-08-26'
+    repository: ROCm/rocm-systems
+    breaking: unknown
+    highlights: >-
+      ROCm Core SDK 10.0 — expanded AMD GPU support, operating-system support update, expanded GPU
+      virtualization support for Instinct GPUs, GPU partitioning support update, AI inference and
+      framework updates, developer-tools and profiling updates, HIP feature and performance
+      highlights, ROCr Runtime core-dump support with attached debuggers.
+  - version: rocm-7.14.0
+    date: '2026-07-16'
+    repository: ROCm/ROCm
+    breaking: unknown
+  - version: rocm-7.2.4
+    date: '2026-05-29'
+    repository: ROCm/ROCm
+    breaking: false
+  - version: rocm-7.2.3
+    date: '2026-05-04'
+    repository: ROCm/ROCm
+    breaking: false
+  - version: rocm-7.2.2
+    date: '2026-04-14'
+    repository: ROCm/ROCm
+    breaking: false
+  - version: rocm-7.2.1
+    date: '2026-03-25'
+    repository: ROCm/ROCm
+    breaking: false
+  - version: rocm-7.2.0
+    date: '2026-01-23'
+    repository: ROCm/ROCm
+    breaking: unknown
+  - version: rocm-7.1.1
+    date: '2025-11-26'
+    repository: ROCm/ROCm
+    breaking: false
+  - version: rocm-7.1.0
+    date: '2025-11-03'
+    repository: ROCm/ROCm
+    breaking: unknown
+  - version: rocm-7.0.0
+    date: '2025-09-16'
+    repository: ROCm/ROCm
+    breaking: true
+    highlights: Major version boundary.
+note: >-
+  `breaking:` is recorded as `unknown` wherever the release page does not state it. AMD publishes a
+  transition guide (https://rocm.docs.amd.com/en/latest/about/transition-guide-TheRock.html) for the
+  move to TheRock build system, which is the closest thing to a stated migration path.
+evidence:
+  - url: https://rocm.docs.amd.com/en/latest/about/release-notes.html
+    status: 200
+  - url: https://api.github.com/repos/ROCm/ROCm/releases
+    status: 200
+  - url: https://api.github.com/repos/ROCm/rocm-systems/releases
+    status: 200
