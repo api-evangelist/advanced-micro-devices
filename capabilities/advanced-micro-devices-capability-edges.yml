@@ -1,0 +1,32 @@
+slug: advanced-micro-devices
+provider: Advanced Micro Devices
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Electrical Components & Equipment
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Models
+  spec_file: advanced-micro-devices-models-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.78
+  evidence: POST /models deployModel  AMD Developer Cloud Deploy AI Model; 'deploying AI models'
+  reason: Deploying and listing AI models corresponds to AI/ML model lifecycle (MLOps) management.
+- tag: Instances
+  spec_file: advanced-micro-devices-instances-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: POST /instances createInstance  AMD Developer Cloud Create GPU Instance; 'access to AMD Instinct
+    GPU instances for AI inference, training, and HPC workloads'
+  reason: Provisioning and terminating cloud compute instances is cloud infrastructure management.

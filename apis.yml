@@ -236,6 +236,9 @@ apis:
   - type: JSONLD
     url: json-ld/amd-rocm-management-api-context.jsonld
 common:
+  - type: CapabilityMap
+    url: capabilities/advanced-micro-devices-capability-edges.yml
+    name: Advanced Micro Devices Business Capability Map
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/advanced-micro-devices/overview
   - type: AgenticAccess
