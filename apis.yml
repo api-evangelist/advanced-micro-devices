@@ -60,6 +60,8 @@ apis:
   humanURL: https://developer.amd.com
   baseURL: https://api.developer.amd.com/v1
   tags:
+  - Credit
+  tags_raw:
   - Credits
   properties:
   - type: OpenAPI
