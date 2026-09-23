@@ -1,7 +1,9 @@
 ---
 title: Advanced Micro Devices, Inc. (AMD) Stock Price, News ...
 url: https://finance.yahoo.com/quote/AMD/
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Advanced Micro Devices" press release artificial intelligence'
 position: 3
 source: serpapi-google

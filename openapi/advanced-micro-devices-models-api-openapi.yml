@@ -151,6 +151,27 @@ components:
           type: integer
           description: Number of GPUs to allocate.
           example: 2
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
+    ModelList:
+      type: object
+      description: List of deployed AI models.
+      properties:
+        models:
+          type: array
+          description: Array of model deployments.
+          items:
+            $ref: '#/components/schemas/Model'
     Model:
       type: object
       description: A deployed AI model for inference serving.
@@ -185,27 +206,6 @@ components:
           type: string
           description: Inference endpoint URL.
           example: https://inf.developer.amd.com/model-001/v1
-    ErrorResponse:
-      type: object
-      description: API error response.
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        message:
-          type: string
-          description: Error message.
-          example: The requested resource was not found.
-    ModelList:
-      type: object
-      description: List of deployed AI models.
-      properties:
-        models:
-          type: array
-          description: Array of model deployments.
-          items:
-            $ref: '#/components/schemas/Model'
   securitySchemes:
     apiKey:
       type: apiKey

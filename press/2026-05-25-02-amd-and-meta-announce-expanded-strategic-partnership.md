@@ -1,7 +1,9 @@
 ---
 title: AMD and Meta Announce Expanded Strategic Partnership ...
 url: https://ir.amd.com/news-events/press-releases/detail/1279/amd-and-meta-announce-expanded-strategic-partnership-to-deploy-6-gigawatts-of-amd-gpus
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Advanced Micro Devices" press release artificial intelligence'
 position: 2
 source: serpapi-google

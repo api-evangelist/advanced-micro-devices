@@ -113,6 +113,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    DeviceList:
+      type: object
+      description: List of AMD GPU devices.
+      properties:
+        devices:
+          type: array
+          description: Array of GPU devices.
+          items:
+            $ref: '#/components/schemas/Device'
     ErrorResponse:
       type: object
       description: API error response.
@@ -161,15 +170,6 @@ components:
           type: integer
           description: Number of compute units.
           example: 304
-    DeviceList:
-      type: object
-      description: List of AMD GPU devices.
-      properties:
-        devices:
-          type: array
-          description: Array of GPU devices.
-          items:
-            $ref: '#/components/schemas/Device'
   securitySchemes:
     bearerAuth:
       type: http

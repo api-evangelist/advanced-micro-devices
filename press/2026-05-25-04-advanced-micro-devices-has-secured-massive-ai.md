@@ -1,7 +1,9 @@
 ---
 title: Advanced Micro Devices has secured massive AI ...
 url: https://www.facebook.com/Neewtoop/posts/advanced-micro-devices-has-secured-massive-ai-infrastructure-deals-with-meta-and/998984876042705/
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Advanced Micro Devices" press release artificial intelligence'
 position: 4
 source: serpapi-google

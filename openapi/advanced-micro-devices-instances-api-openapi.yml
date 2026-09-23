@@ -233,37 +233,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    InstanceInput:
-      type: object
-      description: Request to create a GPU compute instance.
-      required:
-      - gpuType
-      - gpuCount
-      properties:
-        name:
-          type: string
-          description: Display name for the instance.
-          example: llm-training
-        gpuType:
-          type: string
-          description: GPU hardware type.
-          enum:
-          - mi300x
-          - mi250
-          - mi210
-          example: mi300x
-        gpuCount:
-          type: integer
-          description: Number of GPUs to allocate.
-          example: 8
-        imageId:
-          type: string
-          description: ROCm environment image.
-          example: rocm-6.1-pytorch
-        region:
-          type: string
-          description: Deployment region.
-          example: us-west-2
     Instance:
       type: object
       description: An AMD GPU compute instance.
@@ -335,6 +304,37 @@ components:
           type: integer
           description: Total number of instances.
           example: 3
+    InstanceInput:
+      type: object
+      description: Request to create a GPU compute instance.
+      required:
+      - gpuType
+      - gpuCount
+      properties:
+        name:
+          type: string
+          description: Display name for the instance.
+          example: llm-training
+        gpuType:
+          type: string
+          description: GPU hardware type.
+          enum:
+          - mi300x
+          - mi250
+          - mi210
+          example: mi300x
+        gpuCount:
+          type: integer
+          description: Number of GPUs to allocate.
+          example: 8
+        imageId:
+          type: string
+          description: ROCm environment image.
+          example: rocm-6.1-pytorch
+        region:
+          type: string
+          description: Deployment region.
+          example: us-west-2
   securitySchemes:
     apiKey:
       type: apiKey
