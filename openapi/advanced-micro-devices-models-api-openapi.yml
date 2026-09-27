@@ -118,60 +118,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ModelInput:
-      type: object
-      description: Request to deploy an AI model.
-      required:
-      - modelId
-      - framework
-      - gpuType
-      properties:
-        name:
-          type: string
-          description: Display name for the deployment.
-          example: llama-3.1-70b
-        modelId:
-          type: string
-          description: Hugging Face model ID or path.
-          example: meta-llama/Llama-3.1-70B-Instruct
-        framework:
-          type: string
-          description: Inference framework to use.
-          enum:
-          - vLLM
-          - TGI
-          - TorchServe
-          - Triton
-          example: vLLM
-        gpuType:
-          type: string
-          description: GPU hardware type.
-          example: mi300x
-        gpuCount:
-          type: integer
-          description: Number of GPUs to allocate.
-          example: 2
-    ErrorResponse:
-      type: object
-      description: API error response.
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        message:
-          type: string
-          description: Error message.
-          example: The requested resource was not found.
-    ModelList:
-      type: object
-      description: List of deployed AI models.
-      properties:
-        models:
-          type: array
-          description: Array of model deployments.
-          items:
-            $ref: '#/components/schemas/Model'
     Model:
       type: object
       description: A deployed AI model for inference serving.
@@ -206,6 +152,60 @@ components:
           type: string
           description: Inference endpoint URL.
           example: https://inf.developer.amd.com/model-001/v1
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
+    ModelList:
+      type: object
+      description: List of deployed AI models.
+      properties:
+        models:
+          type: array
+          description: Array of model deployments.
+          items:
+            $ref: '#/components/schemas/Model'
+    ModelInput:
+      type: object
+      description: Request to deploy an AI model.
+      required:
+      - modelId
+      - framework
+      - gpuType
+      properties:
+        name:
+          type: string
+          description: Display name for the deployment.
+          example: llama-3.1-70b
+        modelId:
+          type: string
+          description: Hugging Face model ID or path.
+          example: meta-llama/Llama-3.1-70B-Instruct
+        framework:
+          type: string
+          description: Inference framework to use.
+          enum:
+          - vLLM
+          - TGI
+          - TorchServe
+          - Triton
+          example: vLLM
+        gpuType:
+          type: string
+          description: GPU hardware type.
+          example: mi300x
+        gpuCount:
+          type: integer
+          description: Number of GPUs to allocate.
+          example: 2
   securitySchemes:
     apiKey:
       type: apiKey

@@ -291,19 +291,6 @@ components:
           type: string
           description: Error message.
           example: The requested resource was not found.
-    InstanceList:
-      type: object
-      description: List of GPU compute instances.
-      properties:
-        instances:
-          type: array
-          description: Array of instances.
-          items:
-            $ref: '#/components/schemas/Instance'
-        total:
-          type: integer
-          description: Total number of instances.
-          example: 3
     InstanceInput:
       type: object
       description: Request to create a GPU compute instance.
@@ -335,6 +322,19 @@ components:
           type: string
           description: Deployment region.
           example: us-west-2
+    InstanceList:
+      type: object
+      description: List of GPU compute instances.
+      properties:
+        instances:
+          type: array
+          description: Array of instances.
+          items:
+            $ref: '#/components/schemas/Instance'
+        total:
+          type: integer
+          description: Total number of instances.
+          example: 3
   securitySchemes:
     apiKey:
       type: apiKey

@@ -391,7 +391,7 @@ tags:
 - Cloud Computing
 - GPU
 - HPC
-- Machine-Learning
+- Machine Learning
 - Semiconductors
 - Fortune 500
 tags_raw:
@@ -402,6 +402,7 @@ tags_raw:
 - Machine Learning
 - Semiconductor
 - Fortune 500
+- Machine-Learning
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
