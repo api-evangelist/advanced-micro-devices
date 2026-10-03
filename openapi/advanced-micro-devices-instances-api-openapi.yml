@@ -279,18 +279,19 @@ components:
           type: string
           format: date-time
           description: Instance creation timestamp.
-    ErrorResponse:
+    InstanceList:
       type: object
-      description: API error response.
+      description: List of GPU compute instances.
       properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        message:
-          type: string
-          description: Error message.
-          example: The requested resource was not found.
+        instances:
+          type: array
+          description: Array of instances.
+          items:
+            $ref: '#/components/schemas/Instance'
+        total:
+          type: integer
+          description: Total number of instances.
+          example: 3
     InstanceInput:
       type: object
       description: Request to create a GPU compute instance.
@@ -322,19 +323,18 @@ components:
           type: string
           description: Deployment region.
           example: us-west-2
-    InstanceList:
+    ErrorResponse:
       type: object
-      description: List of GPU compute instances.
+      description: API error response.
       properties:
-        instances:
-          type: array
-          description: Array of instances.
-          items:
-            $ref: '#/components/schemas/Instance'
-        total:
-          type: integer
-          description: Total number of instances.
-          example: 3
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
   securitySchemes:
     apiKey:
       type: apiKey
