@@ -60,18 +60,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: API error response.
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        message:
-          type: string
-          description: Error message.
-          example: The requested resource was not found.
     RocmVersion:
       type: object
       description: ROCm platform version information.
@@ -92,6 +80,18 @@ components:
           type: string
           description: Linux kernel version.
           example: 5.15.0-105-generic
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http

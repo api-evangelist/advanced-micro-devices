@@ -279,6 +279,18 @@ components:
           type: string
           format: date-time
           description: Instance creation timestamp.
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
     InstanceList:
       type: object
       description: List of GPU compute instances.
@@ -323,18 +335,6 @@ components:
           type: string
           description: Deployment region.
           example: us-west-2
-    ErrorResponse:
-      type: object
-      description: API error response.
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        message:
-          type: string
-          description: Error message.
-          example: The requested resource was not found.
   securitySchemes:
     apiKey:
       type: apiKey

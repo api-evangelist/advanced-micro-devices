@@ -113,6 +113,27 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
+    DeviceList:
+      type: object
+      description: List of AMD GPU devices.
+      properties:
+        devices:
+          type: array
+          description: Array of GPU devices.
+          items:
+            $ref: '#/components/schemas/Device'
     Device:
       type: object
       description: An AMD GPU device.
@@ -149,27 +170,6 @@ components:
           type: integer
           description: Number of compute units.
           example: 304
-    ErrorResponse:
-      type: object
-      description: API error response.
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        message:
-          type: string
-          description: Error message.
-          example: The requested resource was not found.
-    DeviceList:
-      type: object
-      description: List of AMD GPU devices.
-      properties:
-        devices:
-          type: array
-          description: Array of GPU devices.
-          items:
-            $ref: '#/components/schemas/Device'
   securitySchemes:
     bearerAuth:
       type: http
