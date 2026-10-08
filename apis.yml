@@ -239,6 +239,8 @@ apis:
   - type: JSONLD
     url: json-ld/amd-rocm-management-api-context.jsonld
 common:
+- type: FinOps
+  url: finops/advanced-micro-devices-finops.yml
 - type: CapabilityMap
   url: capabilities/advanced-micro-devices-capability-edges.yml
   name: Advanced Micro Devices Business Capability Map
