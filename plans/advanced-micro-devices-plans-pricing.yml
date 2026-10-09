@@ -84,3 +84,38 @@ plans:
       - name: Instinct MI300X / MI325X
       - name: EPYC accelerator integration
       - name: Hyperscaler distribution
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - subscription
+  units:
+  - compute
+  - negotiated
+  - object
+  plans:
+  - name: AMD Developer Cloud
+    access: freemium
+    model: free
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - per-use
+  - name: ROCm Software
+    access: freemium
+    model: free
+    model_how: derived
+    units:
+    - object
+    periods:
+    - per-use
+  - name: Enterprise / OEM
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - negotiated
+    periods:
+    - month
