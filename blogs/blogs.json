@@ -2,6 +2,13 @@
   "repo": "advanced-micro-devices",
   "feeds": [
     {
+      "source": "https://www.amd.com/en/blogs.html",
+      "feed_url": "https://www.amd.com/en/blogs.html",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
       "source": "https://www.amd.com/en/support.html",
       "feed_url": "https://www.amd.com/en/support.html",
       "title": "",
@@ -9,7 +16,7 @@
       "method": "none"
     }
   ],
-  "fetched": "2026-10-03T12:30:02Z",
+  "fetched": "2026-10-10T13:15:00Z",
   "post_count": 0,
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
