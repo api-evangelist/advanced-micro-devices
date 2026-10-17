@@ -118,39 +118,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ModelInput:
-      type: object
-      description: Request to deploy an AI model.
-      required:
-      - modelId
-      - framework
-      - gpuType
-      properties:
-        name:
-          type: string
-          description: Display name for the deployment.
-          example: llama-3.1-70b
-        modelId:
-          type: string
-          description: Hugging Face model ID or path.
-          example: meta-llama/Llama-3.1-70B-Instruct
-        framework:
-          type: string
-          description: Inference framework to use.
-          enum:
-          - vLLM
-          - TGI
-          - TorchServe
-          - Triton
-          example: vLLM
-        gpuType:
-          type: string
-          description: GPU hardware type.
-          example: mi300x
-        gpuCount:
-          type: integer
-          description: Number of GPUs to allocate.
-          example: 2
     Model:
       type: object
       description: A deployed AI model for inference serving.
@@ -197,6 +164,39 @@ components:
           type: string
           description: Error message.
           example: The requested resource was not found.
+    ModelInput:
+      type: object
+      description: Request to deploy an AI model.
+      required:
+      - modelId
+      - framework
+      - gpuType
+      properties:
+        name:
+          type: string
+          description: Display name for the deployment.
+          example: llama-3.1-70b
+        modelId:
+          type: string
+          description: Hugging Face model ID or path.
+          example: meta-llama/Llama-3.1-70B-Instruct
+        framework:
+          type: string
+          description: Inference framework to use.
+          enum:
+          - vLLM
+          - TGI
+          - TorchServe
+          - Triton
+          example: vLLM
+        gpuType:
+          type: string
+          description: GPU hardware type.
+          example: mi300x
+        gpuCount:
+          type: integer
+          description: Number of GPUs to allocate.
+          example: 2
     ModelList:
       type: object
       description: List of deployed AI models.

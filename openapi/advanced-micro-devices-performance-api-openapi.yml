@@ -68,6 +68,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: API error response.
+      properties:
+        code:
+          type: string
+          description: Error code.
+          example: NOT_FOUND
+        message:
+          type: string
+          description: Error message.
+          example: The requested resource was not found.
     DevicePerformance:
       type: object
       description: Performance counters for an AMD GPU device.
@@ -96,18 +108,6 @@ components:
           format: float
           description: Compute throughput in PFLOPS.
           example: 1.83
-    ErrorResponse:
-      type: object
-      description: API error response.
-      properties:
-        code:
-          type: string
-          description: Error code.
-          example: NOT_FOUND
-        message:
-          type: string
-          description: Error message.
-          example: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http
