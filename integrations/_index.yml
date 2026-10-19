@@ -77,3 +77,16 @@
     detected: '2026-10-15'
   status: not-a-workflow
   arazzo: null
+- slug: advanced-micro-devices-autodesk-own
+  label: Autodesk (own)
+  partner: autodesk
+  partner_name: Autodesk (own)
+  category: INVNTOR
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.autodesk.com/apps/3248534f-7d11-4c94-9607-72e0527b7ee2
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
