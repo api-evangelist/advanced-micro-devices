@@ -166,3 +166,146 @@
     detected: '2026-10-20'
   status: not-a-workflow
   arazzo: null
+- slug: advanced-micro-devices-khronos-group-conformant-products
+  label: Khronos Group conformant products
+  partner_name: Khronos Group conformant products
+  category: graphics API conformance
+  type: register
+  channel: standard-directory
+  evidence: https://www.khronos.org/conformance/adopters/conformant-products/vulkan#submission_971
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Khronos Group conformant products + API adopters (khronos.org/conformance/adopters)
+    standard: Khronos conformance
+    spec_file: null
+    role: khronos-conformant-adopter
+    registered_name: AMD
+    register_id: https://www.khronos.org/conformance/adopters/conformant-products/vulkan#submission_971
+    matched_domain: amd.com
+    matched_by: domain+verified
+    certified_products:
+    - product: OpenCL
+      lapsed: false
+      newest_submission: '2015-09-25'
+      versions:
+      - OpenCL_1_0
+      - OpenCL_1_1
+      - OpenCL_1_2
+      - OpenCL_2_0
+      submissions_listed: 70
+    - product: OpenGL
+      lapsed: false
+      newest_submission: '2025-06-30'
+      versions:
+      - OpenGL_4_4
+      - OpenGL_4_5
+      - OpenGL_4_6
+      submissions_listed: 75
+    - product: OpenGL ES
+      lapsed: false
+      newest_submission: '2010-08-22'
+      versions:
+      - OpenGL_ES_2_0
+      submissions_listed: 12
+    - product: OpenVX
+      lapsed: false
+      newest_submission: '2022-03-24'
+      versions:
+      - OpenVX_1_0_1
+      - OpenVX_1_3
+      submissions_listed: 15
+    - product: Vulkan
+      lapsed: false
+      newest_submission: '2026-01-15'
+      versions:
+      - Vulkan_1_1
+      - Vulkan_1_2
+      - Vulkan_1_3
+      - Vulkan_1_4
+      submissions_listed: 179
+    products_sample:
+    - '* AMD Desktop Processors -- AMD Ryzen™ Processor Architecture CPU and AMD Radeon™ RDNA™ 2'
+    - '* AMD Embedded Processor -- AMD Ryzen™ Embedded Processor Architecture CPU with Radeon™ Vega Mobile GPU'
+    - '* AMD Laptop Processor -- AMD Ryzen™ Pro Processor Architecture CPU with Radeon™ Vega Mobile GPU'
+    - '* AMD Server Processors -- AMD EPYC™ Processor Architecture CPU and AMD Instinct™ GPU'
+    - '* AMD Workstation Processors -- AMD Ryzen™ Processor Architecture CPU and Radeon™ Vega 10 GPU'
+    - '* AMD Workstation Processors -- AMD Ryzen™ Processor Architecture CPU and Radeon™ Vega 20 GPU'
+    - '* Using open-source implementation of OpenVX 1.3 -- MIVisionX Version 2.0'
+    - '* Using open-source implementation of OpenVX 1.3 -- MIVisionX Version 2.0 Plus'
+    - '- A-Series AMD Radeon R4 Graphics'
+    - '- A-Series AMD Radeon R5 Graphics'
+    signal_note: certified_products = one entry per Khronos API the company is a conformant adopter of (the API
+      Adopters page), never per submission or product; dates, versions and submission counts are context. Khronos
+      marks no conformance as superseded or lapsed, so lapsed is false
+    detected_by: sweep-xr-graphics.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
+- slug: advanced-micro-devices-khronos-group-members
+  label: Khronos Group (members)
+  partner_name: Khronos Group (members)
+  category: graphics standards body membership
+  type: register
+  channel: standard-directory
+  evidence: https://www.khronos.org/members/list
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Khronos Group members list (khronos.org/members/list)
+    standard: Khronos Group
+    spec_file: null
+    role: khronos-member
+    registered_name: AMD
+    register_id: https://www.khronos.org/members/list
+    matched_domain: amd.com
+    matched_by: domain+verified
+    signal_note: 'participation only: membership level is partner_tier, never counted'
+    detected_by: sweep-xr-graphics.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
+- slug: advanced-micro-devices-alliance-for-openusd-aousd
+  label: Alliance for OpenUSD (AOUSD)
+  partner_name: Alliance for OpenUSD (AOUSD)
+  category: OpenUSD standards body
+  type: register
+  channel: standard-directory
+  evidence: https://aousd.org/members/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Alliance for OpenUSD members (aousd.org/members; landscape.aousd.org/data/full.json)
+    standard: OpenUSD
+    spec_file: null
+    role: aousd-member
+    registered_name: Advanced Micro Devices (AMD)
+    register_id: aousd-members--general--advanced-micro-devices-amd
+    matched_domain: amd.com
+    matched_by: domain+name-among-holders
+    signal_note: 'participation only: steering / general is partner_tier, never counted'
+    detected_by: sweep-xr-graphics.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
+- slug: advanced-micro-devices-skillsmp-skillsmp-com
+  label: SkillsMP (skillsmp.com)
+  partner_name: SkillsMP (skillsmp.com)
+  category: Agent Skills register
+  type: register
+  channel: standard-directory
+  evidence: https://skillsmp.com/creators/rocm
+  source: edge
+  relationship: compatible
+  contract_reference:
+    register: SkillsMP (skillsmp.com) (public sitemap / list)
+    spec_file: null
+    standard: Agent Skills (agentskills.io)
+    role: agent-skills-listing
+    matched_org: rocm
+    matched_by: org-profile-domain:amd.com
+    sample_skills: []
+    detected_by: sweep-agent-skills.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
