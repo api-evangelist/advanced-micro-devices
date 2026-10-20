@@ -1,15 +1,34 @@
 edges:
+- partner_name: Autodesk (own)
+  partner: autodesk
+  partner_match: mirror
+  mirror_match: domain+verified
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.autodesk.com/apps/3248534f-7d11-4c94-9607-72e0527b7ee2
+  mirror_of: autodesk/integrations/autodesk-integration-edges.yml
+  apps:
+  - Radeon ProRender
+  listing_count: 1
+  detected: '2026-10-19'
+  detected_by: mirror-platform-listings.py
+  category: INVNTOR
+  publisher_verified:
+  - autodesk-digital-signature
 - partner_name: LF AI & Data (Landscape)
   partner: lf-ai-data
   partner_match: register
   type: register
   direction: partner-built
   category: AI & data landscape
-  evidence: https://github.com/lfai/landscape/blob/95d361b8abfdd04a8c76bf38a012778d13621b5e/landscape.yml
+  evidence: https://github.com/lfai/landscape/blob/3893e0631e1d12921a9b0ac25ffc78a2ac26239d/landscape.yml
   channel: standard-directory
   relationship: standard-participant
   contract_reference:
-    register: LF AI & Data Landscape (github.com/lfai/landscape landscape.yml @95d361b8ab)
+    register: LF AI & Data Landscape (github.com/lfai/landscape landscape.yml @3893e0631e)
     spec_file: null
     standard: LF AI & Data
     role: lfai-member (General)
@@ -27,7 +46,7 @@ edges:
     signal_note: 'participation only: a landscape listing is standard-participant evidence, not depth. Entries,
       categories, tier and projects are CONTEXT, never read (breadth is not credit)'
     detected_by: sweep-mlops.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
   detected_by: sweep-mlops.py
   first_seen: '2026-10-15'
 - partner_name: MLCommons MLPerf
@@ -68,35 +87,108 @@ edges:
       result, lapsed outside the current window; open-division families, rounds and result counts are context, never
       read
     detected_by: sweep-mlops.py
-    detected: '2026-10-15'
+    detected: '2026-10-19'
   detected_by: sweep-mlops.py
   first_seen: '2026-10-15'
-- partner_name: Autodesk (own)
-  partner: autodesk
-  partner_match: mirror
-  mirror_match: domain+verified
+- partner_name: Microsoft Azure Marketplace
+  partner: microsoft-azure
+  partner_match: aggregator
   type: marketplace
-  relationship: platform-app
+  marketplace: azure-marketplace
+  channel: distribution
+  relationship: distribution-channel
   direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://marketplace.autodesk.com/apps/3248534f-7d11-4c94-9607-72e0527b7ee2
-  mirror_of: autodesk/integrations/autodesk-integration-edges.yml
+  evidence: https://azuremarketplace.microsoft.com/en-us/marketplace/apps?search=AMD
+  listing_count: 3
   apps:
-  - Radeon ProRender
-  listing_count: 1
+  - NVV5 V710 Rocm Linux Image
+  - Vitis 2022.1 Alveo U250 Development VM - Ubuntu20.04
+  - AMD Alveo U250 2022.1 Deployment VM - Ubuntu20.04
+  seller_name: AMD
+  detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-19'
-  detected_by: mirror-platform-listings.py
-  category: INVNTOR
-  publisher_verified:
-  - autodesk-digital-signature
+- partner_name: CNCF (Cloud Native Landscape)
+  partner: cncf
+  partner_match: register
+  type: register
+  direction: partner-built
+  category: Cloud native landscape
+  evidence: https://github.com/cncf/landscape/blob/42dd4cd91dad8ec8558ac02467a43f0805b9957a/landscape.yml
+  channel: standard-directory
+  relationship: standard-participant
+  contract_reference:
+    register: CNCF Cloud Native Landscape (github.com/cncf/landscape landscape.yml @42dd4cd91d)
+    spec_file: null
+    standard: Cloud Native (CNCF)
+    role: cncf-member (Silver)
+    registered_name: AMD
+    registered_names:
+    - AMD
+    website: https://www.amd.com/
+    matched_domain: amd.com
+    matched_by: domain+verified
+    member_tier: Silver
+    joined: '2023-12-01'
+    end_user: false
+    cncf_projects: []
+    landscape_categories: []
+    landscape_entries: 0
+    signal_note: 'participation only: a landscape listing is standard-participant evidence, not depth. Entries,
+      categories, tier and projects are CONTEXT, never read (breadth is not credit)'
+    detected_by: sweep-cloud-native.py
+    detected: '2026-10-19'
+  detected_by: sweep-cloud-native.py
+  first_seen: '2026-10-19'
+- partner_name: PyPI
+  partner: pypi
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (Python)
+  evidence: https://pypi.org/project/amd-quark/
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: PyPI (public registry JSON)
+    spec_file: null
+    language: Python
+    packages:
+    - name: amd-quark
+      version: '0.13'
+      released: '2026-09-28'
+      released_field: upload_time
+      lapsed: false
+      page: https://pypi.org/project/amd-quark/
+      repo_leg: domain:amd.com
+      publisher_leg: email:amd.com
+      matched_by: domain+verified
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-20'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-20'
 generated: '2026-10-15'
 method: searched
 source:
 - https://github.com/lfai/landscape
 - https://github.com/mlcommons
 checked:
+- autodesk/integrations/autodesk-integration-edges.yml
+- https://api.nuget.org/v3
+- https://azuremarketplace.microsoft.com/
+- https://crates.io/api/v1
+- https://focus.finops.org/data-generators/
+- https://github.com/cncf/k8s-conformance
+- https://github.com/cncf/landscape
 - https://github.com/kubeflow/website
 - https://github.com/lfai/landscape
 - https://github.com/mlcommons
 - https://marketplace.autodesk.com/sitemap.xml
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
+marketplace_apps: []
