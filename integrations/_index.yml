@@ -350,3 +350,112 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: advanced-micro-devices-open-compute-project-foundation
+  label: Open Compute Project Foundation
+  partner_name: Open Compute Project Foundation
+  category: open data center hardware standards membership
+  type: register
+  channel: standard-directory
+  evidence: https://www.opencompute.org/membership/membership-directory
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Open Compute Project membership directory (opencompute.org/membership/membership-directory)
+    standard: Open Compute Project (OCP) specifications
+    spec_file: null
+    role: ocp-member
+    registered_name: AMD
+    register_id: https://www.amd.com
+    matched_domain: amd.com
+    matched_by: domain+verified
+    member_since: '2015'
+    signal_note: 'participation only: corporate membership of the Open Compute Project (level recorded as partner_tier);
+      membership is not product conformance (OCP Accepted / Inspired products are a separate marketplace, not read)'
+    detected_by: sweep-data-center-tier-certification.py
+    detected: '2026-10-21'
+  status: not-a-workflow
+  arazzo: null
+- slug: advanced-micro-devices-the-green-grid
+  label: The Green Grid
+  partner_name: The Green Grid
+  category: data center efficiency consortium membership
+  type: register
+  channel: standard-directory
+  evidence: https://www.thegreengrid.org/en/about-us/members
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: The Green Grid members, Executive Leadership Council (thegreengrid.org/en/about-us/members)
+    standard: The Green Grid data-center efficiency metrics (PUE / WUE / CUE)
+    spec_file: null
+    role: green-grid-member
+    registered_name: AMD
+    register_id: https://www.amd.com
+    matched_domain: amd.com
+    matched_by: domain+verified
+    signal_note: 'participation only: member of The Green Grid''s Executive Leadership Council (public logo wall;
+      the full roster is behind the member login and was not entered)'
+    detected_by: sweep-data-center-tier-certification.py
+    detected: '2026-10-21'
+  status: not-a-workflow
+  arazzo: null
+- slug: advanced-micro-devices-risc-v-international-members
+  label: RISC-V International (members)
+  partner_name: RISC-V International (members)
+  category: processor ISA standards body membership
+  type: register
+  channel: standard-directory
+  evidence: https://riscv.org/members/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: RISC-V International members (riscv.org/members; riscv.landscape2.io/data/full.json)
+    standard: RISC-V ISA
+    spec_file: null
+    role: risc-v-member
+    registered_name: Advanced Micro Devices (AMD)
+    register_id: risc-v-members--strategic--advanced-micro-devices-amd-member
+    matched_domain: amd.com
+    matched_by: domain+name-among-holders
+    signal_note: 'participation only: membership level is partner_tier, never counted'
+    detected_by: sweep-semiconductor-consortia.py
+    detected: '2026-10-21'
+  status: not-a-workflow
+  arazzo: null
+- slug: advanced-micro-devices-open-compute-project-marketplace
+  label: Open Compute Project marketplace
+  partner_name: Open Compute Project marketplace
+  category: data-center hardware recognition
+  type: register
+  channel: standard-directory
+  evidence: https://www.opencompute.org/marketplace/security-systems-management/amd-instinct-mi300x-accelerator/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Open Compute Project marketplace (opencompute.org/products; /wp-json/wp/v2/marketplace + /companies)
+    standard: Open Compute Project
+    spec_file: null
+    role: ocp-recognised-product-vendor
+    registered_name: AMD
+    register_id: https://www.opencompute.org/members/amd/
+    matched_domain: amd.com
+    matched_by: domain+verified
+    listings: 2
+    recognised_listings: 2
+    products_sample:
+    - AMD EPYC™ 9005 Series Processors
+    - AMD Instinct™ MI300X accelerator
+    signal_note: certified_products = one entry per product type (OCP recognition + most specific marketplace segment)
+      among OCP-recognised listings; unrecognised listings are listing alone (participation). The REST data marks
+      no listing archived, so lapsed is false. Listing counts are context, never counted
+    detected_by: sweep-semiconductor-consortia.py
+    detected: '2026-10-21'
+    certified_products:
+    - product: 'OCP S.A.F.E.: OCP S.A.F.E.™ Firmware'
+      recognition: OCP S.A.F.E.
+      product_type: OCP S.A.F.E.™ Firmware
+      lapsed: false
+      listings: 2
+      newest_listing: '2024-11-22'
+  status: not-a-workflow
+  arazzo: null
