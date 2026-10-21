@@ -1,23 +1,4 @@
 edges:
-- partner_name: Autodesk (own)
-  partner: autodesk
-  partner_match: mirror
-  mirror_match: domain+verified
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://marketplace.autodesk.com/apps/3248534f-7d11-4c94-9607-72e0527b7ee2
-  mirror_of: autodesk/integrations/autodesk-integration-edges.yml
-  apps:
-  - Radeon ProRender
-  listing_count: 1
-  detected: '2026-10-19'
-  detected_by: mirror-platform-listings.py
-  category: INVNTOR
-  publisher_verified:
-  - autodesk-digital-signature
 - partner_name: LF AI & Data (Landscape)
   partner: lf-ai-data
   partner_match: register
@@ -323,6 +304,71 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-agent-skills.py
   first_seen: '2026-10-20'
+- partner_name: PyPI organization accounts
+  partner: pypi
+  partner_match: register
+  type: register
+  channel: package-registry
+  relationship: distribution-channel
+  direction: third-party
+  evidence: https://pypi.org/org/AMD-OSS/
+  category: PyPI organization
+  contract_reference:
+    register: PyPI organization accounts
+    spec_file: null
+    role: pypi-organization
+    registered_name: AMD-OSS
+    register_id: https://pypi.org/org/AMD-OSS/
+    org_display_name: Advanced Micro Devices
+    matched_by: verified-package
+    packages_verified:
+    - amd-quark
+    org_projects: 165
+    identity_note: the org is reached through packages sweep-official-sdks / official-clis verified as the provider's
+      own (domain / org leg AND publisher leg); never by the org name
+    signal_note: 'participation only (python): an organization account on PyPI, not a package count'
+    detected_by: sweep-ide-extension-marketplaces.py
+    detected: '2026-10-20'
+  detected_by: sweep-ide-extension-marketplaces.py
+  first_seen: '2026-10-20'
+- partner_name: Autodesk (own)
+  partner: autodesk
+  partner_match: mirror
+  mirror_match: domain+verified
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.autodesk.com/apps/3248534f-7d11-4c94-9607-72e0527b7ee2
+  mirror_of: autodesk/integrations/autodesk-integration-edges.yml
+  apps:
+  - Radeon ProRender
+  listing_count: 1
+  detected: '2026-10-19'
+  detected_by: mirror-platform-listings.py
+  category: INVNTOR
+  publisher_verified:
+  - autodesk-digital-signature
+- partner_name: Eclipse Foundation (open-vsx)
+  partner: eclipse
+  partner_match: mirror
+  mirror_match: domain+verified
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: open-vsx
+  evidence: https://open-vsx.org/namespace/AMD
+  mirror_of: eclipse/integrations/eclipse-integration-edges.yml
+  apps:
+  - aianalyzer
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: IDE / developer extension marketplace listing
+  badges:
+  - Verified namespace
 generated: '2026-10-15'
 method: searched
 source:
@@ -356,4 +402,7 @@ checked:
 - https://officialskills.sh/sitemap.xml
 - https://skillsmp.com/sitemap.xml
 - https://www.skills.sh/sitemap.xml
+- https://pypi.org/org/{org}/
+- https://pypi.org/pypi/{package}/json
+- eclipse/integrations/eclipse-integration-edges.yml
 marketplace_apps: []
