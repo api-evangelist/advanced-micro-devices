@@ -324,32 +324,6 @@
     detected: '2026-10-20'
   status: not-a-workflow
   arazzo: null
-- slug: advanced-micro-devices-autodesk-own
-  label: Autodesk (own)
-  partner: autodesk
-  partner_name: Autodesk (own)
-  category: INVNTOR
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://marketplace.autodesk.com/apps/3248534f-7d11-4c94-9607-72e0527b7ee2
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
-- slug: advanced-micro-devices-eclipse-foundation-open-vsx
-  label: Eclipse Foundation (open-vsx)
-  partner: eclipse
-  partner_name: Eclipse Foundation (open-vsx)
-  category: IDE / developer extension marketplace listing
-  type: marketplace
-  marketplace: open-vsx
-  channel: partner-built
-  evidence: https://open-vsx.org/namespace/AMD
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
 - slug: advanced-micro-devices-open-compute-project-foundation
   label: Open Compute Project Foundation
   partner_name: Open Compute Project Foundation
@@ -723,5 +697,44 @@
     - FIPS 140-3 (Comment Resolution - CMVP (10/15/2026))
     vendor_country: USA
     identity_source: register website (CMVP certificate Vendor panel)
+  status: not-a-workflow
+  arazzo: null
+- slug: advanced-micro-devices-autodesk-own
+  label: Autodesk (own)
+  partner: autodesk
+  partner_name: Autodesk (own)
+  category: INVNTOR
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.autodesk.com/apps/3248534f-7d11-4c94-9607-72e0527b7ee2
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: advanced-micro-devices-eclipse-foundation-open-vsx
+  label: Eclipse Foundation (open-vsx)
+  partner: eclipse
+  partner_name: Eclipse Foundation (open-vsx)
+  category: IDE / developer extension marketplace listing
+  type: marketplace
+  marketplace: open-vsx
+  channel: partner-built
+  evidence: https://open-vsx.org/namespace/AMD
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: advanced-micro-devices-artifact-hub-artifact-hub
+  label: Artifact Hub (artifact-hub)
+  partner: artifact-hub
+  partner_name: Artifact Hub (artifact-hub)
+  category: Artifact Hub listing (Helm chart)
+  type: marketplace
+  marketplace: artifact-hub
+  channel: partner-built
+  evidence: https://artifacthub.io/packages/search?repo=amd-gpu-helm
+  source: edge
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null
