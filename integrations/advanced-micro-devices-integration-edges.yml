@@ -765,6 +765,41 @@ edges:
   category: Artifact Hub listing (Helm chart)
   badges:
   - 'Verified publisher (Artifact Hub verified publisher: repository ownership proven)'
+- partner_name: Hugging Face (hugging-face-hub)
+  partner: hugging-face
+  partner_match: mirror
+  mirror_match: domain+verified
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: hugging-face-hub
+  evidence: https://huggingface.co/amd
+  mirror_of: hugging-face/integrations/hugging-face-integration-edges.yml
+  apps:
+  - amd/Instella-Long
+  - amd/Micro-World-MC-Dataset
+  - amd/ReasonLite-Dataset
+  - amd/Cot-Drop
+  - amd/AIG-Datasets
+  - amd/SAND-MATH
+  - amd/Micro-World-Capsaicin
+  - amd/SAND-Post-Training-Dataset
+  - amd/DeepSeek-R1-MXFP4
+  - amd/MiniMax-M3-MXFP4
+  - amd/GLM-5.2-MXFP4
+  - amd/Kimi-K2.5-MXFP4
+  - amd/Qwen3.8-27B-Quark-AWQ-MXFP4
+  - amd/GLM-5.3-Flash-Quark-MXFP4
+  - amd/Qwen3.8-27B-Quark-AWQ-INT4-W4A16
+  - amd/Qwen3.8-2.4T-A95B-Quark-MXFP4
+  - amd
+  listing_count: 3
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Hugging Face Hub datasets
+  badges:
+  - Verified publisher (Hugging Face verified organisation)
 generated: '2026-10-15'
 method: searched
 source:
@@ -826,4 +861,5 @@ checked:
 - https://csrc.nist.gov/projects/cryptographic-module-validation-program/validated-modules/search/all
 - https://csrc.nist.gov/projects/cryptographic-module-validation-program/validated-modules/search?SearchMode=Advanced&Standard=140-2&CertificateStatus=Historical&ValidationYear=0
 - artifact-hub/integrations/artifact-hub-integration-edges.yml
+- hugging-face/integrations/hugging-face-integration-edges.yml
 marketplace_apps: []
